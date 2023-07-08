@@ -11,10 +11,10 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link href="/cart">
+              {/* <Nav.Link href="/cart">
                 <FaShoppingCart />
                 {` `} Cart
-              </Nav.Link>
+              </Nav.Link> */}
               <Nav.Link href="/login">
                 <FaUser />
                 {` `} Sign In
