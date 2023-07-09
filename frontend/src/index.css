@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -10,4 +10,152 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+} */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  /* height: 100vh; */
+}
+
+/* .mx-3 {
+  margin-left: 3rem !important;
+  margin-right: 3rem !important;
+} */
+/* my-3 {
+  margin-left: ($spacer * 0.25) !important;
+}
+
+p-3 {
+} */
+
+.p-3 {
+  padding: 0 !important;
+}
+
+main {
+  min-height: 80vh;
+}
+
+.event-container {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.calendar-title {
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(115, 115, 115);
+}
+
+.rating span {
+  margin: 0.1rem;
+}
+
+.rating svg {
+  color: #f8e825;
+}
+
+.rating-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+
+.event-title {
+  /* height: 2.5em;  Set a fixed height */
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+.event-url {
+  overflow: hidden; /* Hide overflow content */
+  text-overflow: ellipsis; /* Add ellipsis for long text */
+  white-space: nowrap; /* Prevent wrapping */
+}
+
+table td,
+table th {
+  text-align: center;
+}
+
+.review {
+  margin-top: 30px;
+}
+
+.review h2 {
+  font-size: 24px;
+  background: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* .review button {
+  margin-top: 10px;
+} */
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.card-items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: black solid 4px;
+  background-color: black;
+  /* align-content: flex-start; */
+  /* height: 50px; */
+  /* background-color: black;
+  color: white; */
+  /* margin-top: -1rem;
+  padding-top: 10px;
+  margin-left: -4px; */
+  /* align-items: left; */
+  /* max-width: 100%;
+  margin: 0;
+  padding: 0; */
+}
+
+/* .card-item {
+  display: flex;
+  justify-content: flex-end;
+} */
+
+.edit-button {
+  border-radius: 10%;
+  border: none;
+  background-color: rgb(175, 175, 175);
+  color: white;
+  padding: 5px 18px;
+
+  /* padding: 50px 12px; */
+  /* margin: 1px -15px; */
+}
+
+.rsvp-button {
+  border-radius: 10%;
+  border: none;
+  background-color: rgb(5, 192, 195);
+  color: white;
+  padding: 5px 12px;
+}
+
+.card-title {
+  padding-top: 5px;
+  margin-top: 5px;
 }
