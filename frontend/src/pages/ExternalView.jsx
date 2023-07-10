@@ -3,7 +3,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 import events from '../events';
 import ExternalEvents from '../components/ExternalEvents';
 
-function externalEvent() {
+function externalView() {
   return (
     <>
       <Container className="home-heading">
@@ -20,4 +20,4 @@ function externalEvent() {
   );
 }
 
-export default externalEvent;
+export default externalView;

@@ -1,14 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'; //optonal
 // import './bootstrap.custom.css';
 import './index.css';
+import Home from './pages/Home';
 import App from './App';
+import ExternalView from './pages/ExternalView';
+import CreateEvent from './pages/CreateEvent';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route index={true} path="/" element={<Home />} />
+      <Route path="/gdla-calendar" element={<ExternalView />} />
+      <Route path="/add-event" element={<CreateEvent />} />
+    </Route>
+  )
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    {/* <App />  */}
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 
