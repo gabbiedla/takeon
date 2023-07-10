@@ -46,10 +46,10 @@ main {
   padding-right: 6rem;
 }
 
-.calendar-title {
+/* .calendar-title {
   display: flex;
   justify-content: center;
-}
+} */
 
 a {
   text-decoration: none;
@@ -116,7 +116,7 @@ table th {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: black solid 4px;
+  /* border-bottom: black solid 4px; */
   background-color: black;
   /* align-content: flex-start; */
   /* height: 50px; */
@@ -131,10 +131,10 @@ table th {
   padding: 0; */
 }
 
-/* .card-item {
+.card-item {
   display: flex;
   justify-content: flex-end;
-} */
+}
 
 .edit-button {
   border-radius: 10%;
@@ -153,9 +153,55 @@ table th {
   background-color: rgb(5, 192, 195);
   color: white;
   padding: 5px 12px;
+  margin-bottom: 15px;
 }
 
 .card-title {
   padding-top: 5px;
   margin-top: 5px;
+  padding-left: 3px;
+}
+
+.new-event-button {
+  /* display: flex; */
+  /* justify-content: flex-end; */
+  background-color: rgb(66, 203, 80);
+  /* float: right; */
+  padding: 5px 5px;
+}
+
+.home-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-form-container {
+  display: flex;
+  /* justify-content: center; */
+  align-items: left;
+  flex-direction: column;
+  max-width: 25rem;
+  background-color: rgb(229, 229, 229);
+  padding: 25px 20px;
+}
+
+.add-btn {
+  margin: 15px 130px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: rgb(66, 203, 80);
+  font-weight: bold;
+}
+
+.form-title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.collapse-btn {
+  border: none;
+  background-color: black;
+  color: white;
 }

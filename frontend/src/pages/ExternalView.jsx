@@ -1,20 +1,18 @@
+import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 import events from '../events';
-import E from '../components/E';
-import CreateEventButton from '../components/CreateEventButton';
-import CreateEvent from './CreateEvent';
+import ExternalEvents from '../components/ExternalEvents';
 
-function Home() {
+function externalEvent() {
   return (
     <>
       <Container className="home-heading">
-        <h1 className="calendar-title">My Calendar</h1>
-        <CreateEventButton />
+        <h1 className="calendar-title">Gabbie's Calendar</h1>
       </Container>
       <Row className="event-container">
         {events.map((event) => (
           <Col key={event._id} sm={12} md={6} lg={4} xl={3}>
-            <E event={event} />
+            <ExternalEvents event={event} />
           </Col>
         ))}
       </Row>
@@ -22,4 +20,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default externalEvent;
