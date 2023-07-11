@@ -8,6 +8,7 @@ import {
   FaLink,
   FaRegUser,
   FaPlus,
+  FaMinus,
 } from 'react-icons/fa';
 
 const ExternalEvent = ({ event }) => {
@@ -35,7 +36,7 @@ const ExternalEvent = ({ event }) => {
           // aria-expanded="false"
           // aria-controls="collapseExample"
         >
-          <FaPlus />
+          {isCollapsed ? <FaPlus /> : <FaMinus />}
         </button>
         {/* </a> */}
       </Container>

@@ -3,13 +3,17 @@ import events from '../events';
 import E from '../components/E';
 import CreateEventButton from '../components/CreateEventButton';
 import CreateEvent from './CreateEvent';
+import ShareButton from '../components/ShareButton';
 
 function Home() {
   return (
     <>
       <Container className="home-heading">
         <h1 className="calendar-title">My Calendar</h1>
-        <CreateEventButton />
+        <div className="buttons">
+          <ShareButton />
+          <CreateEventButton />
+        </div>
       </Container>
       <Row className="event-container">
         {events.map((event) => (

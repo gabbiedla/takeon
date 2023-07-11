@@ -46,10 +46,10 @@ main {
   padding-right: 6rem;
 }
 
-/* .calendar-title {
+.calendar-title {
   display: flex;
-  justify-content: center;
-} */
+  justify-content: left;
+}
 
 a {
   text-decoration: none;
@@ -168,6 +168,7 @@ table th {
   background-color: rgb(66, 203, 80);
   /* float: right; */
   padding: 5px 5px;
+  margin-left: 5px;
 }
 
 .home-heading {
@@ -204,4 +205,20 @@ table th {
   border: none;
   background-color: black;
   color: white;
+}
+
+.share-btn {
+  /* margin: 15px 130px; */
+  padding: 5px 5px;
+  background-color: rgb(66, 203, 80);
+  /* font-weight: bold; */
+  /* border: none; */
+  margin-right: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  /* align-items: end; */
+  /* justify-content: space-between; */
 }
