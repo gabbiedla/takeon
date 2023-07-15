@@ -20,9 +20,9 @@ const ExternalEvent = ({ event }) => {
 
   // const externalEvent = ({ event }) => {
   return (
-    <Card className="my-3 p-3 mx-3 rounded bg-light border-0">
+    <Card className="my-3 p-3 mx-3  bg-light border-0">
       {/* <a href={`/event/${event._id}`}> */}
-      <Container className="card-items rounded-top text-white">
+      <Container className="card-items  text-white">
         <Card.Title as="div">
           <h3 className="card-title">{event.title}</h3>
         </Card.Title>

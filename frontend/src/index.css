@@ -35,6 +35,7 @@ p-3 {
 
 .p-3 {
   padding: 0 !important;
+  border-radius: 50px;
 }
 
 main {
@@ -118,6 +119,9 @@ table th {
   align-items: center;
   /* border-bottom: black solid 4px; */
   background-color: black;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+
   /* align-content: flex-start; */
   /* height: 50px; */
   /* background-color: black;
