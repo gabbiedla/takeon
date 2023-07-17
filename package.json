@@ -1,0 +1,23 @@
+{
+  "name": "takeon",
+  "version": "1.0.0",
+  "description": "social calendar app built with MERN ",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabbiedla/takeon.git"
+  },
+  "author": "GDLA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabbiedla/takeon/issues"
+  },
+  "homepage": "https://github.com/gabbiedla/takeon#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
