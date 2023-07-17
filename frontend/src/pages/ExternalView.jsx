@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
-import events from '../events';
+// import events from '../events';
+import axios from 'axios';
 import ExternalEvents from '../components/ExternalEvents';
 
-function externalView() {
+// function externalView()
+const ExternalView = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const { data } = await axios.get('/api/events');
+      setEvents(data);
+    };
+
+    fetchEvents();
+  }, []);
   return (
     <>
       <Container className="home-heading">
@@ -18,6 +31,6 @@ function externalView() {
       </Row>
     </>
   );
-}
+};
 
-export default externalView;
+export default ExternalView;

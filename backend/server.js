@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import events from './data/events.js';
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5002;
 
 //const app = express();common js syntax
 // const port = 5001; select port it opens on
