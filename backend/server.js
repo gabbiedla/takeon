@@ -1,9 +1,14 @@
 //use ES6 modules so that languge on frontned matches backend but not necessary.
 
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
 import events from './data/events.js';
+
+const port = process.env.PORT || 5001;
+
 //const app = express();common js syntax
-const port = 5001; // select port it opens on
+// const port = 5001; select port it opens on
 const app = express(); //code to initialize express so calling it app
 
 //first route
