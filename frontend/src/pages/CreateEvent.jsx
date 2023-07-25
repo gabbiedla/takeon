@@ -5,8 +5,8 @@ const CreateEvent = () => {
   return (
     <form className="event-form">
       <Container className="event-form-container rounded">
-        <h4 className="form-title ">Event Details</h4>
-        <label>Event Name</label>
+        <h4 className="form-title ">Activity Details</h4>
+        <label>Activity Name</label>
         <input type="text" name="eventName" />
 
         <label>Date </label>

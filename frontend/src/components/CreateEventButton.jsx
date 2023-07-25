@@ -5,7 +5,9 @@ const CreateEventButton = () => {
   return (
     // <div>CreateEventButton</div>
     <LinkContainer to="/add-event">
-      <button className="new-event-button rounded border-0">Add Event</button>
+      <button className="new-event-button rounded border-0">
+        Add Activity
+      </button>
     </LinkContainer>
   );
 };
