@@ -42,7 +42,7 @@ main {
   min-height: 80vh;
 }
 
-.event-container {
+.activity-container {
   padding-left: 6rem;
   padding-right: 6rem;
 }
@@ -71,14 +71,14 @@ a {
   padding-left: 0.5rem;
 }
 
-.event-title {
+.activity-title {
   /* height: 2.5em;  Set a fixed height */
   overflow: hidden; /* Hide overflow content */
   text-overflow: ellipsis; /* Add ellipsis for long text */
   white-space: nowrap; /* Prevent wrapping */
 }
 
-.event-url {
+.activity-url {
   overflow: hidden; /* Hide overflow content */
   text-overflow: ellipsis; /* Add ellipsis for long text */
   white-space: nowrap; /* Prevent wrapping */
@@ -166,7 +166,7 @@ table th {
   padding-left: 3px;
 }
 
-.new-event-button {
+.new-activity-button {
   /* display: flex; */
   /* justify-content: flex-end; */
   background-color: rgb(66, 203, 80);
@@ -181,7 +181,7 @@ table th {
   align-items: center;
 }
 
-.event-form-container {
+.activity-form-container {
   display: flex;
   /* justify-content: center; */
   align-items: left;

@@ -12,14 +12,14 @@ import './index.css';
 import Home from './pages/Home';
 import App from './App';
 import ExternalView from './pages/ExternalView';
-import CreateEvent from './pages/CreateEvent';
+import CreateActivity from './pages/CreateActivity';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<Home />} />
       <Route path="/gdla-calendar" element={<ExternalView />} />
-      <Route path="/add-event" element={<CreateEvent />} />
+      <Route path="/add-activity" element={<CreateActivity />} />
     </Route>
   )
 );

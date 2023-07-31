@@ -1,15 +1,15 @@
 import React from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 
-const CreateEventButton = () => {
+const CreateActivityButton = () => {
   return (
     // <div>CreateEventButton</div>
-    <LinkContainer to="/add-event">
-      <button className="new-event-button rounded border-0">
+    <LinkContainer to="/add-activity">
+      <button className="new-activity-button rounded border-0">
         Add Activity
       </button>
     </LinkContainer>
   );
 };
 
-export default CreateEventButton;
+export default CreateActivityButton;

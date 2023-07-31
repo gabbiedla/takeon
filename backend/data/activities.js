@@ -1,4 +1,4 @@
-const events = [
+const activities = [
   {
     _id: '1',
     title: 'Event 1',
@@ -36,4 +36,4 @@ const events = [
     accepting: '2',
   },
 ];
-export default events;
+export default activities;

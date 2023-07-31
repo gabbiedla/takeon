@@ -9,13 +9,13 @@ import {
   FaRegUser,
 } from 'react-icons/fa';
 
-const Event = ({ event }) => {
+const Activity = ({ activity }) => {
   return (
     <Card className="my-3 p-3 mx-3  bg-light border-0">
       {/* <a href={`/event/${event._id}`}> */}
       <Container className="card-items  text-white">
         <Card.Title as="div">
-          <h3 className="card-title">{event.title}</h3>
+          <h3 className="card-title">{activity.title}</h3>
         </Card.Title>
         {/* <button className="edit-button">Edit</button> */}
         <FaPencilAlt />
@@ -24,22 +24,22 @@ const Event = ({ event }) => {
       <Card.Body>
         {/* <a href={`/event/${event._id}`}> */}
         <Card.Text as="p">
-          <FaMapPin /> {event.location}
+          <FaMapPin /> {activity.location}
         </Card.Text>
 
         {/* </a> */}
         <Card.Text as="p">
-          <FaRegCalendar /> {event.date}
+          <FaRegCalendar /> {activity.date}
         </Card.Text>
         <Card.Text as="p">
-          <FaRegClock /> {event.time}
+          <FaRegClock /> {activity.time}
         </Card.Text>
-        <Card.Text as="p" className="event-url">
+        <Card.Text as="p" className="activity-url">
           <FaLink />
-          <a href={`/event/${event._id}`}> {event.url}</a>
+          <a href={`/activity/${activity._id}`}> {activity.url}</a>
         </Card.Text>
         <Card.Text as="p">
-          <FaRegUser /> {event.accepting}
+          <FaRegUser /> {activity.accepting}
         </Card.Text>
       </Card.Body>
       {/* <Container className="card-item">
@@ -49,4 +49,4 @@ const Event = ({ event }) => {
   );
 };
 
-export default Event;
+export default Activity;

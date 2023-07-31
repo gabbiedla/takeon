@@ -1,28 +1,28 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
-const CreateEvent = () => {
+const CreateActivity = () => {
   return (
-    <form className="event-form">
-      <Container className="event-form-container rounded">
+    <form className="activity-form">
+      <Container className="activity-form-container rounded">
         <h4 className="form-title ">Activity Details</h4>
         <label>Activity Name</label>
-        <input type="text" name="eventName" />
+        <input type="text" name="activityName" />
 
         <label>Date </label>
-        <input type="date" name="eventDate" />
+        <input type="date" name="activityDate" />
 
         <label>Location</label>
-        <input type="text" name="eventLocation" />
+        <input type="text" name="activityLocation" />
 
         <label>Time</label>
-        <input type="Time" name="eventTime" />
+        <input type="Time" name="activityTime" />
 
         <label>Url </label>
-        <input type="link" name="eventLink" />
+        <input type="link" name="activityLink" />
 
         <label>Accepting</label>
-        <select name="event-capactiy">
+        <select name="activity-capacity">
           <option value="one">1</option>
           <option value="two">2</option>
           <option value="group">Group</option>
@@ -36,4 +36,4 @@ const CreateEvent = () => {
   //   <div>CreateEvent</div>;
 };
 
-export default CreateEvent;
+export default CreateActivity;

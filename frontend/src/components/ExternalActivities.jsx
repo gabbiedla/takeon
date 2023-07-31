@@ -11,7 +11,7 @@ import {
   FaMinus,
 } from 'react-icons/fa';
 
-const ExternalEvent = ({ event }) => {
+const ExternalActivity = ({ activity }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const toggleCollapse = () => {
@@ -24,7 +24,7 @@ const ExternalEvent = ({ event }) => {
       {/* <a href={`/event/${event._id}`}> */}
       <Container className="card-items  text-white">
         <Card.Title as="div">
-          <h3 className="card-title">{event.title}</h3>
+          <h3 className="card-title">{activity.title}</h3>
         </Card.Title>
         {/* <button className="edit-button">Edit</button> */}
         <button
@@ -44,22 +44,22 @@ const ExternalEvent = ({ event }) => {
         <Card.Body>
           {/* <a href={`/event/${event._id}`}> */}
           <Card.Text as="p">
-            <FaMapPin /> {event.location}
+            <FaMapPin /> {activity.location}
           </Card.Text>
 
           {/* </a> */}
           <Card.Text as="p">
-            <FaRegCalendar /> {event.date}
+            <FaRegCalendar /> {activity.date}
           </Card.Text>
           <Card.Text as="p">
-            <FaRegClock /> {event.time}
+            <FaRegClock /> {activity.time}
           </Card.Text>
-          <Card.Text as="p" className="event-url">
+          <Card.Text as="p" className="activity-url">
             <FaLink />
-            <a href={`/event/${event._id}`}> {event.url}</a>
+            <a href={`/activity/${activity._id}`}> {activity.url}</a>
           </Card.Text>
           <Card.Text as="p">
-            <FaRegUser /> {event.accepting}
+            <FaRegUser /> {activity.accepting}
           </Card.Text>
           {/* <Container className="card-item"> */}
           <button className="rsvp-button">RSVP</button>
@@ -70,4 +70,4 @@ const ExternalEvent = ({ event }) => {
   );
 };
 
-export default ExternalEvent;
+export default ExternalActivity;

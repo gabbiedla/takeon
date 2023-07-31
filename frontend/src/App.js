@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import Header from './components/Header';
 import Footer from './components/Footer';
 // import Home from './pages/Home';
-import CreateEvent from './pages/CreateEvent';
+import CreateActivity from './pages/CreateActivity';
 import ExternalView from './pages/ExternalView';
 import { Outlet } from 'react-router-dom';
 

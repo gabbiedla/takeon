@@ -3,29 +3,29 @@ import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 // import events from '../events';
 import axios from 'axios';
-import ExternalEvents from '../components/ExternalEvents';
+import ExternalActivities from '../components/ExternalActivities';
 
 // function externalView()
 const ExternalView = () => {
-  const [events, setEvents] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const { data } = await axios.get('/api/events');
-      setEvents(data);
+    const fetchActivities = async () => {
+      const { data } = await axios.get('/api/activities');
+      setActivities(data);
     };
 
-    fetchEvents();
+    fetchActivities();
   }, []);
   return (
     <>
       <Container className="home-heading">
         <h1 className="calendar-title">Gabbie's Calendar</h1>
       </Container>
-      <Row className="event-container">
-        {events.map((event) => (
-          <Col key={event._id} sm={12} md={6} lg={4} xl={3}>
-            <ExternalEvents event={event} />
+      <Row className="activity-container">
+        {activities.map((activity) => (
+          <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+            <ExternalActivities activity={activity} />
           </Col>
         ))}
       </Row>

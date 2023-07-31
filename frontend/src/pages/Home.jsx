@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Row, Col, Container } from 'react-bootstrap';
 //import events from '../events'; //data
-import Event from '../components/InternalEvents'; //event compoonent
-import CreateEventButton from '../components/CreateEventButton';
+import Activity from '../components/InternalActivities'; //event compoonent
+import CreateActivityButton from '../components/CreateActivityButton';
 import ShareButton from '../components/ShareButton';
 import axios from 'axios';
 
 // function Home() {
 
 const Home = () => {
-  const [events, setEvents] = useState([]);
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const { data } = await axios.get('/api/events');
-      setEvents(data);
+    const fetchActivities = async () => {
+      const { data } = await axios.get('/api/activities');
+      setActivities(data);
     };
 
-    fetchEvents();
+    fetchActivities();
   }, []);
 
   return (
@@ -26,13 +26,13 @@ const Home = () => {
         <h1 className="calendar-title">My Calendar</h1>
         <div className="buttons">
           <ShareButton />
-          <CreateEventButton />
+          <CreateActivityButton />
         </div>
       </Container>
-      <Row className="event-container">
-        {events.map((event) => (
-          <Col key={event._id} sm={12} md={6} lg={4} xl={3}>
-            <Event event={event} />
+      <Row className="activity-container">
+        {activities.map((activity) => (
+          <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+            <Activity activity={activity} />
           </Col>
         ))}
       </Row>
