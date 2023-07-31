@@ -21,7 +21,7 @@ const activitySchema = new mongoose.Schema(
       required: true,
     },
     time: {
-      type: Time,
+      type: Date,
       required: true,
     },
     url: {
