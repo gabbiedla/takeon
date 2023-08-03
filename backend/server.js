@@ -18,7 +18,7 @@ const app = express(); //code to initialize express so calling it app
 //first route
 app.get('/', (req, res) => res.send('API is running...'));
 
-app.use('api/activities', activityRoutes);
+app.use('/api/activities', activityRoutes);
 
 //start server up
 

@@ -51,9 +51,9 @@ const ExternalActivity = ({ activity }) => {
           <Card.Text as="p">
             <FaRegCalendar /> {activity.date}
           </Card.Text>
-          {/* <Card.Text as="p">
+          <Card.Text as="p">
             <FaRegClock /> {activity.time}
-          </Card.Text> */}
+          </Card.Text>
           <Card.Text as="p" className="activity-url">
             <FaLink />
             <a href={`/activity/${activity._id}`}> {activity.url}</a>
