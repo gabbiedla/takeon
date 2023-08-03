@@ -15,7 +15,7 @@ const Activity = ({ activity }) => {
       {/* <a href={`/event/${event._id}`}> */}
       <Container className="card-items  text-white">
         <Card.Title as="div">
-          <h3 className="card-title">{activity.title}</h3>
+          <h3 className="card-title">{activity.name}</h3>
         </Card.Title>
         {/* <button className="edit-button">Edit</button> */}
         <FaPencilAlt />
@@ -31,15 +31,15 @@ const Activity = ({ activity }) => {
         <Card.Text as="p">
           <FaRegCalendar /> {activity.date}
         </Card.Text>
-        <Card.Text as="p">
+        {/* <Card.Text as="p">
           <FaRegClock /> {activity.time}
-        </Card.Text>
+        </Card.Text> */}
         <Card.Text as="p" className="activity-url">
           <FaLink />
           <a href={`/activity/${activity._id}`}> {activity.url}</a>
         </Card.Text>
         <Card.Text as="p">
-          <FaRegUser /> {activity.accepting}
+          <FaRegUser /> {activity.capacity}
         </Card.Text>
       </Card.Body>
       {/* <Container className="card-item">

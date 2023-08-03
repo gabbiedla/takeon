@@ -15,8 +15,8 @@ const CreateActivity = () => {
         <label>Location</label>
         <input type="text" name="activityLocation" />
 
-        <label>Time</label>
-        <input type="Time" name="activityTime" />
+        {/* <label>Time</label>
+        <input type="Time" name="activityTime" /> */}
 
         <label>Url </label>
         <input type="link" name="activityLink" />

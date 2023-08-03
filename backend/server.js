@@ -3,9 +3,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import activityRoutes from './routes/activityRoutes.js';
 dotenv.config();
 // import events from './data/events.js';
-import activities from './data/activities.js';
 
 connectDB(); // Connect to MongoDB
 
@@ -18,16 +18,8 @@ const app = express(); //code to initialize express so calling it app
 //first route
 app.get('/', (req, res) => res.send('API is running...'));
 
-//data route serving all products
-app.get('/api/activities', (req, res) => {
-  res.json(activities);
-});
+app.use('api/activities', activityRoutes);
 
-//route for serving single product
-app.get('/api/activities/:id', (req, res) => {
-  const event = activities.find((p) => p._id === req.params.id);
-  res.json(activity);
-});
 //start server up
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
