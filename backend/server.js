@@ -3,8 +3,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import activityRoutes from './routes/activityRoutes.js';
 dotenv.config();
+
 // import events from './data/events.js';
 
 connectDB(); // Connect to MongoDB
@@ -19,6 +22,11 @@ const app = express(); //code to initialize express so calling it app
 app.get('/', (req, res) => res.send('API is running...'));
 
 app.use('/api/activities', activityRoutes);
+
+//app.use
+
+app.use(notFound);
+app.use(errorHandler);
 
 //start server up
 
