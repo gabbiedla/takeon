@@ -18,6 +18,10 @@ const port = process.env.PORT || 5002;
 // const port = 5001; select port it opens on
 const app = express(); //code to initialize express so calling it app
 
+//Body Parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //first route
 app.get('/', (req, res) => res.send('API is running...'));
 
