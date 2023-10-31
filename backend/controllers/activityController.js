@@ -25,4 +25,42 @@ const getActivityById = asyncHandler(async (req, res) => {
   }
 });
 
-export { getActivities, getActivityById };
+// @desc Create a new activity
+// @route POST /api/activities
+// @access Public
+const createActivity = asyncHandler(async (req, res) => {
+  const {
+    activityName,
+    activityDate,
+    activityLocation,
+    activityLink,
+    activityCapacity,
+    activityTime,
+  } = req.body;
+
+  // Perform validation and data sanitization here if needed
+
+  // Create a new activity
+  const newActivity = new Activity({
+    activityName,
+    activityDate,
+    activityLocation,
+    activityLink,
+    activityCapacity,
+    activityTime,
+  });
+
+  try {
+    // Save the new activity to the database
+    const createdActivity = await newActivity.save();
+
+    // Send a success response with the created activity
+    res.status(201).json(createdActivity);
+  } catch (error) {
+    // Handle errors and send an appropriate error response
+    console.error('Error creating activity:', error);
+    res.status(500).json({ success: false, error: 'Internal server error' });
+  }
+});
+
+export { getActivities, getActivityById, createActivity };

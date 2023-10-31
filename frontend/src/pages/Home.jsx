@@ -5,6 +5,8 @@ import Activity from '../components/InternalActivities'; //event compoonent
 import CreateActivityButton from '../components/CreateActivityButton';
 import ShareButton from '../components/ShareButton';
 import axios from 'axios';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 // function Home() {
 
@@ -29,6 +31,7 @@ const Home = () => {
           <CreateActivityButton />
         </div>
       </Container>
+
       <Row className="activity-container">
         {activities.map((activity) => (
           <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>

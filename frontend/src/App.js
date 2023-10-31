@@ -6,20 +6,22 @@ import Footer from './components/Footer';
 import CreateActivity from './pages/CreateActivity';
 import ExternalView from './pages/ExternalView';
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <>
       <Header />
       <main className="py-3">
-        {/* <Container>
-          <div>Welcome to TakeOn</div>
-        </Container> */}
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
         {/* <CreateEvent />
         <ExternalView /> */}
       </main>
-      {/* <Footer /> */}
+      <Footer />
+      <ToastContainer />
     </>
   );
 };

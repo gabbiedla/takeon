@@ -22,7 +22,7 @@ const activitySchema = new mongoose.Schema(
     },
     time: {
       type: Date,
-      required: true,
+      // required: true,
     },
     url: {
       type: String,

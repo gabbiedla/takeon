@@ -6,9 +6,10 @@ const router = express.Router();
 import {
   getActivities,
   getActivityById,
+  createActivity,
 } from '../controllers/activityController.js';
 
-router.route('/').get(getActivities);
+router.route('/').get(getActivities).post(createActivity);
 router.route('/:id').get(getActivityById);
 
 //data route serving all products

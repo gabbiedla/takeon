@@ -25,7 +25,7 @@ const Header = () => {
                   {` `} Sign In
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to="/create-account">
+              <LinkContainer to="/register">
                 <Nav.Link>
                   <FaUser />
                   {` `} Create Account
