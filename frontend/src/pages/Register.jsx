@@ -1,96 +1,120 @@
-import { useState } from 'react';
-// import { toast } from 'react-toastify';
-import { FaUser } from 'react-icons/fa';
-function Register() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: '',
-  });
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import FormContainer from '../components/FormContainer';
+import Loader from '../components/Loader';
+import { useRegisterMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+import { toast } from 'react-toastify';
 
-  const { name, email, password, password2 } = formData;
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+const Register = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const onSubmit = (e) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  const { search } = useLocation();
+  const sp = new URLSearchParams(search);
+  const redirect = sp.get('redirect') || '/';
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, redirect, navigate]);
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-
-    if (password !== password2) {
-      //   Toast.error('passwords do not match');
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    } else {
+      try {
+        const res = await register({ name, email, password }).unwrap();
+        dispatch(setCredentials({ ...res }));
+        navigate(redirect);
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
     }
   };
 
   return (
-    <>
-      <section className="heading">
-        <h1>
-          <FaUser /> Register
-        </h1>
-        <p> Please create an account</p>
-      </section>
+    <FormContainer>
+      <h1>Sign Up</h1>
 
-      <section className="reg-form">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              value={name}
-              onChange={onChange}
-              placeholder="Enter your name"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              onChange={onChange}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              onChange={onChange}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password2"
-              name="password2"
-              value={password2}
-              onChange={onChange}
-              placeholder="Confirm password"
-              required
-            />
-          </div>
-          <div className="form-group">
-            <button className="btn-block">Submit</button>
-          </div>
-        </form>
-      </section>
-    </>
+      <Form onSubmit={submitHandler}>
+        <Form.Group controlId="name" className="my-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            // name="name"
+            type="text"
+            placeholder="Enter name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId="email" className="my-3">
+          <Form.Label>Email Address</Form.Label>
+          <Form.Control
+            // name="email"
+            type="email"
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId="password" className="my-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            // name="password"
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId="confirmPassword" className="my-3">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            // name="password"
+            type="password"
+            placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-2"
+          disabled={isLoading}
+        >
+          Register
+        </Button>
+
+        {isLoading && <Loader />}
+      </Form>
+
+      <Row className="py-3">
+        <Col>
+          Already have an account?{' '}
+          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+            Login
+          </Link>
+        </Col>
+      </Row>
+    </FormContainer>
   );
-}
+};
 
 export default Register;
