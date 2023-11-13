@@ -5,12 +5,15 @@ import Activity from '../components/InternalActivities'; //event compoonent
 import CreateActivityButton from '../components/CreateActivityButton';
 import ShareButton from '../components/ShareButton';
 import axios from 'axios';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
+// import Loader from '../components/Loader';
+// import Message from '../components/Message';
+import { useSelector } from 'react-redux';
 
 // function Home() {
 
 const Home = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
@@ -28,7 +31,7 @@ const Home = () => {
         <h1 className="calendar-title">My Calendar</h1>
         <div className="buttons">
           <ShareButton />
-          <CreateActivityButton />
+          {userInfo ? <CreateActivityButton /> : null}
         </div>
       </Container>
 
