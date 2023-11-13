@@ -1,4 +1,7 @@
 import mongoose from 'mongoose';
+import validator from 'validator';
+
+const timeFormatRegex = /^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/;
 
 const activitySchema = new mongoose.Schema(
   {
@@ -21,15 +24,24 @@ const activitySchema = new mongoose.Schema(
       required: true,
     },
     time: {
-      type: Date,
+      type: String,
+      validate: {
+        validator: (value) => timeFormatRegex.test(value),
+        message: (props) =>
+          `${props.value} is not a valid time format (hh:mm AM/PM)`,
+      },
       // required: true,
     },
     url: {
       type: String,
+      validate: {
+        validator: (value) => validator.isURL(value),
+        message: (props) => `${props.value} is not a valid URL!`,
+      },
       required: true,
     },
     capacity: {
-      type: Number,
+      type: String,
       required: true,
       default: 0,
     },

@@ -8,7 +8,9 @@ const CreateActivity = () => {
     activityDate: '',
     activityLocation: '',
     activityLink: '',
-    activityCapacity: 'one', // Default value
+    activityTime: '',
+    activityCapacity: '1', // Default value
+    user: null,
   });
 
   const handleSubmit = async (e) => {
@@ -26,8 +28,14 @@ const CreateActivity = () => {
   };
 
   const handleChange = (e) => {
+    // const { name, value } = e.target;
+    // setActivityData({ ...activityData, [name]: value });
     const { name, value } = e.target;
-    setActivityData({ ...activityData, [name]: value });
+    console.log(`Setting ${name} to ${value}`);
+    setActivityData({
+      ...activityData,
+      [name]: value,
+    });
   };
 
   return (
@@ -58,13 +66,13 @@ const CreateActivity = () => {
           onChange={handleChange}
         />
 
-        {/* <label>Time</label>
+        <label>Time</label>
         <input
-          type="date"
+          type="time"
           name="activityTime"
           value={activityData.activityTime}
           onChange={handleChange}
-        /> */}
+        />
 
         <label>URL</label>
         <input
@@ -80,10 +88,22 @@ const CreateActivity = () => {
           value={activityData.activityCapacity}
           onChange={handleChange}
         >
+          <option value="group">Group</option>
+          {[...Array(20).keys()].map((number) => (
+            <option key={number + 1} value={String(number + 1)}>
+              {number + 1}
+            </option>
+          ))}
+        </select>
+        {/* <select
+          name="activityCapacity"
+          value={activityData.activityCapacity}
+          onChange={handleChange}
+        >
           <option value="one">1</option>
           <option value="two">2</option>
           <option value="group">Group</option>
-        </select>
+        </select> */}
 
         <input type="submit" value="Add" className="add-btn rounded border-0" />
       </Container>

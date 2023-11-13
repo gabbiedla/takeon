@@ -49,20 +49,29 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link>
-                    <FaUser />
-                    {` `} Sign In
-                  </Nav.Link>
-                </LinkContainer>
+                <>
+                  <LinkContainer to="/login">
+                    <Nav.Link>
+                      <FaUser />
+                      {` `} Sign In
+                    </Nav.Link>
+                  </LinkContainer>
+
+                  <LinkContainer to="/register">
+                    <Nav.Link>
+                      <FaUser />
+                      {` `} Register
+                    </Nav.Link>
+                  </LinkContainer>
+                </>
               )}
 
-              <LinkContainer to="/register">
+              {/* <LinkContainer to="/register">
                 <Nav.Link>
                   <FaUser />
-                  {` `} Create Account
+                  {` `} Register
                 </Nav.Link>
-              </LinkContainer>
+              </LinkContainer> */}
             </Nav>
           </Navbar.Collapse>
         </Container>

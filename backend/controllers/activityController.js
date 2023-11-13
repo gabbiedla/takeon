@@ -34,8 +34,8 @@ const createActivity = asyncHandler(async (req, res) => {
     activityDate,
     activityLocation,
     activityLink,
-    activityCapacity,
     activityTime,
+    activityCapacity,
   } = req.body;
 
   // Perform validation and data sanitization here if needed
@@ -46,8 +46,8 @@ const createActivity = asyncHandler(async (req, res) => {
     activityDate,
     activityLocation,
     activityLink,
-    activityCapacity,
     activityTime,
+    activityCapacity,
   });
 
   try {
