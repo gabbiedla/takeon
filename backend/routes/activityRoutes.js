@@ -1,4 +1,5 @@
 import express from 'express';
+import { protect } from '../middleware/authMiddleware.js';
 const router = express.Router();
 // import activities from '../data/activities.js';
 // import asyncHandler from '../middleware/asyncHandler.js';
@@ -9,8 +10,12 @@ import {
   createActivity,
 } from '../controllers/activityController.js';
 
-router.route('/').get(getActivities).post(createActivity);
+// Route to get all activities and create a new activity (protected route)
+router.route('/').get(getActivities).post(protect, createActivity);
+// Route to get a single activity by ID
 router.route('/:id').get(getActivityById);
+
+export default router;
 
 //data route serving all products
 // router.get(
@@ -38,5 +43,3 @@ router.route('/:id').get(getActivityById);
 // res.status(404).json({ message: 'Product not found' });
 //   })
 // );
-
-export default router;

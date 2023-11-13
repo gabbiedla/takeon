@@ -43,7 +43,7 @@ const activitySchema = new mongoose.Schema(
     capacity: {
       type: String,
       required: true,
-      default: 0,
+      // default: 0,
     },
   },
   {

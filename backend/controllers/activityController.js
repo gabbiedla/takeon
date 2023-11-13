@@ -29,25 +29,30 @@ const getActivityById = asyncHandler(async (req, res) => {
 // @route POST /api/activities
 // @access Public
 const createActivity = asyncHandler(async (req, res) => {
-  const {
-    activityName,
-    activityDate,
-    activityLocation,
-    activityLink,
-    activityTime,
-    activityCapacity,
-  } = req.body;
+  const { name, date, location, url, time, capacity } = req.body;
+
+  // Access user information from the request (assuming it's populated by authentication middleware)
+  const { user } = req;
+
+  // Validate required fields
+  if (!name || !date || !location || !url || !capacity) {
+    return res
+      .status(400)
+      .json({ success: false, error: 'Missing required fields' });
+  }
+  // !time ||
 
   // Perform validation and data sanitization here if needed
 
   // Create a new activity
   const newActivity = new Activity({
-    activityName,
-    activityDate,
-    activityLocation,
-    activityLink,
-    activityTime,
-    activityCapacity,
+    user: user._id,
+    name,
+    date,
+    location,
+    url,
+    // time,
+    capacity,
   });
 
   try {
@@ -57,10 +62,29 @@ const createActivity = asyncHandler(async (req, res) => {
     // Send a success response with the created activity
     res.status(201).json(createdActivity);
   } catch (error) {
-    // Handle errors and send an appropriate error response
+    // Log detailed error information
     console.error('Error creating activity:', error);
-    res.status(500).json({ success: false, error: 'Internal server error' });
+
+    // Send a more detailed error response
+    res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      message: error.message || 'An error occurred during activity creation',
+      stack: error.stack || null,
+    });
   }
 });
+// try {
+// Save the new activity to the database
+// const createdActivity = await newActivity.save();
+
+// Send a success response with the created activity
+//   res.status(201).json(createdActivity);
+// } catch (error) {
+// Handle errors and send an appropriate error response
+//     console.error('Error creating activity:', error);
+//     res.status(500).json({ success: false, error: 'Internal server error' });
+//   }
+// });
 
 export { getActivities, getActivityById, createActivity };
