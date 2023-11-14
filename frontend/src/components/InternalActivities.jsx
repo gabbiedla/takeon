@@ -7,6 +7,7 @@ import {
   FaRegClock,
   FaLink,
   FaRegUser,
+  FaTag,
 } from 'react-icons/fa';
 
 const Activity = ({ activity }) => {
@@ -23,23 +24,35 @@ const Activity = ({ activity }) => {
       </Container>
       <Card.Body>
         {/* <a href={`/event/${event._id}`}> */}
-        <Card.Text as="p">
-          <FaMapPin /> {activity.location}
-        </Card.Text>
-
+        {activity.location && (
+          <Card.Text as="p">
+            <FaMapPin /> {activity.location}
+          </Card.Text>
+        )}
         {/* </a> */}
+        {activity.date && (
+          <Card.Text as="p">
+            <FaRegCalendar /> {activity.date}
+          </Card.Text>
+        )}
+        {activity.time && (
+          <Card.Text as="p">
+            <FaRegClock /> {activity.time}
+          </Card.Text>
+        )}
+        {activity.url && (
+          <Card.Text as="p" className="activity-url">
+            <FaLink />
+            <a href={`/activity/${activity._id}`}> {activity.url}</a>
+          </Card.Text>
+        )}
+        {activity.capacity && (
+          <Card.Text as="p">
+            <FaRegUser /> {activity.capacity}
+          </Card.Text>
+        )}
         <Card.Text as="p">
-          <FaRegCalendar /> {activity.date}
-        </Card.Text>
-        <Card.Text as="p">
-          <FaRegClock /> {activity.time}
-        </Card.Text>
-        <Card.Text as="p" className="activity-url">
-          <FaLink />
-          <a href={`/activity/${activity._id}`}> {activity.url}</a>
-        </Card.Text>
-        <Card.Text as="p">
-          <FaRegUser /> {activity.capacity}
+          <FaTag /> {activity.category}
         </Card.Text>
       </Card.Body>
       {/* <Container className="card-item">

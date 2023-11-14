@@ -17,11 +17,11 @@ const activitySchema = new mongoose.Schema(
     },
     location: {
       type: String,
-      required: true,
+      // required: true,
     },
     date: {
       type: Date,
-      required: true,
+      // required: true,
       get: function (val) {
         return val ? formatDateString(val) : val;
       },
@@ -29,23 +29,47 @@ const activitySchema = new mongoose.Schema(
     time: {
       type: String,
       validate: {
-        validator: (value) => timeFormatRegex.test(value),
+        validator: (value) =>
+          // validator: (value) => timeFormatRegex.test(value),
+          // Check if value is provided before applying the regular expression
+          // return value === undefined || timeFormatRegex.test(value);
+          {
+            return (
+              value === undefined ||
+              value.trim() === '' ||
+              timeFormatRegex.test(value)
+            );
+          },
         message: (props) =>
           `${props.value} is not a valid time format (hh:mm AM/PM)`,
       },
-      // required: true,
+      // required: false,
     },
     url: {
       type: String,
       validate: {
-        validator: (value) => validator.isURL(value),
+        validator: (value) =>
+          // validator.isURL(value),
+          {
+            return (
+              value === undefined ||
+              value.trim() === '' ||
+              timeFormatRegex.test(value)
+            );
+          },
+
         message: (props) => `${props.value} is not a valid URL!`,
       },
-      required: true,
+      // required: false,
     },
     capacity: {
       type: String,
-      required: true,
+      // required: true,
+      // default: 0,
+    },
+    category: {
+      type: String,
+      // required: true,
       // default: 0,
     },
   },

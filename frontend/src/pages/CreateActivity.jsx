@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const CreateActivity = () => {
   const [activityData, setActivityData] = useState({
@@ -9,8 +9,9 @@ const CreateActivity = () => {
     date: '',
     location: '',
     url: '',
-    // time: '',
-    capacity: '1', // Default value
+    time: '',
+    capacity: '', // Default value
+    category: '',
     user: null,
   });
 
@@ -107,13 +108,13 @@ const CreateActivity = () => {
           onChange={handleChange}
         />
 
-        {/* <label>Time</label>
+        <label>Time</label>
         <input
           type="text"
           name="time"
           value={activityData.time}
           onChange={handleChange}
-        /> */}
+        />
 
         <label>URL</label>
         <input
@@ -136,6 +137,13 @@ const CreateActivity = () => {
             </option>
           ))}
         </select>
+        <label>Category</label>
+        <input
+          type="text"
+          name="category"
+          value={activityData.category}
+          onChange={handleChange}
+        />
         {/* <select
           name="activityCapacity"
           value={activityData.activityCapacity}

@@ -29,13 +29,14 @@ const getActivityById = asyncHandler(async (req, res) => {
 // @route POST /api/activities
 // @access Public
 const createActivity = asyncHandler(async (req, res) => {
-  const { name, date, location, url, time, capacity } = req.body;
+  const { name, date, location, url, time, capacity, category } = req.body;
 
   // Access user information from the request (assuming it's populated by authentication middleware)
   const { user } = req;
 
   // Validate required fields
-  if (!name || !date || !location || !url || !capacity) {
+  // || !date || !location || !url || !time || !capacity
+  if (!name) {
     return res
       .status(400)
       .json({ success: false, error: 'Missing required fields' });
@@ -51,8 +52,9 @@ const createActivity = asyncHandler(async (req, res) => {
     date,
     location,
     url,
-    // time,
+    time,
     capacity,
+    category,
   });
 
   try {
