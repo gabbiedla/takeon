@@ -22,6 +22,9 @@ const activitySchema = new mongoose.Schema(
     date: {
       type: Date,
       required: true,
+      get: function (val) {
+        return val ? formatDateString(val) : val;
+      },
     },
     time: {
       type: String,
@@ -47,9 +50,23 @@ const activitySchema = new mongoose.Schema(
     },
   },
   {
+    toJSON: {
+      getters: true, // Ensure that the `get` function is invoked during JSON serialization
+    },
     timestamps: true,
   }
 );
+
+function formatDateString(inputDateString) {
+  const date = new Date(inputDateString);
+  return (
+    date.getMonth().toString().padStart(2, '0') +
+    '/' +
+    date.getDate().toString().padStart(2, '0') +
+    '/' +
+    date.getFullYear()
+  );
+}
 
 const Activity = mongoose.model('Activity', activitySchema);
 export default Activity;
