@@ -6,7 +6,9 @@ import Activity from '../models/activityModel.js';
 //@route GET /api/activities
 //@access Public
 const getActivities = asyncHandler(async (req, res) => {
-  const activities = await Activity.find({});
+  // Access user information from the request (assuming it's populated by authentication middleware)
+  // const userId = req.user;
+  const activities = await Activity.find({ user: req.user._id });
   res.json(activities);
 });
 

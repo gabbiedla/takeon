@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
+import { EventShareButton } from './EventShareButton';
 import {
   FaPencilAlt,
   FaMapPin,
@@ -8,6 +9,7 @@ import {
   FaLink,
   FaRegUser,
   FaTag,
+  FaShare,
 } from 'react-icons/fa';
 
 const Activity = ({ activity }) => {
@@ -20,6 +22,7 @@ const Activity = ({ activity }) => {
         </Card.Title>
         {/* <button className="edit-button">Edit</button> */}
         <FaPencilAlt />
+        <FaShare />
         {/* </a> */}
       </Container>
       <Card.Body>

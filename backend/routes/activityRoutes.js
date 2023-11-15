@@ -1,6 +1,6 @@
 import express from 'express';
 import { protect } from '../middleware/authMiddleware.js';
-const router = express.Router();
+
 // import activities from '../data/activities.js';
 // import asyncHandler from '../middleware/asyncHandler.js';
 // import Activity from '../models/activityModel.js';
@@ -9,11 +9,12 @@ import {
   getActivityById,
   createActivity,
 } from '../controllers/activityController.js';
+const router = express.Router();
 
 // Route to get all activities and create a new activity (protected route)
-router.route('/').get(getActivities).post(protect, createActivity);
+router.route('/').get(protect, getActivities).post(protect, createActivity);
 // Route to get a single activity by ID
-router.route('/:id').get(getActivityById);
+router.route('/:id').get(protect, getActivityById);
 
 export default router;
 

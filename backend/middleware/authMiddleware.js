@@ -14,6 +14,11 @@ const protect = asyncHandler(async (req, res, next) => {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await User.findById(decoded.userId).select('-password');
+      // Modify the user property to store only the user ID
+      req.user = req.user._id;
+
+      console.log('User in protect middleware:', req.user);
+
       next();
     } catch (error) {
       console.log(error);
