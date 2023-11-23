@@ -49,15 +49,7 @@ const activitySchema = new mongoose.Schema(
       type: String,
       validate: {
         validator: (value) =>
-          // validator.isURL(value),
-          {
-            return (
-              value === undefined ||
-              value.trim() === '' ||
-              timeFormatRegex.test(value)
-            );
-          },
-
+          value === undefined || value.trim() === '' || validator.isURL(value),
         message: (props) => `${props.value} is not a valid URL!`,
       },
       // required: false,
@@ -94,3 +86,21 @@ function formatDateString(inputDateString) {
 
 const Activity = mongoose.model('Activity', activitySchema);
 export default Activity;
+
+// url: {
+//   type: String,
+//   validate: {
+//     validator: (value) =>
+//       // validator.isURL(value),
+//       {
+//         return (
+//           value === undefined ||
+//           value.trim() === '' ||
+//           timeFormatRegex.test(value)
+//         );
+//       },
+
+//     message: (props) => `${props.value} is not a valid URL!`,
+//   },
+//   // required: false,
+// },

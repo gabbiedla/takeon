@@ -17,8 +17,13 @@ router.route('/').get(protect, getActivities).post(protect, createActivity);
 // Route to get a single activity by ID
 router
   .route('/:id')
+  // .get(protect, admin, getActivityById)
   .get(protect, getActivityById)
-  .put(protect, admin, updateActivity);
+
+  // .put(protect, admin, updateActivity);
+  .put(protect, updateActivity);
+
+router.route('/:id/edit');
 
 export default router;
 

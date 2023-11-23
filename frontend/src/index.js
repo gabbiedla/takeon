@@ -12,9 +12,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'; //optonal
 // import './bootstrap.custom.css';
 import './index.css';
 
-import Home from './pages/Home';
 import App from './App';
-// import AdminRoute from './components/AdminRoute';
+import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
+import Home from './pages/Home';
 import ExternalView from './pages/ExternalView';
 import CreateActivity from './pages/CreateActivity';
 import Register from './pages/Register';
@@ -26,10 +27,15 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<Home />} />
       <Route path="/gdla-calendar" element={<ExternalView />} />
-      <Route path="/add-activity" element={<CreateActivity />} />
+
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/activity/:id/edit" element={<ActivityEdit />} />
+
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/add-activity" element={<CreateActivity />} />
+        <Route path="/activity/:id/edit" element={<ActivityEdit />} />
+      </Route>
 
       {/* <Route path="" element={<AdminRoute />}>
         <Route path="/admin/activity/:id/edit" element={<ActivityEdit />} />

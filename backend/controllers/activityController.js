@@ -79,7 +79,7 @@ const createActivity = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc Update a product
+//@desc Update an activity
 //@route PUT /api/activities/:id
 //@access Private/Admin
 const updateActivity = asyncHandler(async (req, res) => {

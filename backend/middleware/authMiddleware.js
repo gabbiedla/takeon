@@ -17,7 +17,7 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = await User.findById(decoded.userId).select('-password');
       // Modify the user property to store only the user ID
-      req.user = req.user._id;
+      // req.user = req.user._id;
 
       console.log('User in protect middleware:', req.user);
 
@@ -36,9 +36,11 @@ const protect = asyncHandler(async (req, res, next) => {
 //Admin Middleware
 
 const admin = (req, res, next) => {
+  console.log('User in admin middleware:', req.user);
   if (req.user && req.user.isAdmin) {
     next();
   } else {
+    console.log('isAdmin property value:', req.user.isAdmin);
     res.status(401);
     throw new Error('Not authorized as admin');
   }
