@@ -9,7 +9,33 @@ export const activitiesApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+    getActivityDetails: builder.query({
+      query: (activityId) => ({
+        url: `${ACTIVITIES_URL}/${activityId}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
+    createActivity: builder.mutation({
+      query: () => ({
+        url: ACTIVITIES_URL,
+        method: 'POST',
+      }),
+      invalidatesTags: ['Activity'],
+    }),
+    updateActivity: builder.mutation({
+      query: (data) => ({
+        url: `${ACTIVITIES_URL}/${data._id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Activity'],
+    }),
   }),
 });
 
-export const { useGetActivitiesQuery } = activitiesApiSlice;
+export const {
+  useGetActivitiesQuer,
+  useGetActivityDetailsQuery,
+  useCreateActivityMutation,
+  useUpdateActivityMutation,
+} = activitiesApiSlice;

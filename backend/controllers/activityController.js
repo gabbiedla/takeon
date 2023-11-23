@@ -78,6 +78,31 @@ const createActivity = asyncHandler(async (req, res) => {
     });
   }
 });
+
+//@desc Update a product
+//@route PUT /api/activities/:id
+//@access Private/Admin
+const updateActivity = asyncHandler(async (req, res) => {
+  //pull data or descturure the date u need from the body
+  const { name, location, date, url, capacity, category } = req.body;
+  //updating by finding by ID
+  const activity = await Activity.findById(req.params.id);
+  // check for the activity÷
+  if (activity) {
+    activity.name = name;
+    activity.location = location;
+    activity.date = date;
+    activity.url = url;
+    activity.capacity = capacity;
+    activity.category = category;
+
+    const updatedActivity = await activity.save();
+    res.json(updatedActivity);
+  } else {
+    res.status(404);
+    throw new Error('Resources not found');
+  }
+});
 // try {
 // Save the new activity to the database
 // const createdActivity = await newActivity.save();
@@ -91,4 +116,4 @@ const createActivity = asyncHandler(async (req, res) => {
 //   }
 // });
 
-export { getActivities, getActivityById, createActivity };
+export { getActivities, getActivityById, createActivity, updateActivity };

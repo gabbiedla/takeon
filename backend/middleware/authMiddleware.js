@@ -10,6 +10,8 @@ const protect = asyncHandler(async (req, res, next) => {
   //Read the JWT from the cookie
   token = req.cookies.jwt;
 
+  // console.log('User in admin middleware:', req.user);
+
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);

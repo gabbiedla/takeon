@@ -1,5 +1,5 @@
 import express from 'express';
-import { protect } from '../middleware/authMiddleware.js';
+import { protect, admin } from '../middleware/authMiddleware.js';
 
 // import activities from '../data/activities.js';
 // import asyncHandler from '../middleware/asyncHandler.js';
@@ -8,13 +8,17 @@ import {
   getActivities,
   getActivityById,
   createActivity,
+  updateActivity,
 } from '../controllers/activityController.js';
 const router = express.Router();
 
 // Route to get all activities and create a new activity (protected route)
 router.route('/').get(protect, getActivities).post(protect, createActivity);
 // Route to get a single activity by ID
-router.route('/:id').get(protect, getActivityById);
+router
+  .route('/:id')
+  .get(protect, getActivityById)
+  .put(protect, admin, updateActivity);
 
 export default router;
 
