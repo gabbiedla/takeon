@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import {
   useUpdateActivityMutation,
   useGetActivityDetailsQuery,
+  useDeleteActivityMutation,
 } from '../slices/activitiesApiSlice';
 
 const ActivityEdit = () => {
@@ -79,6 +80,21 @@ const ActivityEdit = () => {
       navigate('/');
     }
   };
+
+  const [deleteActivity, { isLoading: loadingDelete }] =
+    useDeleteActivityMutation();
+
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are you sure?')) {
+      try {
+        await deleteActivity(id);
+        refetch();
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  };
+
   return (
     <>
       <Link to="/" className="btn btn-light my-3">
@@ -87,6 +103,8 @@ const ActivityEdit = () => {
       <FormContainer>
         <h1>Edit Activity</h1>
         {LoadingUpdate && <Loader />}
+        {loadingDelete && <Loader />}
+
         {/* {isLoading ? <Loading />} */}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
@@ -160,6 +178,13 @@ const ActivityEdit = () => {
           </Form.Group>
           <Button type="submit" variant="primary" className="my-2">
             Update
+          </Button>
+          <Button
+            variant="danger"
+            className="my-2"
+            onClick={() => deleteHandler(activity._id)}
+          >
+            Delete
           </Button>
         </Form>
       </FormContainer>

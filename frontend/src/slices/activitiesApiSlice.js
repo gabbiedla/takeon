@@ -30,6 +30,12 @@ export const activitiesApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Activity'],
     }),
+    deleteActivity: builder.mutation({
+      query: (activityId) => ({
+        url: `${ACTIVITIES_URL}/${activityId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 });
 
@@ -38,4 +44,5 @@ export const {
   useGetActivityDetailsQuery,
   useCreateActivityMutation,
   useUpdateActivityMutation,
+  useDeleteActivityMutation,
 } = activitiesApiSlice;

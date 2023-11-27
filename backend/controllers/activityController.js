@@ -103,6 +103,25 @@ const updateActivity = asyncHandler(async (req, res) => {
     throw new Error('Resources not found');
   }
 });
+
+//@desc Delete an activity
+//@route PUT /api/activities/:id
+//@access Private/Admin
+const deleteActivity = asyncHandler(async (req, res) => {
+  //pull data or descturure the date u need from the body
+  // const { name, location, date, url, capacity, category } = req.body;
+  //updating by finding by ID
+  const activity = await Activity.findById(req.params.id);
+  // check for the activity÷
+  if (activity) {
+    await Activity.deleteOne({ _id: activity._id });
+    res.status(200).json({ message: 'Activity Deleted' });
+  } else {
+    res.status(404);
+    throw new Error('Resource not found');
+  }
+});
+
 // try {
 // Save the new activity to the database
 // const createdActivity = await newActivity.save();
@@ -116,4 +135,10 @@ const updateActivity = asyncHandler(async (req, res) => {
 //   }
 // });
 
-export { getActivities, getActivityById, createActivity, updateActivity };
+export {
+  getActivities,
+  getActivityById,
+  createActivity,
+  updateActivity,
+  deleteActivity,
+};

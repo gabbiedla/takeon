@@ -9,6 +9,7 @@ import {
   getActivityById,
   createActivity,
   updateActivity,
+  deleteActivity,
 } from '../controllers/activityController.js';
 const router = express.Router();
 
@@ -21,7 +22,8 @@ router
   .get(protect, getActivityById)
 
   // .put(protect, admin, updateActivity);
-  .put(protect, updateActivity);
+  .put(protect, updateActivity)
+  .delete(protect, deleteActivity);
 
 router.route('/:id/edit');
 
