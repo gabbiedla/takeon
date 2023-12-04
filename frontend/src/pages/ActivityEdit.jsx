@@ -77,7 +77,9 @@ const ActivityEdit = () => {
       toast.error(result.error);
     } else {
       toast.success('Activity updated');
+      console.log('Before navigate');
       navigate('/');
+      console.log('After navigate');
     }
   };
 
@@ -85,11 +87,15 @@ const ActivityEdit = () => {
     useDeleteActivityMutation();
 
   const deleteHandler = async (id) => {
+    console.log('Before deleteActivity');
     if (window.confirm('Are you sure?')) {
       try {
         await deleteActivity(id);
+        console.log('After deleteActivity');
         refetch();
+        navigate('/');
       } catch (err) {
+        console.error('Error deleting activity:', err);
         toast.error(err?.data?.message || err.error);
       }
     }

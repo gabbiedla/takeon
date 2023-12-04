@@ -100,7 +100,7 @@ const updateActivity = asyncHandler(async (req, res) => {
     res.json(updatedActivity);
   } else {
     res.status(404);
-    throw new Error('Resources not found');
+    throw new Error('Resource not found');
   }
 });
 

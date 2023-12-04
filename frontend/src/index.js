@@ -25,14 +25,14 @@ import ActivityEdit from './pages/ActivityEdit';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route index={true} path="/" element={<Home />} />
+      {/* <Route index={true} path="/" element={<Home />} /> */}
       <Route path="/gdla-calendar" element={<ExternalView />} />
-
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/activity/:id/edit" element={<ActivityEdit />} />
 
       <Route path="" element={<PrivateRoute />}>
+        <Route index={true} path="/" element={<Home />} />
         <Route path="/add-activity" element={<CreateActivity />} />
         <Route path="/activity/:id/edit" element={<ActivityEdit />} />
       </Route>
