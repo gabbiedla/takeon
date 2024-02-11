@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
 
-const timeFormatRegex = /^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/;
+// const timeFormatRegex = /^(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)$/;
+const timeFormatRegex = /^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$/i;
 
 const activitySchema = new mongoose.Schema(
   {
@@ -27,19 +28,31 @@ const activitySchema = new mongoose.Schema(
       },
     },
     time: {
+      // type: String,
+      // validate: {
+      //   validator: (value) =>
+      // validator: (value) => timeFormatRegex.test(value),
+      // Check if value is provided before applying the regular expression
+      // return value === undefined || timeFormatRegex.test(value);
+      //     {
+      //       return (
+      //         value === undefined ||
+      //         value.trim() === '' ||
+      //         timeFormatRegex.test(value)
+      //       );
+      //     },
+      //   message: (props) =>
+      //     `${props.value} is not a valid time format (hh:mm AM/PM)`,
+      // },
       type: String,
       validate: {
-        validator: (value) =>
-          // validator: (value) => timeFormatRegex.test(value),
-          // Check if value is provided before applying the regular expression
-          // return value === undefined || timeFormatRegex.test(value);
-          {
-            return (
-              value === undefined ||
-              value.trim() === '' ||
-              timeFormatRegex.test(value)
-            );
-          },
+        validator: (value) => {
+          return (
+            value === undefined ||
+            value.trim() === '' ||
+            timeFormatRegex.test(value)
+          );
+        },
         message: (props) =>
           `${props.value} is not a valid time format (hh:mm AM/PM)`,
       },

@@ -33,6 +33,15 @@ const CreateActivity = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate time format
+    // const timeRegex = /^(0?[1-9]|1[0-2]|0?[1-9]:[0-5][0-9])\s?(AM|PM)$/i;
+    // if (!timeRegex.test(activityData.time)) {
+    //   console.error(
+    //     'Invalid time format. Please enter time in HH:MM AM/PM format.'
+    //   );
+    //   return;
+    // }
+
     try {
       const isLoggedIn = !!localStorage.getItem('userInfo');
       if (!isLoggedIn) {
