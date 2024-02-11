@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -28,6 +29,7 @@ const CreateActivity = () => {
     }
   }, []);
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,6 +51,10 @@ const CreateActivity = () => {
       const response = await axios.post('/api/activities', activityData);
 
       console.log('Activity created:', response.data);
+      // After successfully creating the activity, navigate back to "/"
+      console.log('Before navigate');
+      navigate('/');
+      console.log('After navigate');
     } catch (error) {
       console.error('Error creating activity:', error);
     }
