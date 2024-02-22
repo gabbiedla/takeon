@@ -22,6 +22,20 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    location: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
+    profileImage: {
+      type: String, // Store the URL of the profile image
+    },
   },
   { timestamps: true }
 );
@@ -38,6 +52,9 @@ userSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+// Index the location field for geospatial queries
+userSchema.index({ location: '2dsphere' });
 
 const User = mongoose.model('User', userSchema);
 

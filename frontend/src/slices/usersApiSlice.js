@@ -1,4 +1,4 @@
-import { USERS_URL } from '../constants';
+import { USERS_URL, UPLOAD_URL } from '../constants';
 import { apiSlice } from './apiSlice';
 // import { authSlice } from './authSlice';
 
@@ -24,8 +24,28 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
       }),
     }),
+    updateUser: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/${data._id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: ['Activity'],
+    }),
+    uploadProfileImage: builder.mutation({
+      query: (data) => ({
+        url: `${UPLOAD_URL}`,
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useRegisterMutation } =
-  usersApiSlice;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useRegisterMutation,
+  useUpdateUserMutation,
+  useUploadProfileImageMutation,
+} = usersApiSlice;

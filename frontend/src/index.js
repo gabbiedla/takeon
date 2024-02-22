@@ -21,6 +21,7 @@ import CreateActivity from './pages/CreateActivity';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ActivityEdit from './pages/ActivityEdit';
+import Profile from './pages/Profile';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,12 +30,14 @@ const router = createBrowserRouter(
       <Route path="/gdla-calendar" element={<ExternalView />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/activity/:id/edit" element={<ActivityEdit />} />
+      {/* <Route path="/activity/:id/edit" element={<ActivityEdit />} /> */}
+      {/* <Route path="/profile" element={<Profile />} /> */}
 
       <Route path="" element={<PrivateRoute />}>
         <Route index={true} path="/" element={<Home />} />
         <Route path="/add-activity" element={<CreateActivity />} />
         <Route path="/activity/:id/edit" element={<ActivityEdit />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
 
       {/* <Route path="" element={<AdminRoute />}>

@@ -31,7 +31,7 @@ app.get('/', (req, res) => res.send('API is running...'));
 
 app.use('/api/activities', activityRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/uploads', uploadRoutes);
+app.use('/api/upload', uploadRoutes);
 
 const __dirname = path.resolve(); // Set __dirname to current directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import ProfileImage from './ProfileImage';
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -41,6 +42,9 @@ const Header = () => {
               </Nav.Link> */}
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
+                  {userInfo.profileImage && (
+                    <ProfileImage image={userInfo.profileImage} />
+                  )}
                   <LinkContainer to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
