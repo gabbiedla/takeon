@@ -30,7 +30,7 @@ const Home = () => {
       <Container className="home-heading">
         <h1 className="calendar-title">My Calendar</h1>
         <div className="buttons">
-          <ShareButton />
+          {<ShareButton />}
           {userInfo ? <CreateActivityButton /> : null}
         </div>
       </Container>

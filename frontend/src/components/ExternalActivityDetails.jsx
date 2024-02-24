@@ -56,23 +56,12 @@ const Activity = ({ activity }) => {
         <Card.Title as="div">
           <h3 className="card-title">
             {activity.name}
-            <LinkContainer to={`/activity/${activity._id}/edit`}>
-              <Button onClick={() => console.log('Edit button clicked')}>
-                {' '}
-                <FaPencilAlt className="mx-2" />
-              </Button>
-            </LinkContainer>
+
             {/* Updated onClick event handler for FaShare */}
             {/* <FaShare
               className="mx-2"
               onClick={() => handleShare(activity._id)}
             /> */}
-            <LinkContainer to={`/activity/${activity._id}/view`}>
-              <Button onClick={() => console.log('Share button clicked')}>
-                {' '}
-                <FaShare className="mx-2" />
-              </Button>
-            </LinkContainer>
             {/* <FaShare
               className="mx-2" */}
             {/* // onClick={() => handleShare(activity.id)} */}
@@ -86,56 +75,3 @@ const Activity = ({ activity }) => {
   );
 };
 export default Activity;
-
-// const Activity = ({ activity }) => {
-//   return (
-//     <Card className="my-3 p-3 mx-3  bg-light border-0">
-//       {/* <a href={`/event/${event._id}`}> */}
-//       <Container className="card-items  text-white">
-//         <Card.Title as="div">
-//           <h3 className="card-title">{activity.name}</h3>
-//         </Card.Title>
-//         {/* <button className="edit-button">Edit</button> */}
-//         <FaPencilAlt />
-//         <FaShare />
-//         {/* </a> */}
-//       </Container>
-//       <Card.Body>
-//         {/* <a href={`/event/${event._id}`}> */}
-//         {activity.location && (
-//           <Card.Text as="p">
-//             <FaMapPin /> {activity.location}
-//           </Card.Text>
-//         )}
-//         {/* </a> */}
-//         {activity.date && (
-//           <Card.Text as="p">
-//             <FaRegCalendar /> {activity.date}
-//           </Card.Text>
-//         )}
-//         {activity.time && (
-//           <Card.Text as="p">
-//             <FaRegClock /> {activity.time}
-//           </Card.Text>
-//         )}
-//         {activity.url && (
-//           <Card.Text as="p" className="activity-url">
-//             <FaLink />
-//             <a href={`/activity/${activity._id}`}> {activity.url}</a>
-//           </Card.Text>
-//         )}
-//         {activity.capacity && (
-//           <Card.Text as="p">
-//             <FaRegUser /> {activity.capacity}
-//           </Card.Text>
-//         )}
-//         <Card.Text as="p">
-//           <FaTag /> {activity.category}
-//         </Card.Text>
-//       </Card.Body>
-//       {/* <Container className="card-item">
-//         <button className="rsvp-button">RSVP</button>
-//       </Container> */}
-//     </Card>
-//   );
-// };

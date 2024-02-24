@@ -1,7 +1,12 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 
 const ShareButton = () => {
-  return <button className="share-btn rounded border-0">Share</button>;
+  return (
+    <LinkContainer to="/gdla-calendar">
+      <button className="share-btn rounded border-0">Share</button>
+    </LinkContainer>
+  );
 };
 
 export default ShareButton;

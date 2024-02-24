@@ -19,7 +19,8 @@ router.route('/').get(protect, getActivities).post(protect, createActivity);
 router
   .route('/:id')
   // .get(protect, admin, getActivityById)
-  .get(protect, getActivityById)
+  // .get(protect, getActivityById)
+  .get(getActivityById)
 
   // .put(protect, admin, updateActivity);
   .put(protect, updateActivity)
