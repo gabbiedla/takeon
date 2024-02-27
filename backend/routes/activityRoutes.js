@@ -10,11 +10,16 @@ import {
   createActivity,
   updateActivity,
   deleteActivity,
+  getActivitiesByUserId,
 } from '../controllers/activityController.js';
 const router = express.Router();
 
 // Route to get all activities and create a new activity (protected route)
 router.route('/').get(protect, getActivities).post(protect, createActivity);
+
+// Route to get activities by userID (public route)
+router.route('/user/:userId').get(getActivitiesByUserId);
+
 // Route to get a single activity by ID
 router
   .route('/:id')

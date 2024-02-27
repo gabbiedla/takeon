@@ -28,7 +28,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       {/* <Route index={true} path="/" element={<Home />} /> */}
-      <Route path="/calendar/:id" element={<ExternalView />} />
+      <Route path="/activities/user/:userId" element={<ExternalView />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/activity/:id/view" element={<ExternalEventView />} />

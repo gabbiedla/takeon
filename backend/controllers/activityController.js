@@ -2,6 +2,21 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Activity from '../models/activityModel.js';
 
+//@desc Fetch all activities of a user
+//@route GET /api/activities/:userId
+//@access Public
+const getActivitiesByUserId = asyncHandler(async (req, res) => {
+  const userId = req.params.userId;
+  const activities = await Activity.find({ user: userId });
+
+  if (activities) {
+    res.json(activities);
+  } else {
+    res.status(404);
+    throw new Error('Activities not found for the user');
+  }
+});
+
 //@desc Fetch all products
 //@route GET /api/activities
 //@access Public
@@ -136,6 +151,7 @@ const deleteActivity = asyncHandler(async (req, res) => {
 // });
 
 export {
+  getActivitiesByUserId,
   getActivities,
   getActivityById,
   createActivity,
