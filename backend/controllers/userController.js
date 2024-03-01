@@ -28,6 +28,7 @@ const authUser = asyncHandler(async (req, res) => {
     res.status(200).json({
       _id: user._id,
       name: user.name,
+      username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
       location: user.location,
@@ -45,7 +46,7 @@ const authUser = asyncHandler(async (req, res) => {
 //@access Public
 const registerUser = asyncHandler(async (req, res) => {
   // res.send('Register user');
-  const { name, email, password } = req.body;
+  const { name, username, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -54,7 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('User already exists');
   }
 
-  const user = await User.create({ name, email, password });
+  const user = await User.create({ name, username, email, password });
 
   if (user) {
     generateToken(res, user._id);
@@ -62,6 +63,7 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: user._id,
       name: user.name,
+      username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
     });
@@ -95,6 +97,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json({
       _id: user._id,
       name: user.name,
+      username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
       location: user.location,
@@ -114,6 +117,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
   if (user) {
     user.name = req.body.name || user.name;
+    user.username = req.body.username || user.username;
     user.email = req.body.email || user.email;
     user.location = req.body.location || user.location;
 
@@ -126,6 +130,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json({
       _id: updatedUser._id,
       name: updatedUser.name,
+      username: updatedUser.username,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
       location: updatedLocation.location,

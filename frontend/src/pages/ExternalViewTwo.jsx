@@ -5,10 +5,10 @@ import { Row, Col, Container } from 'react-bootstrap';
 // import events from '../events';
 import axios from 'axios';
 import ExternalActivities from '../components/ExternalActivities';
-
-const ExternalView = () => {
-  // useparams allows non users to view  activities on this page with userID attached
-  const { userId } = useParams();
+//userID as prop allows internal users to view activites on this page only
+const ExternalViewTwo = ({ userId }) => {
+  // Assuming you pass the user ID as a prop
+  // const { userId } = useParams();
   console.log('userId inside Home component:', userId);
   const [activities, setActivities] = useState([]);
 
@@ -47,34 +47,4 @@ const ExternalView = () => {
   );
 };
 
-export default ExternalView;
-
-// function externalView()
-// const ExternalView = () => {
-//   const [activities, setActivities] = useState([]);
-
-//   useEffect(() => {
-//     const fetchActivities = async () => {
-//       const { data } = await axios.get('/api/activities');
-//       setActivities(data);
-//     };
-
-//     fetchActivities();
-//   }, []);
-//   return (
-//     <>
-//       <Container className="home-heading">
-//         <h1 className="calendar-title">Gabbie's Calendar</h1>
-//       </Container>
-//       <Row className="activity-container">
-//         {activities.map((activity) => (
-//           <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
-//             <ExternalActivities activity={activity} />
-//           </Col>
-//         ))}
-//       </Row>
-//     </>
-//   );
-// };
-
-// export default ExternalView;
+export default ExternalViewTwo;

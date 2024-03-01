@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     password: {
       type: String,
       required: true,
@@ -26,11 +31,11 @@ const userSchema = new mongoose.Schema(
       type: {
         type: String,
         enum: ['Point'],
-        required: true,
+        required: false,
       },
       coordinates: {
         type: [Number],
-        required: true,
+        required: false,
       },
     },
     profileImage: {

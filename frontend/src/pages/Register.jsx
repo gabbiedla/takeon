@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 
 const Register = () => {
   const [name, setName] = useState('');
+  const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -38,7 +39,12 @@ const Register = () => {
       return;
     } else {
       try {
-        const res = await register({ name, email, password }).unwrap();
+        const res = await register({
+          name,
+          username,
+          email,
+          password,
+        }).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate(redirect);
       } catch (err) {
@@ -60,6 +66,16 @@ const Register = () => {
             placeholder="Enter name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId="username" className="my-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            // name="name"
+            type="text"
+            placeholder="Enter username"
+            value={username}
+            onChange={(e) => setUserName(e.target.value)}
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="email" className="my-3">

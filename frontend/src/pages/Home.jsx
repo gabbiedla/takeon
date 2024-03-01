@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { useNavigate, useParams } from 'react-router-dom'; // Import useHistory hook
+import { Row, Col, Container, Button } from 'react-bootstrap';
 //import events from '../events'; //data
 import Activity from '../components/InternalActivities'; //event compoonent
+import { FaShare } from 'react-icons/fa'; // Import share icon from react-icons/fa
 import CreateActivityButton from '../components/CreateActivityButton';
 import ShareButton from '../components/ShareButton';
 import axios from 'axios';
@@ -12,26 +14,55 @@ import { useSelector } from 'react-redux';
 // function Home() {
 
 const Home = () => {
-  const { userInfo } = useSelector((state) => state.auth);
+  // OLD CODE to display activites internally without userID based on auth...
+  // const { userInfo } = useSelector((state) => state.auth);
 
+  // const [activities, setActivities] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchActivities = async () => {
+  //     const { data } = await axios.get('/api/activities');
+  //     setActivities(data);
+  //   };
+
+  //   fetchActivities();
+  // }, []);
+  const { userId } = useParams(); // Extract userId from route
+  console.log('userId from useParams:', userId);
+
+  const { userInfo } = useSelector((state) => state.auth);
   const [activities, setActivities] = useState([]);
+  const navigate = useNavigate(); // Initialize useNavigate hook
+  // const { userId } = useParams();
 
   useEffect(() => {
+    console.log('Inside useEffect, userId:', userId);
+
     const fetchActivities = async () => {
-      const { data } = await axios.get('/api/activities');
-      setActivities(data);
+      try {
+        const { data } = await axios.get('/api/activities');
+        setActivities(data);
+      } catch (error) {
+        console.error('Error fetching activities:', error);
+      }
     };
 
-    fetchActivities();
-  }, []);
+    if (userId) {
+      fetchActivities();
+    } else {
+      console.warn('userId is undefined');
+    }
+  }, [userId]);
 
   return (
     <>
       <Container className="home-heading">
         <h1 className="calendar-title">My Calendar</h1>
         <div className="buttons">
-          {<ShareButton />}
           {userInfo ? <CreateActivityButton /> : null}
+          {/* <ShareButton /> old code */}
+
+          <ShareButton userId={userId} />
         </div>
       </Container>
 
@@ -47,3 +78,44 @@ const Home = () => {
 };
 
 export default Home;
+// const handleShare = () => {
+//   // Log userId value when Share button is clicked
+//   console.log('userId in handleShare function:', userId);
+
+//   // Implement the functionality to handle the share action here
+//   console.log('Share button clicked');
+//   if (userId) {
+//     navigate(`/activities/user/${userId}`);
+//   } else {
+//     // Handle the case where userId is not defined
+//     console.error('userId is not defined');
+//   }
+// };
+
+// const handleShare = () => {
+//   // Implement the functionality to handle the share action here
+//   console.log('Share button clicked');
+
+//   if (userId) {
+//     navigate(`/activities/user/${userId}`);
+//   } else {
+//     // Handle the case where userId is not defined
+//     console.error('userId is not defined');
+//   }
+//   // navigate(`/activities/user/${userId}`);
+
+//   // navigate(`/activities/user/${userId}`);
+
+//   // Handle the case where userInfo or userInfo.userId is undefined
+// };
+
+{
+  /* <Button variant="primary" onClick={handleShare}>
+            <FaShare /> Share
+          </Button> */
+}
+{
+  /* <Button variant="primary" onClick={() => handleShare(userId)}>
+            <FaShare /> Share
+          </Button> */
+}

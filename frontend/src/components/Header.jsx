@@ -8,8 +8,10 @@ import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileImage from './ProfileImage';
+import { useParams } from 'react-router-dom';
 
 const Header = () => {
+  const { userId } = useParams(); // Extract userId from route
   const { userInfo } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -30,7 +32,8 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
+          <LinkContainer to={`/home/${userId}`}>
+            {/* <LinkContainer to="/"> old code*/}
             <Navbar.Brand>TakeOn</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

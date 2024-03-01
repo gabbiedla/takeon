@@ -7,10 +7,12 @@ import Loader from '../components/Loader';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const { userId } = useParams();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ const Login = () => {
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
+  // need to fix this redirect
   const redirect = sp.get('redirect') || '/';
 
   useEffect(() => {
