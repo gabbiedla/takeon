@@ -133,7 +133,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       username: updatedUser.username,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
-      location: updatedLocation.location,
+      location: updatedUser.location,
     });
   } else {
     res.status(404);

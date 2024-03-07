@@ -32,6 +32,13 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Activity'],
     }),
+    profile: builder.mutation({
+      query: (data) => ({
+        url: `${USERS_URL}/profile`,
+        method: 'PUT',
+        body: data,
+      }),
+    }),
     uploadProfileImage: builder.mutation({
       query: (data) => ({
         url: `${UPLOAD_URL}`,
@@ -47,5 +54,6 @@ export const {
   useLogoutMutation,
   useRegisterMutation,
   useUpdateUserMutation,
+  useProfileMutation,
   useUploadProfileImageMutation,
 } = usersApiSlice;
