@@ -40,7 +40,7 @@ export const activitiesApiSlice = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetActivitiesQuer,
+  useGetActivitiesQuery,
   useGetActivityDetailsQuery,
   useCreateActivityMutation,
   useUpdateActivityMutation,

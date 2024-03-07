@@ -24,6 +24,7 @@ import ActivityEdit from './pages/ActivityEdit';
 import Profile from './pages/Profile';
 import ExternalViewTwo from './pages/ExternalViewTwo';
 import ExternalEventView from './pages/ExternalEventView';
+import Test from './pages/Test';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,13 +32,14 @@ const router = createBrowserRouter(
       {/* <Route index={true} path="/" element={<Home />} /> */}
 
       {/* //allows non users to view activities by user */}
-      {/* <Route path="/activities/user/:userId" element={<ExternalView />} /> */}
+      <Route path="/activities/user/:userId" element={<ExternalView />} />
 
       {/* //testingusername need to create new page */}
-      {/* <Route path="/activities/user/username" element={<ExternalView />} /> */}
+      <Route path="/activities/user/username" element={<ExternalView />} />
 
       {/* THis allows button to work and navigate and view activites internally... */}
-      <Route path="/activities/user/:userId" element={<ExternalViewTwo />} />
+      {/* <Route path="/activities/user/:userId" element={<ExternalViewTwo />} /> */}
+      <Route path="/activities/user/:username" element={<Test />} />
 
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />

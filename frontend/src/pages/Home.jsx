@@ -29,11 +29,15 @@ const Home = () => {
   // }, []);
   const { userId } = useParams(); // Extract userId from route
   console.log('userId from useParams:', userId);
-
+  const { username } = useSelector((state) => state.auth.userInfo);
   const { userInfo } = useSelector((state) => state.auth);
   const [activities, setActivities] = useState([]);
   const navigate = useNavigate(); // Initialize useNavigate hook
   // const { userId } = useParams();
+
+  const handleActivitiesClick = () => {
+    navigate(`/activities/user/${username}`);
+  };
 
   useEffect(() => {
     console.log('Inside useEffect, userId:', userId);
@@ -63,6 +67,9 @@ const Home = () => {
           {/* <ShareButton /> old code */}
 
           <ShareButton userId={userId} />
+          <Button onClick={handleActivitiesClick} userid={userId}>
+            Go to Activities
+          </Button>
         </div>
       </Container>
 
