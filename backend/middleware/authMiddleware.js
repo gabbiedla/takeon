@@ -70,4 +70,4 @@ const nonUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect, admin };
+export { protect, admin, nonUser };

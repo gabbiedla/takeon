@@ -1,24 +1,27 @@
 import express from 'express';
-import { protect, admin } from '../middleware/authMiddleware.js';
+import { protect, admin, nonUser } from '../middleware/authMiddleware.js';
 
 // import activities from '../data/activities.js';
 // import asyncHandler from '../middleware/asyncHandler.js';
 // import Activity from '../models/activityModel.js';
 import {
   getActivities,
+  // getActivitiesByUsername,
   getActivityById,
   createActivity,
   updateActivity,
   deleteActivity,
-  getActivitiesByUserId,
+  // getActivitiesByUserId,
 } from '../controllers/activityController.js';
 const router = express.Router();
 
 // Route to get all activities and create a new activity (protected route)
 router.route('/').get(protect, getActivities).post(protect, createActivity);
 
+// router.route('/user/:username').get(getActivitiesByUsername);
+
 // Route to get activities by userID (public route)
-router.route('/user/:userId').get(getActivitiesByUserId);
+// router.route('/user/:userId').get(getActivitiesByUserId);
 
 // Route to get a single activity by ID
 router
@@ -26,7 +29,7 @@ router
   // .get(protect, admin, getActivityById)
   // .get(protect, getActivityById)
   .get(getActivityById)
-
+  // .get(getActivitiesByUsername)
   // .put(protect, admin, updateActivity);
   .put(protect, updateActivity)
   .delete(protect, deleteActivity);

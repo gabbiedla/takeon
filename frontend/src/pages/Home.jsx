@@ -36,7 +36,7 @@ const Home = () => {
   // const { userId } = useParams();
 
   const handleActivitiesClick = () => {
-    navigate(`/activities/user/${username}`);
+    navigate(`/${username}`);
   };
 
   useEffect(() => {
@@ -66,10 +66,8 @@ const Home = () => {
           {userInfo ? <CreateActivityButton /> : null}
           {/* <ShareButton /> old code */}
 
-          <ShareButton userId={userId} />
-          <Button onClick={handleActivitiesClick} userid={userId}>
-            Go to Activities
-          </Button>
+          {/* <ShareButton userId={userId} /> */}
+          <Button onClick={handleActivitiesClick}>Go to Activities</Button>
         </div>
       </Container>
 

@@ -1,21 +1,110 @@
 // create function to get products
 import asyncHandler from '../middleware/asyncHandler.js';
 import Activity from '../models/activityModel.js';
+import User from '../models/userModel.js';
+
+// const getActivitiesByUsername = asyncHandler(async (req, res) => {
+//   // const userId = req.params.userId;
+//   // const { username } = req.params;
+
+//   try {
+//     const username = req.params.username;
+//     // Find the user by username
+//     const user = await User.findOne({ username });
+//     // const user = await User.findOne({
+//     //   username: { $regex: new RegExp(username, 'i') },
+//     // });
+
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     // Debugging statement
+//     console.log('Retrieved userID:', user._id);
+
+//     // Fetch activities based on userId
+//     const userId = user._id;
+//     const activities = await Activity.find({ userId });
+
+//     res.json(activities);
+//   } catch (error) {
+//     console.error('Error fetching activities:', error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// });
+
+// const getActivitiesByUsername = asyncHandler(async (req, res) => {
+//   try {
+//     const username = req.params.username;
+//     // Find the user by username
+//     const user = await User.findOne({ username });
+
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     // Debugging statement
+//     console.log('Retrieved userID:', user._id);
+
+//     // Fetch activities based on userId
+//     const userId = user._id;
+//     const activities = await Activity.find({ userId });
+
+//     res.json(activities);
+//   } catch (error) {
+//     console.error('Error fetching activities:', error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// });
 
 //@desc Fetch all activities of a user
 //@route GET /api/activities/:userId
 //@access Public
 const getActivitiesByUserId = asyncHandler(async (req, res) => {
-  const userId = req.params.userId;
+  const userId = req.params.userId; // Assuming userId is passed as a parameter in the route
+
+  // Use the userId directly to fetch activities specific to that user ID
   const activities = await Activity.find({ user: userId });
 
-  if (activities) {
-    res.json(activities);
-  } else {
-    res.status(404);
-    throw new Error('Activities not found for the user');
-  }
+  res.status(200).json(activities);
 });
+// const getActivitiesByUserId = asyncHandler(async (req, res) => {
+//   const userId = req.params.userId;
+//   const activities = await Activity.find({ user: userId });
+
+//   if (activities) {
+//     res.json(activities);
+//   } else {
+//     res.status(404);
+//     throw new Error('Activities not found for the user');
+//   }
+// });
+
+// const getActivitiesByUsername = asyncHandler(async (req, res) => {
+//   // const { username } = req.params;
+
+//   try {
+//     // // Find the user by username to get userId
+//     // const user = await user.findOne({ username });
+//     // Step 1: Extract the username from the URL parameter.
+//     const { username } = req.params;
+
+//     // Step 2: Look up the userId associated with that username from your user model.
+//     const user = await User.findOne({ username });
+
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     // Fetch activities based on userId
+//     const activities = await Activity.find({ userId: user._id });
+
+//     res.json(activities);
+//   } catch (error) {
+//     console.error('Error fetching activities:', error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// });
 
 //@desc Fetch all products
 //@route GET /api/activities
@@ -152,6 +241,7 @@ const deleteActivity = asyncHandler(async (req, res) => {
 
 export {
   getActivitiesByUserId,
+  // getActivitiesByUsername,
   getActivities,
   getActivityById,
   createActivity,

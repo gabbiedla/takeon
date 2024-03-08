@@ -46,6 +46,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    // fetchActivitesByUserName: builder.query({
+    //   query: (username) => ({
+    //     url: `${USERS_URL}/${username}`,
+    //   }),
+    // }),
   }),
 });
 
@@ -56,4 +61,5 @@ export const {
   useUpdateUserMutation,
   useProfileMutation,
   useUploadProfileImageMutation,
+  useFetchActivitesByUserNameQuery,
 } = usersApiSlice;

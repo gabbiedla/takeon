@@ -1,5 +1,6 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import User from '../models/userModel.js';
+import Activity from '../models/activityModel.js';
 // import jwt from 'jsonwebtoken';
 import generateToken from '../utils/generateToken.js';
 
@@ -155,6 +156,62 @@ const getUserByID = asyncHandler(async (req, res) => {
   res.send('get user by id');
 });
 
+//@desc Get user by Username
+//@route GET /api/user/:username
+//@access public
+// const getUserByUsername = asyncHandler(async (req, res) => {
+//   // res.send('get user by id');
+//   const username = req.params.username;
+
+//   const user = await User.findOne({ username });
+
+//   if (user) {
+//     res.status(200).json({
+//       _id: user._id,
+//       name: user.name,
+//       username: user.username,
+//       email: user.email,
+//       isAdmin: user.isAdmin,
+//       location: user.location,
+//     });
+//   } else {
+//     res.status(404);
+//     throw new Error('User not found');
+//   }
+// });
+
+const getUserByUsername = asyncHandler(async (req, res, next) => {
+  const username = req.params.username;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      res.status(404);
+      throw new Error('User not found');
+    }
+
+    const userId = user._id;
+
+    // Find activities by user ID
+    const activities = await Activity.find({ user: user._id });
+
+    res.status(200).json({
+      user: {
+        _id: user._id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        location: user.location,
+      },
+      activities: activities,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 //@desc Delete user
 //@route DELETE /api/users/:id
 //@access Private/admin
@@ -178,5 +235,6 @@ export {
   getUsers,
   deleteUser,
   getUserByID,
+  getUserByUsername,
   updateUser,
 };
