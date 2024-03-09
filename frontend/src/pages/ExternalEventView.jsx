@@ -11,6 +11,7 @@ import axios from 'axios';
 
 import { useParams } from 'react-router-dom';
 import { useGetActivityDetailsQuery } from '../slices/activitiesApiSlice';
+import CopyURLButton from '../components/CopyUrlButton';
 
 const ExternalEventView = () => {
   const { id: activityId } = useParams();
@@ -37,6 +38,9 @@ const ExternalEventView = () => {
   return (
     <Container>
       <h1>Activity Details</h1>
+      <div className="buttons">
+        <CopyURLButton />
+      </div>
       {activity && (
         <div>
           <Col sm={12} md={6} lg={4} xl={7}>

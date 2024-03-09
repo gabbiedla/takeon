@@ -1,9 +1,11 @@
 // Assuming this code is in a file named App.js
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Button } from 'react-bootstrap';
 import ExternalActivities from '../components/ExternalActivities';
 import { useParams } from 'react-router-dom'; // Assuming you use React Router for routing
 import axios from 'axios';
+import { FaShare, FaLink } from 'react-icons/fa';
+import CopyURLButton from '../components/CopyUrlButton';
 
 const Test = () => {
   const { username } = useParams();
@@ -31,7 +33,11 @@ const Test = () => {
     <>
       <Container className="home-heading">
         <h1 className="calendar-title">Gabbie's Calendar</h1>
+        <div className="buttons">
+          <CopyURLButton />
+        </div>
       </Container>
+
       <Row className="activity-container">
         {activities.map((activity) => (
           <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>

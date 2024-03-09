@@ -67,7 +67,7 @@ const Home = () => {
           {/* <ShareButton /> old code */}
 
           {/* <ShareButton userId={userId} /> */}
-          <Button onClick={handleActivitiesClick}>Go to Activities</Button>
+          <Button onClick={handleActivitiesClick}>View Public Calendar</Button>
         </div>
       </Container>
 
