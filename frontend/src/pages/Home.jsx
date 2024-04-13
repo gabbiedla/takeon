@@ -34,11 +34,20 @@ const Home = () => {
   const [activities, setActivities] = useState([]);
   const [sortedActivities, setSortedActivities] = useState([]);
   const [sortBy, setSortBy] = useState('name');
+  const [viewFormat, setViewFormat] = useState('normal'); // State to toggle view format
+  const [loading, setLoading] = useState(true); // Add loading state
+
   const navigate = useNavigate(); // Initialize useNavigate hook
   // const { userId } = useParams();
 
   const handleActivitiesClick = () => {
     navigate(`/${username}`);
+  };
+
+  const toggleViewFormat = () => {
+    setViewFormat((prevFormat) =>
+      prevFormat === 'normal' ? 'grouped' : 'normal'
+    );
   };
 
   useEffect(() => {
@@ -48,8 +57,10 @@ const Home = () => {
       try {
         const { data } = await axios.get('/api/activities');
         setActivities(data);
+        setLoading(false); // Update loading state when data is fetched
       } catch (error) {
         console.error('Error fetching activities:', error);
+        setLoading(false); // Update loading state when data is fetched
       }
     };
 
@@ -57,22 +68,23 @@ const Home = () => {
       fetchActivities();
     } else {
       console.warn('userId is undefined');
+      setLoading(false); // Update loading state if userId is undefined
     }
   }, [userId]);
 
-  // const handleSort = (sortBy) => {
-  //   setSortBy(sortBy);
-  //   const sorted = [...activities].sort((a, b) => {
-  //     if (sortBy === 'name') {
-  //       return a.name.localeCompare(b.name);
-  //     } else if (sortBy === 'date') {
-  //       return new Date(a.date) - new Date(b.date);
-  //     } else if (sortBy === 'category') {
-  //       return a.category.localeCompare(b.category);
-  //     }
-  //   });
-  //   setSortedActivities(sorted);
-  // };
+  const handleSort = (sortBy) => {
+    setSortBy(sortBy);
+    const sorted = [...activities].sort((a, b) => {
+      if (sortBy === 'name') {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === 'date') {
+        return new Date(a.date) - new Date(b.date);
+      } else if (sortBy === 'category') {
+        return a.category.localeCompare(b.category);
+      }
+    });
+    setActivities(sorted); // Update activities array with sorted order
+  };
 
   // Group activities by time periods and filter out old events
   useEffect(() => {
@@ -126,8 +138,14 @@ const Home = () => {
 
           {/* <ShareButton userId={userId} /> */}
           {/* <Button onClick={handleSortByName}>Sort by Name</Button> */}
-          {/* <Dropdown>
+          <Button onClick={toggleViewFormat}>
+            {viewFormat === 'normal'
+              ? 'Switch to Grouped View'
+              : 'Switch to Normal View'}
+          </Button>
+          <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              {/* Sort by: {sortBy === 'name' ? 'Name' : 'Date'} */}
               Sort by:{' '}
               {sortBy === 'name'
                 ? 'Name'
@@ -147,38 +165,75 @@ const Home = () => {
                 Category
               </Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown> */}
+          </Dropdown>
           <Button onClick={handleActivitiesClick}>View Public Calendar</Button>
         </div>
       </Container>
 
-      {sortedActivities.map((group, index) => (
-        <div key={index}>
-          <h2>{group.title}</h2>
-          <Row className="activity-container">
-            {group.events.map((activity) => (
+      {loading ? (
+        <div>Loading...</div>
+      ) : viewFormat === 'normal' && activities.length > 0 ? (
+        <Row className="activity-container">
+          {activities.map((activity) => (
+            <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+              <Activity activity={activity} />
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        sortedActivities.map((group, index) => (
+          <div key={index}>
+            <h2>{group.title}</h2>
+            <Row className="activity-container">
+              {group.events.map((activity) => (
+                <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+                  <Activity activity={activity} />
+                </Col>
+              ))}
+            </Row>
+          </div>
+        ))
+      )}
+    </>
+  );
+};
+
+export default Home;
+
+/* <Row className="activity-container"> */
+
+/* {activities.map((activity) => ( */
+
+/* {(sortedActivities.length > 0 ? sortedActivities : activities).map(
+            (activity) => (
               <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
                 <Activity activity={activity} />
               </Col>
-            ))}
-          </Row>
-        </div>
-      ))}
-      {/* <Row className="activity-container"> */}
-      {/* {activities.map((activity) => ( */}
-      {/* {(sortedActivities.length > 0 ? sortedActivities : activities).map(
+            )
+          )}
+        </Row> */
+
+// <Row className="activity-container">
+//   {activities.map((activity) => (
+//     <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+//       <Activity activity={activity} />
+//     </Col>
+//   ))}
+// </Row>
+
+/* <Row className="activity-container">
+        {(sortedActivities.length > 0 ? sortedActivities : activities).map(
           (activity) => (
             <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
               <Activity activity={activity} />
             </Col>
           )
         )}
-      </Row> */}
+      </Row>
     </>
   );
-};
+}; */
 
-export default Home;
 // const handleShare = () => {
 //   // Log userId value when Share button is clicked
 //   console.log('userId in handleShare function:', userId);
