@@ -21,11 +21,13 @@ const activitySchema = new mongoose.Schema(
       // required: true,
     },
     date: {
-      type: Date,
-      // required: true,
-      get: function (val) {
-        return val ? formatDateString(val) : val;
-      },
+      // type: Date,
+      type: String,
+
+      required: true,
+      // get: function (val) {
+      //   return val ? formatDateString(val) : val;
+      // },
     },
     time: {
       // type: String,
@@ -86,16 +88,40 @@ const activitySchema = new mongoose.Schema(
   }
 );
 
-function formatDateString(inputDateString) {
-  const date = new Date(inputDateString);
-  return (
-    date.getMonth().toString().padStart(2, '0') +
-    '/' +
-    date.getDate().toString().padStart(2, '0') +
-    '/' +
-    date.getFullYear()
-  );
-}
+// function formatDateString(inputDateString) {
+//   const date = new Date(inputDateString);
+//   return (
+//     date.getMonth().toString().padStart(2, '0') +
+//     '/' +
+//     date.getDate().toString().padStart(2, '0') +
+//     '/' +
+//     date.getFullYear()
+//   );
+// }
+//working...
+// function formatDateString(inputDateString) {
+//   return inputDateString.toISOString(); // Returns date in ISO format
+// }
+
+// function formatDateString(inputDateString) {
+//   const date = new Date(inputDateString);
+//   return date.toLocaleDateString('en-US', {
+//     year: 'numeric',
+//     month: '2-digit',
+//     day: '2-digit',
+//   });
+// }
+
+// function formatDateString(inputDateString) {
+//   const date = new Date(inputDateString);
+//   const offset = date.getTimezoneOffset(); // Get the timezone offset in minutes
+//   const adjustedDate = new Date(date.getTime() - offset * 60 * 1000); // Adjust the date for the timezone offset
+//   return adjustedDate.toLocaleDateString('en-US', {
+//     year: 'numeric',
+//     month: '2-digit',
+//     day: '2-digit',
+//   });
+// }
 
 const Activity = mongoose.model('Activity', activitySchema);
 export default Activity;

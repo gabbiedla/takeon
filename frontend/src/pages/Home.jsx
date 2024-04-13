@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom'; // Import useHistory hook
-import { Row, Col, Container, Button } from 'react-bootstrap';
+import { Row, Col, Container, Button, Dropdown } from 'react-bootstrap';
 //import events from '../events'; //data
 import Activity from '../components/InternalActivities'; //event compoonent
 import { FaShare } from 'react-icons/fa'; // Import share icon from react-icons/fa
@@ -32,6 +32,8 @@ const Home = () => {
   const { username } = useSelector((state) => state.auth.userInfo);
   const { userInfo } = useSelector((state) => state.auth);
   const [activities, setActivities] = useState([]);
+  const [sortedActivities, setSortedActivities] = useState([]);
+  const [sortBy, setSortBy] = useState('name');
   const navigate = useNavigate(); // Initialize useNavigate hook
   // const { userId } = useParams();
 
@@ -58,6 +60,37 @@ const Home = () => {
     }
   }, [userId]);
 
+  // const handleSortByName = () => {
+  //   const sorted = [...activities].sort((a, b) => a.name.localeCompare(b.name));
+  //   setSortedActivities(sorted);
+  // };
+
+  // const handleSort = (sortBy) => {
+  //   setSortBy(sortBy);
+  //   const sorted = [...activities].sort((a, b) => {
+  //     if (sortBy === 'name') {
+  //       return a.name.localeCompare(b.name);
+  //     } else if (sortBy === 'date') {
+  //       return new Date(a.date) - new Date(b.date);
+  //     }
+  //   });
+  //   setSortedActivities(sorted);
+  // };
+
+  const handleSort = (sortBy) => {
+    setSortBy(sortBy);
+    const sorted = [...activities].sort((a, b) => {
+      if (sortBy === 'name') {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === 'date') {
+        return new Date(a.date) - new Date(b.date);
+      } else if (sortBy === 'category') {
+        return a.category.localeCompare(b.category);
+      }
+    });
+    setSortedActivities(sorted);
+  };
+
   return (
     <>
       <Container className="home-heading">
@@ -67,16 +100,43 @@ const Home = () => {
           {/* <ShareButton /> old code */}
 
           {/* <ShareButton userId={userId} /> */}
+          {/* <Button onClick={handleSortByName}>Sort by Name</Button> */}
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              {/* Sort by: {sortBy === 'name' ? 'Name' : 'Date'} */}
+              Sort by:{' '}
+              {sortBy === 'name'
+                ? 'Name'
+                : sortBy === 'date'
+                ? 'Date'
+                : 'Category'}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleSort('name')}>
+                Name
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleSort('date')}>
+                Date
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => handleSort('category')}>
+                Category
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
           <Button onClick={handleActivitiesClick}>View Public Calendar</Button>
         </div>
       </Container>
 
       <Row className="activity-container">
-        {activities.map((activity) => (
-          <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
-            <Activity activity={activity} />
-          </Col>
-        ))}
+        {/* {activities.map((activity) => ( */}
+        {(sortedActivities.length > 0 ? sortedActivities : activities).map(
+          (activity) => (
+            <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+              <Activity activity={activity} />
+            </Col>
+          )
+        )}
       </Row>
     </>
   );

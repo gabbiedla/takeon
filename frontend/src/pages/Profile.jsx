@@ -326,9 +326,9 @@ const ProfilePage = () => {
   //   setIsEditingProfileImage(true);
   // };
 
-  const handleImageEdit = () => {
-    setIsEditingImage(true);
-  };
+  // const handleImageEdit = () => {
+  //   setIsEditingImage(true);
+  // };
   const handleNameSave = async () => {
     setIsEditingName(false);
     try {
@@ -397,15 +397,15 @@ const ProfilePage = () => {
   //   }
   // };
 
-  const handleImageSave = async () => {
-    setIsEditingImage(false);
-    try {
-      await axios.put(`/api/users/${userInfo._id}`, { image });
-      // Assuming you have an API endpoint for updating user email
-    } catch (error) {
-      console.error('Error updating location:', error);
-    }
-  };
+  // const handleImageSave = async () => {
+  //   setIsEditingImage(false);
+  //   try {
+  //     await axios.put(`/api/users/${userInfo._id}`, { image });
+  //     // Assuming you have an API endpoint for updating user email
+  //   } catch (error) {
+  //     console.error('Error updating location:', error);
+  //   }
+  // };
 
   const uploadFileHandler = async (e) => {
     // const file = e.target.files[0];

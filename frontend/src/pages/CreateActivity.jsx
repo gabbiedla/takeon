@@ -29,9 +29,16 @@ const CreateActivity = () => {
     }
   }, []);
 
+  // Handle change in input fields
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setActivityData({ ...activityData, [name]: value });
+  };
+
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting activity data:', activityData); // Log the form data before submission
 
     // Validate time format
     // const timeRegex = /^(0?[1-9]|1[0-2]|0?[1-9]:[0-5][0-9])\s?(AM|PM)$/i;
@@ -52,12 +59,40 @@ const CreateActivity = () => {
         return;
       }
 
+      // // Format the date in the desired format ("yyyy-MM-dd")
+      // const formattedDate = new Date(activityData.date)
+      //   .toISOString()
+      //   .split('T')[0];
+
+      // // Create a new object with the formatted date
+      // const requestData = {
+      //   ...activityData,
+      //   date: formattedDate,
+      // };
+
+      // Format the date in the desired format ("yyyy-MM-dd")
+      const formattedDate = new Date(activityData.date)
+        .toISOString()
+        .split('T')[0];
+
+      // Create a new object with the formatted date
+      const requestData = {
+        ...activityData,
+        date: formattedDate,
+      };
+
+      console.log('Submitting activity data:', requestData);
+
+      // Make a POST request to create the activity
+      // const response = await axios.post('/api/activities', requestData);
+      const response = await axios.post('/api/activities', activityData);
+
       // Log the activityData before making the POST request
       console.log('Submitting activity data:', activityData);
 
       // Make a POST request to your backend API to create the activity
       // const response = await axios.post('/api/activities', activityData);
-      const response = await axios.post('/api/activities', activityData);
+      // const response = await axios.post('/api/activities', activityData);
 
       console.log('Activity created:', response.data);
       // After successfully creating the activity, navigate back to "/"
@@ -69,23 +104,49 @@ const CreateActivity = () => {
     }
   };
 
-  const handleChange = (e) => {
-    // const { name, value } = e.target;
-    // setActivityData({ ...activityData, [name]: value });
-    const { name, value } = e.target;
-    console.log(`Setting ${name} to ${value}`);
+  // const handleChange = (e) => {
+  //   // const { name, value } = e.target;
+  //   // setActivityData({ ...activityData, [name]: value });
+  //   const { name, value } = e.target;
+  //   console.log(`Setting ${name} to ${value}`);
 
-    // Log the time to check if it matches the expected format
-    // if (name === 'time') {
-    //   console.log('Entered time:', value);
-    // }
+  //   // Log the time to check if it matches the expected format
+  //   // if (name === 'time') {
+  //   //   console.log('Entered time:', value);
+  //   // }
 
-    setActivityData({
-      ...activityData,
-      [name]: value,
-    });
-  };
+  //   setActivityData({
+  //     ...activityData,
+  //     [name]: value,
+  //   });
+  // };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   console.log(`Setting ${name} to ${value}`);
+
+  //   // Format the date if the input field is for the date
+  //   const formattedValue =
+  //     name === 'date' ? new Date(value).toISOString() : value;
+
+  //   setActivityData({
+  //     ...activityData,
+  //     [name]: formattedValue,
+  //   });
+  // };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   console.log(`Setting ${name} to ${value}`);
+
+  //   // Format the date if the input field is for the date
+  //   const formattedValue = name === 'date' ? value.split('T')[0] : value;
+
+  //   setActivityData({
+  //     ...activityData,
+  //     [name]: formattedValue,
+  //   });
+  // };
   // Render the component content only if the user is logged in
   if (!userInfo) {
     // You may choose to display a message or handle the situation here

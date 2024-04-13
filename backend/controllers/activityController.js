@@ -150,12 +150,14 @@ const createActivity = asyncHandler(async (req, res) => {
   // !time ||
 
   // Perform validation and data sanitization here if needed
+  // Format the date before saving to the database
+  const formattedDate = new Date(date).toISOString();
 
   // Create a new activity
   const newActivity = new Activity({
     user: user._id,
     name,
-    date,
+    date: formattedDate, // Use the formatted date
     location,
     url,
     time,

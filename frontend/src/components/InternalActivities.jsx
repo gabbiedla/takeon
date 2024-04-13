@@ -16,9 +16,49 @@ import {
 //
 
 const Activity = ({ activity }) => {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    // // Debugging statements
+
+    // console.log('Date before formatting:', date);
+
+    // // Adjust for the timezone offset
+    // const offset = date.getTimezoneOffset();
+    // date.setDate(date.getDate() - 1); // Subtract one day
+    // date.setTime(date.getTime() - offset * 60 * 1000);
+
+    // const formattedDate = date.toLocaleDateString('en-US'); // Adjust locale as needed
+    // console.log('Date after formatting:', formattedDate);
+    // return formattedDate;
+    // Debugging statements
+    // console.log('Date before formatting:', date);
+
+    // // Adjust for the timezone offset
+    // const offset = date.getTimezoneOffset();
+    // date.setTime(date.getTime() - offset * 60 * 1000);
+
+    // const formattedDate = date.toLocaleDateString('en-US'); // Adjust locale as needed
+    // console.log('Date after formatting:', formattedDate);
+    // return formattedDate;
+    // // Debugging statements
+    // console.log('Date before formatting:', date);
+    // const formattedDate = date.toLocaleDateString('en-US'); // Adjust locale as needed
+    // console.log('Date after formatting:', formattedDate);
+    // return formattedDate;
+    // const date = new Date(dateString);
+    console.log('Date before formatting:', dateString);
+    const formattedDate = date.toLocaleDateString('en-US'); // Adjust locale as needed
+    console.log('Date after formatting:', formattedDate);
+    return formattedDate;
+    // console.log('Date before formatting:', dateString);
+    // const date = new Date(dateString);
+    // console.log('Date after formatting:', date);
+    // return date.toLocaleDateString('en-US'); // Adjust locale as needed
+  };
   const iconData = [
     { icon: <FaMapPin />, data: activity.location },
-    { icon: <FaRegCalendar />, data: activity.date },
+    // { icon: <FaRegCalendar />, data: activity.date },
+    { icon: <FaRegCalendar />, data: formatDate(activity.date) },
     { icon: <FaRegClock />, data: activity.time },
     { icon: <FaLink />, data: activity.url },
     { icon: <FaRegUser />, data: activity.capacity },
