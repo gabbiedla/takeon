@@ -60,11 +60,6 @@ const Home = () => {
     }
   }, [userId]);
 
-  // const handleSortByName = () => {
-  //   const sorted = [...activities].sort((a, b) => a.name.localeCompare(b.name));
-  //   setSortedActivities(sorted);
-  // };
-
   // const handleSort = (sortBy) => {
   //   setSortBy(sortBy);
   //   const sorted = [...activities].sort((a, b) => {
@@ -72,24 +67,54 @@ const Home = () => {
   //       return a.name.localeCompare(b.name);
   //     } else if (sortBy === 'date') {
   //       return new Date(a.date) - new Date(b.date);
+  //     } else if (sortBy === 'category') {
+  //       return a.category.localeCompare(b.category);
   //     }
   //   });
   //   setSortedActivities(sorted);
   // };
 
-  const handleSort = (sortBy) => {
-    setSortBy(sortBy);
-    const sorted = [...activities].sort((a, b) => {
-      if (sortBy === 'name') {
-        return a.name.localeCompare(b.name);
-      } else if (sortBy === 'date') {
-        return new Date(a.date) - new Date(b.date);
-      } else if (sortBy === 'category') {
-        return a.category.localeCompare(b.category);
+  // Group activities by time periods and filter out old events
+  useEffect(() => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const upcomingThisWeek =
+      today.getTime() + (7 - today.getDay()) * 24 * 60 * 60 * 1000;
+    const thisMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 2, 0);
+    const todayEvents = [];
+    const upcomingEvents = [];
+    const thisMonthEvents = [];
+    const nextMonthEvents = [];
+    const restOfYearEvents = [];
+
+    activities.forEach((activity) => {
+      const activityDate = new Date(activity.date);
+      if (activityDate.getTime() >= today.getTime()) {
+        if (activityDate.getTime() === today.getTime()) {
+          todayEvents.push(activity);
+        } else if (activityDate < upcomingThisWeek) {
+          upcomingEvents.push(activity);
+        } else if (activityDate <= thisMonth) {
+          thisMonthEvents.push(activity);
+        } else if (activityDate <= nextMonth) {
+          nextMonthEvents.push(activity);
+        } else {
+          restOfYearEvents.push(activity);
+        }
       }
     });
+
+    const sorted = [
+      { title: 'Today', events: todayEvents },
+      { title: 'Upcoming (This Week)', events: upcomingEvents },
+      { title: 'This Month', events: thisMonthEvents },
+      { title: 'Next Month', events: nextMonthEvents },
+      { title: 'Rest of the Year', events: restOfYearEvents },
+    ];
+
     setSortedActivities(sorted);
-  };
+  }, [activities]);
 
   return (
     <>
@@ -101,9 +126,8 @@ const Home = () => {
 
           {/* <ShareButton userId={userId} /> */}
           {/* <Button onClick={handleSortByName}>Sort by Name</Button> */}
-          <Dropdown>
+          {/* <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-basic">
-              {/* Sort by: {sortBy === 'name' ? 'Name' : 'Date'} */}
               Sort by:{' '}
               {sortBy === 'name'
                 ? 'Name'
@@ -123,21 +147,33 @@ const Home = () => {
                 Category
               </Dropdown.Item>
             </Dropdown.Menu>
-          </Dropdown>
+          </Dropdown> */}
           <Button onClick={handleActivitiesClick}>View Public Calendar</Button>
         </div>
       </Container>
 
-      <Row className="activity-container">
-        {/* {activities.map((activity) => ( */}
-        {(sortedActivities.length > 0 ? sortedActivities : activities).map(
+      {sortedActivities.map((group, index) => (
+        <div key={index}>
+          <h2>{group.title}</h2>
+          <Row className="activity-container">
+            {group.events.map((activity) => (
+              <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+                <Activity activity={activity} />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      ))}
+      {/* <Row className="activity-container"> */}
+      {/* {activities.map((activity) => ( */}
+      {/* {(sortedActivities.length > 0 ? sortedActivities : activities).map(
           (activity) => (
             <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
               <Activity activity={activity} />
             </Col>
           )
         )}
-      </Row>
+      </Row> */}
     </>
   );
 };
