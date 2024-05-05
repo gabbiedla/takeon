@@ -30,7 +30,7 @@ router
   .put(protect, updateUserProfile);
 router
   .route('/:id')
-  .delete(protect, admin, deleteUser)
+  .delete(protect, deleteUser)
   .get(protect, admin, getUserByID)
   .put(protect, admin, updateUser);
 

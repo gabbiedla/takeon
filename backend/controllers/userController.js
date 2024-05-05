@@ -215,8 +215,41 @@ const getUserByUsername = asyncHandler(async (req, res, next) => {
 //@desc Delete user
 //@route DELETE /api/users/:id
 //@access Private/admin
+// const deleteUser = asyncHandler(async (req, res) => {
+//   res.send('delete user');
+// });
+// const deleteUser = asyncHandler(async (req, res) => {
+//   const userId = req.params.id;
+
+//   // Find user by ID
+//   const user = await User.findById(userId);
+
+//   if (!user) {
+//     res.status(404);
+//     throw new Error('User not found');
+//   }
+
+//   // Delete the user
+//   await user.remove();
+
+//   res.status(200).json({ message: 'User deleted successfully' });
+// });
+
 const deleteUser = asyncHandler(async (req, res) => {
-  res.send('delete user');
+  const userId = req.params.id;
+
+  // Find user by ID
+  const user = await User.findById(userId);
+
+  if (!user) {
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+  // Delete the user
+  await User.findByIdAndDelete(userId);
+
+  res.status(200).json({ message: 'User deleted successfully' });
 });
 
 //@desc Update user

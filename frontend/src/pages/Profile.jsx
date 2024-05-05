@@ -162,6 +162,7 @@ import {
   useUpdateUserMutation,
   useProfileMutation,
   useUploadProfileImageMutation,
+  useDeleteUserMutation,
 } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 
@@ -187,7 +188,24 @@ const ProfilePage = () => {
     useUploadProfileImageMutation();
   const [updateProfile, { isLoading: loadingUpdateProfile }] =
     useProfileMutation();
+  const [deleteUser, { refetch, isLoading: loadingDelete }] =
+    useDeleteUserMutation();
 
+  const deleteHandler = async (id) => {
+    console.log('Deleting user...');
+    if (window.confirm('Are you sure?')) {
+      try {
+        console.log('Deleting user with ID:', id);
+        await deleteUser(id);
+        toast.success('User deleted');
+        console.log('User deleted successfully');
+        refetch();
+      } catch (err) {
+        console.error('Error deleting user:', err);
+        toast.error(err?.data?.message || err.error);
+      }
+    }
+  };
   //Usereffect
   useEffect(() => {
     if (userInfo) {
@@ -440,6 +458,7 @@ const ProfilePage = () => {
   return (
     <>
       <FormContainer>
+        {loadingDelete && <Loader />}
         <Form onSubmit={submitHandler}>
           <FormGroup controlId="name">
             <Form.Label>Name</Form.Label>
@@ -526,6 +545,13 @@ const ProfilePage = () => {
           </Form.Group>
           <Button type="submit" variant="primary" className="my-2">
             Update
+          </Button>
+          <Button
+            onClick={() => deleteHandler(userInfo._id)}
+            variant="danger"
+            className="my-2"
+          >
+            Delete
           </Button>
         </Form>
         {/* {profileImage && <PhotoDisplay image={profileImage} />} */}
