@@ -95,6 +95,7 @@ const ExternalActivity = ({ activity }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [showRSVPModal, setShowRSVPModal] = useState(false);
   const [rsvp, setRsvp] = useState({
+    activityId: activity._id, // Set the activity ID for the RSVP
     name: '',
     email: '',
     // guests: 0,

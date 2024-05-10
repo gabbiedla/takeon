@@ -38,10 +38,15 @@ import Rsvp from '../models/rsvpModel.js';
 const createRsvp = asyncHandler(async (req, res) => {
   try {
     console.log(req.body); // Log the request body
-    const { name, email, comments } = req.body;
+    const { activityId, name, email, comments } = req.body;
 
     // Create a new RSVP document
-    const newRsvp = await Rsvp.create({ name, email, comments });
+    const newRsvp = await Rsvp.create({
+      activity: activityId,
+      name,
+      email,
+      comments,
+    });
 
     if (newRsvp) {
       res.status(201).json(newRsvp);

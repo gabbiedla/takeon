@@ -3,6 +3,11 @@ import bcrypt from 'bcryptjs';
 
 const rsvpSchema = new mongoose.Schema(
   {
+    activity: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Activity', // Reference to the Activity model
+    },
     name: {
       type: String,
       required: true,
