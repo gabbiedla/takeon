@@ -25,6 +25,7 @@ import Profile from './pages/Profile';
 import ExternalViewTwo from './pages/ExternalViewTwo';
 import ExternalEventView from './pages/ExternalEventView';
 import Test from './pages/Test';
+import RsvpPage from './pages/RsvpPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,6 +44,7 @@ const router = createBrowserRouter(
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/activity/:id/view" element={<ExternalEventView />} />
+      <Route path="/activity/:id/rsvp" element={<RsvpPage />} />
 
       {/* <Route path="/activity/:id/edit" element={<ActivityEdit />} /> */}
       {/* <Route path="/profile" element={<Profile />} /> */}
