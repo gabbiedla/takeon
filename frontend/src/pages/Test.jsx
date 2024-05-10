@@ -1,8 +1,68 @@
-// Assuming this code is in a file named App.js
+// // Assuming this code is in a file named App.js
+// import React, { useEffect, useState } from 'react';
+// import { Row, Col, Container, Button } from 'react-bootstrap';
+// import ExternalActivities from '../components/ExternalActivities';
+// import { useParams } from 'react-router-dom'; // Assuming you use React Router for routing
+// import axios from 'axios';
+// import { FaShare, FaLink } from 'react-icons/fa';
+// import CopyURLButton from '../components/CopyUrlButton';
+
+// const Test = () => {
+//   const { username } = useParams();
+//   const [activities, setActivities] = useState([]);
+
+//   useEffect(() => {
+//     const fetchActivities = async () => {
+//       console.log('Fetching activities for username:', username); // Log username before fetching activities
+//       try {
+//         const response = await axios.get(`/api/users/${username}`);
+//         // Extract the activities from the response data
+//         const { activities } = response.data;
+//         setActivities(activities); // Assuming activities are returned under 'activities' key in response data
+//       } catch (error) {
+//         console.error('Error fetching activities:', error);
+//       }
+//     };
+
+//     if (username) {
+//       fetchActivities();
+//     }
+//   }, [username]);
+
+//   return (
+//     <>
+//       <Container className="home-heading">
+//         <h1 className="calendar-title">Gabbie's Calendar</h1>
+//         <div className="buttons">
+//           <CopyURLButton />
+//         </div>
+//       </Container>
+
+//       <Row className="activity-container">
+//         {activities.map((activity) => (
+//           <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+//             <ExternalActivities activity={activity} />
+//           </Col>
+//         ))}
+//       </Row>
+//     </>
+//     // <div>
+//     //   <h1>User Activities</h1>
+//     //   <ul>
+//     //     {activities.map((activity) => (
+//     //       <li key={activity._id}>{activity}</li>
+//     //     ))}
+//     //   </ul>
+//     // </div>
+//   );
+// };
+
+// export default Test;
+// EDITED TO SORT
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Container, Button } from 'react-bootstrap';
 import ExternalActivities from '../components/ExternalActivities';
-import { useParams } from 'react-router-dom'; // Assuming you use React Router for routing
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaShare, FaLink } from 'react-icons/fa';
 import CopyURLButton from '../components/CopyUrlButton';
@@ -13,12 +73,11 @@ const Test = () => {
 
   useEffect(() => {
     const fetchActivities = async () => {
-      console.log('Fetching activities for username:', username); // Log username before fetching activities
+      console.log('Fetching activities for username:', username);
       try {
         const response = await axios.get(`/api/users/${username}`);
-        // Extract the activities from the response data
         const { activities } = response.data;
-        setActivities(activities); // Assuming activities are returned under 'activities' key in response data
+        setActivities(activities);
       } catch (error) {
         console.error('Error fetching activities:', error);
       }
@@ -29,31 +88,62 @@ const Test = () => {
     }
   }, [username]);
 
+  const sortedActivities = activities.reduce(
+    (acc, activity) => {
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const upcomingThisWeek =
+        today.getTime() + (7 - today.getDay()) * 24 * 60 * 60 * 1000;
+      const thisMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      const nextMonth = new Date(now.getFullYear(), now.getMonth() + 2, 0);
+
+      const activityDate = new Date(activity.date);
+      if (activityDate.getTime() >= today.getTime()) {
+        if (activityDate.getTime() === today.getTime()) {
+          acc[0].events.push(activity);
+        } else if (activityDate < upcomingThisWeek) {
+          acc[1].events.push(activity);
+        } else if (activityDate <= thisMonth) {
+          acc[2].events.push(activity);
+        } else if (activityDate <= nextMonth) {
+          acc[3].events.push(activity);
+        } else {
+          acc[4].events.push(activity);
+        }
+      }
+      return acc;
+    },
+    [
+      { title: 'Today', events: [] },
+      { title: 'Upcoming (This Week)', events: [] },
+      { title: 'This Month', events: [] },
+      { title: 'Next Month', events: [] },
+      { title: 'Rest of the Year', events: [] },
+    ]
+  );
+
   return (
     <>
       <Container className="home-heading">
-        <h1 className="calendar-title">Gabbie's Calendar</h1>
+        <h1 className="calendar-title">{`${username}'s Calendar`}</h1>
         <div className="buttons">
           <CopyURLButton />
         </div>
       </Container>
 
       <Row className="activity-container">
-        {activities.map((activity) => (
-          <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
-            <ExternalActivities activity={activity} />
-          </Col>
+        {sortedActivities.map((period) => (
+          <React.Fragment key={period.title}>
+            <h2>{period.title}</h2>
+            {period.events.map((activity) => (
+              <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+                <ExternalActivities activity={activity} />
+              </Col>
+            ))}
+          </React.Fragment>
         ))}
       </Row>
     </>
-    // <div>
-    //   <h1>User Activities</h1>
-    //   <ul>
-    //     {activities.map((activity) => (
-    //       <li key={activity._id}>{activity}</li>
-    //     ))}
-    //   </ul>
-    // </div>
   );
 };
 
