@@ -159,7 +159,9 @@ const ExternalActivity = ({ activity }) => {
       {/* RSVP Modal */}
       <Modal show={showRSVPModal} onHide={handleCloseRSVPModal}>
         <Modal.Header closeButton>
-          <Modal.Title>RSVP</Modal.Title>
+          {/* <Modal.Title>RSVP</Modal.Title> */}
+          <Modal.Title>RSVP for {activity.name}</Modal.Title>
+          {/* <p>RSVP for {activity.time}</p> */}
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleRSVPSubmit}>
