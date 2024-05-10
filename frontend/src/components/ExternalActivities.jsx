@@ -89,17 +89,23 @@ import {
   FaMinus,
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useRegisterRsvpMutation } from '../slices/rsvpsApiSlice';
 
 const ExternalActivity = ({ activity }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [showRSVPModal, setShowRSVPModal] = useState(false);
-  const [rsvpDetails, setRSVPDetails] = useState({
+  const [rsvp, setRsvp] = useState({
     name: '',
     email: '',
-    guests: 0,
+    // guests: 0,
     comments: '',
   });
-  const [rsvpSubmitted, setRSVPSubmitted] = useState(false);
+  const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
+
+  // Importing the hook from rsvpSlice.js
+
+  const [registerRsvp, { isLoading, isSuccess, isError }] =
+    useRegisterRsvpMutation(); // Using the hook to handle RSVP submission
 
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -113,13 +119,38 @@ const ExternalActivity = ({ activity }) => {
     setShowRSVPModal(true);
   };
 
-  const handleRSVPSubmit = (e) => {
+  // const handleRSVPSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Process RSVP form submission here
+  //   // For example, you can send the data to your backend
+  //   console.log('RSVP Details:', rsvpDetails);
+  //   // After submission, you can display a confirmation message
+  //   setRSVPSubmitted(true);
+  // };
+
+  // const handleRSVPSubmit = async (e) => {
+  //   // Changed handleRSVPSubmit to an async function
+  //   e.preventDefault();
+  //   try {
+  //     await registerRsvp(rsvp); // Calling the mutation function with RSVP details
+  //     setRsvpSubmitted(true);
+  //   } catch (error) {
+  //     // Handle error if submission fails
+  //   }
+  // };
+
+  const handleRSVPSubmit = async (e) => {
+    // Changed handleRSVPSubmit to an async function
     e.preventDefault();
-    // Process RSVP form submission here
-    // For example, you can send the data to your backend
-    console.log('RSVP Details:', rsvpDetails);
-    // After submission, you can display a confirmation message
-    setRSVPSubmitted(true);
+    console.log('Submitting RSVP:', rsvp); // Log the RSVP data before submission
+    try {
+      await registerRsvp(rsvp); // Calling the mutation function with RSVP details
+      console.log('RSVP submitted successfully!');
+      setRsvpSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting RSVP:', error); // Log any errors that occur during submission
+      // Handle error if submission fails
+    }
   };
 
   return (
@@ -170,56 +201,46 @@ const ExternalActivity = ({ activity }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter your name"
-                value={rsvpDetails.name}
-                onChange={(e) =>
-                  setRSVPDetails({ ...rsvpDetails, name: e.target.value })
-                }
+                value={rsvp.name}
+                onChange={(e) => setRsvp({ ...rsvp, name: e.target.value })}
               />
             </Form.Group>
-            <Form.Group controlId="formPhone">
+            {/* <Form.Group controlId="formPhone">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter your phone number"
-                value={rsvpDetails.phone}
-                onChange={(e) =>
-                  setRSVPDetails({ ...rsvpDetails, phone: e.target.value })
-                }
+                value={rsvp.phone}
+                onChange={(e) => setRsvp({ ...rsvp, phone: e.target.value })}
               />
-            </Form.Group>
+            </Form.Group> */}
             <Form.Group controlId="formEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                value={rsvpDetails.email}
-                onChange={(e) =>
-                  setRSVPDetails({ ...rsvpDetails, email: e.target.value })
-                }
+                value={rsvp.email}
+                onChange={(e) => setRsvp({ ...rsvp, email: e.target.value })}
               />
             </Form.Group>
 
-            <Form.Group controlId="formGuests">
+            {/* <Form.Group controlId="formGuests">
               <Form.Label>Number of Guests</Form.Label>
               <Form.Control
                 type="number"
                 min="0"
-                value={rsvpDetails.guests}
-                onChange={(e) =>
-                  setRSVPDetails({ ...rsvpDetails, guests: e.target.value })
-                }
+                value={rsvp.guests}
+                onChange={(e) => setRsvp({ ...rsvp, guests: e.target.value })}
               />
-            </Form.Group>
+            </Form.Group> */}
 
             <Form.Group controlId="formComments">
               <Form.Label>Comments</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                value={rsvpDetails.comments}
-                onChange={(e) =>
-                  setRSVPDetails({ ...rsvpDetails, comments: e.target.value })
-                }
+                value={rsvp.comments}
+                onChange={(e) => setRsvp({ ...rsvp, comments: e.target.value })}
               />
             </Form.Group>
             {/* Add other form fields as needed */}

@@ -10,6 +10,7 @@ import activityRoutes from './routes/activityRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 // import events from './data/events.js';
+import rsvpRoutes from './routes/rsvpRoutes.js';
 
 connectDB(); // Connect to MongoDB
 
@@ -32,6 +33,7 @@ app.get('/', (req, res) => res.send('API is running...'));
 app.use('/api/activities', activityRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/rsvps', rsvpRoutes);
 
 const __dirname = path.resolve(); // Set __dirname to current directory
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

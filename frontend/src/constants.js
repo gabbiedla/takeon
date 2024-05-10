@@ -8,3 +8,4 @@ export const ORDERS_URL = '/api/orders';
 export const PAYPAL_URL = '/api/config/paypal';
 export const AUTH_URL = '/api/users/auth'; //added this via gpt
 export const UPLOAD_URL = '/api/upload';
+export const RSVPS_URL = '/api/rsvps';
