@@ -102,3 +102,66 @@ Available scripts in `package.json`
     "data:import": "node backend/seeder.js",
     "data:destroy": "node backend/seeder.js -d"
 ```
+## Environment Variables
+
+The `client` proxies requests to the `server` in port `5001`.
+
+The `server` sends requests to the mongo DB in `mongo_uri`.
+
+```env
+
+MONGO_URI=mongodb://root:example@localhost:27017
+JWT_KEY=3404519834
+```
+
+## MongoDB
+
+This project uses MongoDB as its database.
+
+You can easily run a local MongoDB instance using Docker Compose.
+
+### Setting Up MongoDB with Docker Compose
+
+1. **Using a `docker-compose.yml` file**:
+
+2. **Start the MongoDB container**:
+
+```bash
+
+docker-compose up -d
+```
+
+3. **Get the MongoDB URI**:
+
+The MongoDB URI will be:
+
+```
+
+mongodb://root:example@localhost:27017
+```
+
+4. **Set the MongoDB URI as an environment variable**:
+
+    Add the following line to your `.env` file in the root of your project:
+
+```env
+
+MONGO_URI=mongodb://root:example@localhost:27017
+```
+
+### Using the MongoDB URI in Your Application
+
+Make sure your application reads the `MONGO_URI` environment variable to connect to the MongoDB instance. For example, in a Node.js application, you can use the following code to connect to MongoDB:
+
+```javascript
+
+const mongoose = require('mongoose');
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+```
