@@ -14,7 +14,7 @@ import rsvpRoutes from './routes/rsvpRoutes.js';
 
 connectDB(); // Connect to MongoDB
 
-const port = process.env.PORT || 5002;
+const port = process.env.PORT || 5001;
 
 //const app = express();common js syntax
 // const port = 5001; select port it opens on
