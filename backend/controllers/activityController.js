@@ -171,8 +171,9 @@ const createActivity = asyncHandler(async (req, res) => {
     const createdActivity = await newActivity.save();
 
     // send a success email to the person who created the event
+    // test@blackhole.postmarkapp.com
     sendEmail(
-      'test@blackhole.postmarkapp.com', //user.email,
+      user.email,
       {
         action_url: 'build+google+calendar+url',
         event_name: name,
