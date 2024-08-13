@@ -2,6 +2,7 @@
 import asyncHandler from '../middleware/asyncHandler.js';
 import Activity from '../models/activityModel.js';
 import User from '../models/userModel.js';
+import { sendEmail } from './emailController.js';
 
 // const getActivitiesByUsername = asyncHandler(async (req, res) => {
 //   // const userId = req.params.userId;
@@ -168,6 +169,21 @@ const createActivity = asyncHandler(async (req, res) => {
   try {
     // Save the new activity to the database
     const createdActivity = await newActivity.save();
+
+    // send a success email to the person who created the event
+    sendEmail(
+      'test@blackhole.postmarkapp.com', //user.email,
+      {
+        action_url: 'build+google+calendar+url',
+        event_name: name,
+        event_url: url,
+        event_location: location,
+        event_date: formattedDate,
+        event_time: time,
+      },
+      `Event Created: ${name}`,
+      'event_created'
+    );
 
     // Send a success response with the created activity
     res.status(201).json(createdActivity);

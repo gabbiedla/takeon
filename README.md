@@ -70,6 +70,8 @@ NODE_ENV=development
 PORT=5001
 MONGO_URI=mongodb+srv://gdla23:Socal23@cluster0.5ngsjz6.mongodb.net/socal?retryWrites=true&w=majority
 JWT_SECRET=abc123
+POSTMARK_API_TOKEN=xxxx
+EMAIL_FROM=
 ```
 
 ## Github Actions
