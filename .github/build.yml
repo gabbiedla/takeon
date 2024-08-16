@@ -40,8 +40,11 @@ jobs:
       - name: Test
         run: npm run test
 
-      - name: Build
-        run: npm run build
+      - name: Build Frontend
+        run: npm run build:client
+
+      - name: Lint Server
+        run: npm run lint
 
       # - name: Install Playwright browsers
       #   run: npx playwright install
