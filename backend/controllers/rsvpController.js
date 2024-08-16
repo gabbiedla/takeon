@@ -1,44 +1,18 @@
-// controllers/rsvpController.js
 import asyncHandler from '../middleware/asyncHandler.js';
 import Rsvp from '../models/rsvpModel.js';
-
-// // Controller function to create a new RSVP
-// const createRsvp = asyncHandler(async (req, res) => {
-//   console.log(req.body); // Log the request body
-//   const { name, email } = req.body;
-
-//   // Create a new RSVP document
-//   const newRsvp = await Rsvp.create({
-//     name: Rsvp.name,
-//     email: Rsvp.email,
-//     comments: Rsvp.comments,
-//   });
-
-//   res.status(201).json(newRsvp);
-// });
-
-// export { createRsvp };
-//TEST 2
-// const createRsvp = asyncHandler(async (req, res) => {
-//   try {
-//     console.log(req.body); // Log the request body
-//     const { name, email, comments } = req.body;
-
-//     // Create a new RSVP document
-//     const newRsvp = await Rsvp.create({ name, email, comments });
-
-//     res.status(201).json(newRsvp);
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
-// export { createRsvp };
+import Activity from '../models/activityModel.js';
+import User from '../models/userModel.js';
+import { sendEmail } from './emailController.js';
+import dayjs from 'dayjs';
+import { createGoogleUrl } from '../utils.js';
 
 const createRsvp = asyncHandler(async (req, res) => {
   try {
     console.log(req.body); // Log the request body
     const { activityId, name, email, comments } = req.body;
+
+    const activity = await Activity.findById(activityId);
+    const user = await User.findById(activity.user);
 
     // Create a new RSVP document
     const newRsvp = await Rsvp.create({
@@ -49,6 +23,29 @@ const createRsvp = asyncHandler(async (req, res) => {
     });
 
     if (newRsvp) {
+      const event_url = `https://myeventlink.co/activity/${activity.id}/view`;
+      const data = {
+        activity_name: activity.name,
+        rsvpDetails_name: name,
+        activity_time: activity.time,
+        activity_date: dayjs(activity.date).format('MMMM D, YYYY'),
+        activity_location: activity.location,
+        rspvDetails_comments: comments,
+        activity_url: activity.url,
+        google_calendar_url: createGoogleUrl({
+          startDate: activity.date,
+          timeZone: activity.timezone,
+          name: encodeURIComponent(activity.name),
+          location: encodeURIComponent(activity.location),
+          details: encodeURIComponent(`${comments}\n\n${event_url}\n\n${activity.url}`),
+        }),
+        user_name: user.name,
+        event_url,
+      };
+
+      sendEmail(email, data, 'rsvp_confirmation');
+      sendEmail(user.email, data, 'rsvp_notification');
+
       res.status(201).json(newRsvp);
     } else {
       res.status(400);
