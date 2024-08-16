@@ -30,7 +30,7 @@ const init = () => {
  * @param {*} template_alias
  * @returns {Promise}
  */
-export const sendEmail = (destiny, data, subject, template_alias) => {
+export const sendEmail = (destiny, data, template_alias) => {
   console.log('sending email to', { destiny, template_id: template_alias });
 
   const client = init();
@@ -40,9 +40,11 @@ export const sendEmail = (destiny, data, subject, template_alias) => {
     return;
   }
 
+  console.log('Sending email with template', { destiny, template_alias });
+
   const result = client.sendEmailWithTemplate({
     From: EMAIL_FROM,
-    To: destiny,
+    To: 'test@blackhole.postmarkapp.com', // destiny,
     TemplateAlias: template_alias,
     TemplateModel: { ...data },
   });
@@ -51,3 +53,4 @@ export const sendEmail = (destiny, data, subject, template_alias) => {
 
   return result;
 };
+
