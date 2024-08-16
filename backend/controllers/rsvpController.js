@@ -35,6 +35,23 @@ import Rsvp from '../models/rsvpModel.js';
 
 // export { createRsvp };
 
+/**
+ * rsvpDetails_name
+          <td class="attributes_item"><strong>Event Name:</strong> {{activity_name}}</td>
+          <td class="attributes_item"><strong>Time:</strong> {{activity_time}}</td>
+          <td class="attributes_item"><strong>Date:</strong> {{activity_date}}</td>
+          <td class="attributes_item"><strong>Location:</strong> {{activity_location}}</td>
+          <td class="attributes_item"><strong>Your comments:</strong> {{rsvpDetails_comments}}</td>
+      activity_url: 'http://localhost:3000/rsvp',
+      google_calendar_url
+      user_name
+      event_url
+
+      rsvp_notification |
+      rsvp_confirmation |
+      event_created
+ */
+
 const createRsvp = asyncHandler(async (req, res) => {
   try {
     console.log(req.body); // Log the request body

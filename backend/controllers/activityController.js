@@ -1,8 +1,10 @@
 // create function to get products
 import asyncHandler from '../middleware/asyncHandler.js';
 import Activity from '../models/activityModel.js';
-import User from '../models/userModel.js';
 import { sendEmail } from './emailController.js';
+import dayjs from 'dayjs';
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import timezone from 'dayjs/plugin/timezone.js';
 
 // const getActivitiesByUsername = asyncHandler(async (req, res) => {
 //   // const userId = req.params.userId;
@@ -136,42 +138,45 @@ const getActivityById = asyncHandler(async (req, res) => {
 // @route POST /api/activities
 // @access Public
 const createActivity = asyncHandler(async (req, res) => {
-  const { name, date, location, url, time, capacity, category } = req.body;
+  const { name, date, location, url, time, capacity, category, timeZone = '' } = req.body;
 
   // Access user information from the request (assuming it's populated by authentication middleware)
   const { user } = req;
 
+  dayjs.extend(customParseFormat);
+  dayjs.extend(timezone);
+
   // Validate required fields
   // || !date || !location || !url || !time || !capacity
-  if (!name) {
+  if (!name || !date || !time) {
     return res
       .status(400)
       .json({ success: false, error: 'Missing required fields' });
   }
-  // !time ||
 
   // Perform validation and data sanitization here if needed
   // Format the date before saving to the database
-  const formattedDate = new Date(date).toISOString();
+  const formattedDate = dayjs(`${date} ${time}`, 'YYYY-MM-DD HH:MM', timeZone);
 
   // Create a new activity
   const newActivity = new Activity({
     user: user._id,
     name,
-    date: formattedDate, // Use the formatted date
+    date: formattedDate.toISOString(),
     location,
     url,
-    time,
+    time: formattedDate.format('hh:mm A'),
     capacity,
+    timezone: timeZone,
     category,
   });
+  let createdActivity = {};
 
   try {
     // Save the new activity to the database
-    const createdActivity = await newActivity.save();
+    createdActivity = await newActivity.save();
 
     // send a success email to the person who created the event
-    // test@blackhole.postmarkapp.com
     sendEmail(
       user.email,
       {
@@ -179,14 +184,13 @@ const createActivity = asyncHandler(async (req, res) => {
         event_name: name,
         event_url: url,
         event_location: location,
-        event_date: formattedDate,
-        event_time: time,
+        event_date: formattedDate.format('YYYY-MM-DD'),
+        event_time: formattedDate.format('hh:mm A'),
       },
       'event_created'
     );
 
     // Send a success response with the created activity
-    res.status(201).json(createdActivity);
   } catch (error) {
     // Log detailed error information
     console.error('Error creating activity:', error);
@@ -199,6 +203,8 @@ const createActivity = asyncHandler(async (req, res) => {
       stack: error.stack || null,
     });
   }
+
+  res.status(201).json(createdActivity);
 });
 
 //@desc Update an activity
