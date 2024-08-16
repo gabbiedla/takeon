@@ -11,7 +11,7 @@ import ProfileImage from './ProfileImage';
 import { useParams } from 'react-router-dom';
 
 const Header = () => {
-  const { userId } = useParams(); // Extract userId from route
+  const { username } = useSelector((state) => state.auth.userInfo);
   const { userInfo } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Header = () => {
     <header>
       <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
         <Container>
-          <LinkContainer to={`/home/${userId}`}>
+          <LinkContainer to={`/home/${username}`}>
             {/* <LinkContainer to="/"> old code*/}
             <Navbar.Brand>TakeOn</Navbar.Brand>
           </LinkContainer>

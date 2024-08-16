@@ -8,21 +8,18 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.min.css'; //optonal
-// import './bootstrap.custom.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import { IconHome } from '@tabler/icons-react';
 
 import App from './App';
 import PrivateRoute from './components/PrivateRoute';
-import AdminRoute from './components/AdminRoute';
 import Home from './pages/Home';
-import ExternalView from './pages/ExternalView';
 import CreateActivity from './pages/CreateActivity';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ActivityEdit from './pages/ActivityEdit';
 import Profile from './pages/Profile';
-import ExternalViewTwo from './pages/ExternalViewTwo';
 import ExternalEventView from './pages/ExternalEventView';
 import Test from './pages/Test';
 import RsvpPage from './pages/RsvpPage';
@@ -30,6 +27,8 @@ import RsvpPage from './pages/RsvpPage';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      {/** Index page */}
+      <Route index={true} element={<IconHome size={48} />} />
       {/* <Route index={true} path="/" element={<Home />} /> */}
 
       {/* //allows non users to view activities by user */}
@@ -66,13 +65,9 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <App />  */}
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

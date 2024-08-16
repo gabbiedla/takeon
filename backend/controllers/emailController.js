@@ -46,10 +46,11 @@ export const sendEmail = (destiny, data, template_alias) => {
   try {
     result = client.sendEmailWithTemplate({
       From: EMAIL_FROM,
-      To: 'test@blackhole.postmarkapp.com', // destiny,
+      To: 'test@blackhole.postmarkapp.com',
+      // To: destiny,
       TemplateAlias: template_alias,
       TemplateModel: { ...data },
-    });
+    }).then().catch();
     console.log('Sent email', { result });
   } catch (error) {
     console.error('Failed to send email', { error });

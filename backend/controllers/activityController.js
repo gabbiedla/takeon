@@ -179,26 +179,6 @@ const createActivity = asyncHandler(async (req, res) => {
 
     // send a success email to the person who created the event
     const event_url = `https://myeventlink.co/activity/${createdActivity.id}/view`;
-
-    sendEmail(
-      user.email,
-      {
-        event_name: name,
-        event_url: url,
-        event_location: location,
-        event_date: formattedDate.format('YYYY-MM-DD'),
-        event_time: formattedDate.format('hh:mm A'),
-        google_calendar_url: createGoogleUrl({
-          startDate: formattedDate.toISOString(),
-          timeZone: timeZone,
-          name: encodeURIComponent(name),
-          location: encodeURIComponent(location),
-          details: encodeURIComponent(`\n\n${event_url}\n\n${url}`),
-        }),
-      },
-      'event_created'
-    );
-
     // Send a success response with the created activity
   } catch (error) {
     // Log detailed error information
@@ -212,6 +192,25 @@ const createActivity = asyncHandler(async (req, res) => {
       stack: error.stack || null,
     });
   }
+
+  sendEmail(
+    user.email,
+    {
+      event_name: name,
+      event_url: url,
+      event_location: location,
+      event_date: formattedDate.format('YYYY-MM-DD'),
+      event_time: formattedDate.format('hh:mm A'),
+      google_calendar_url: createGoogleUrl({
+        startDate: formattedDate.toISOString(),
+        timeZone: timeZone,
+        name: encodeURIComponent(name),
+        location: encodeURIComponent(location),
+        details: encodeURIComponent(`\n\n${event_url}\n\n${url}`),
+      }),
+    },
+    'event_created'
+  );
 
   res.status(201).json(createdActivity);
 });
