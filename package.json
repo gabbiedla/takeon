@@ -7,9 +7,11 @@
   "scripts": {
     "test": "echo \"Warning: test success\"",
     "build": "echo \"Creating build process\"",
+    "lint": "echo \"Creating lint process\"",
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
+    "build:client": "npm run build --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/seeder.js",
     "data:destroy": "node backend/seeder.js -d"
