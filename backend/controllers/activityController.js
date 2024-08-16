@@ -5,6 +5,7 @@ import { sendEmail } from './emailController.js';
 import dayjs from 'dayjs';
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import timezone from 'dayjs/plugin/timezone.js';
+import { createGoogleUrl } from '../utils.js';
 
 // const getActivitiesByUsername = asyncHandler(async (req, res) => {
 //   // const userId = req.params.userId;
@@ -177,15 +178,23 @@ const createActivity = asyncHandler(async (req, res) => {
     createdActivity = await newActivity.save();
 
     // send a success email to the person who created the event
+    const event_url = `https://myeventlink.co/activity/${createdActivity.id}/view`;
+
     sendEmail(
       user.email,
       {
-        action_url: 'build+google+calendar+url',
         event_name: name,
         event_url: url,
         event_location: location,
         event_date: formattedDate.format('YYYY-MM-DD'),
         event_time: formattedDate.format('hh:mm A'),
+        google_calendar_url: createGoogleUrl({
+          startDate: formattedDate.toISOString(),
+          timeZone: timeZone,
+          name: encodeURIComponent(name),
+          location: encodeURIComponent(location),
+          details: encodeURIComponent(`\n\n${event_url}\n\n${url}`),
+        }),
       },
       'event_created'
     );

@@ -113,10 +113,6 @@ const CreateActivity = () => {
           <Input type="text" name="url" value={activityData.url} onChange={handleChange} />
         </Input.Wrapper>
 
-        <Input.Wrapper label="Url">
-          <Input type="text" name="url" value={activityData.url} onChange={handleChange} />
-        </Input.Wrapper>
-
         <Input.Wrapper label="Accepting">
           <NativeSelect name="capacity"
             value={activityData.capacity}

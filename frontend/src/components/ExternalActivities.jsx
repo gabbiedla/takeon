@@ -10,6 +10,7 @@ import {
   FaMinus,
 } from 'react-icons/fa';
 import { useRegisterRsvpMutation } from '../slices/rsvpsApiSlice';
+import dayjs from 'dayjs';
 
 const ExternalActivity = ({ activity }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
@@ -21,6 +22,7 @@ const ExternalActivity = ({ activity }) => {
     // guests: 0,
     comments: '',
   });
+
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
 
   // Importing the hook from rsvpSlice.js
@@ -36,7 +38,15 @@ const ExternalActivity = ({ activity }) => {
     setShowRSVPModal(false);
   };
 
-  const handleOpenRSVPModal = () => {
+  const handleOpenRSVPModal = (id) => {
+    console.log('Opening RSVP modal for activity', { id });
+    setRsvpSubmitted(false);
+    setRsvp({
+      activityId: id,
+      name: '',
+      email: '',
+      comments: '',
+    });
     setShowRSVPModal(true);
   };
 
@@ -69,6 +79,7 @@ const ExternalActivity = ({ activity }) => {
       await registerRsvp(rsvp); // Calling the mutation function with RSVP details
       console.log('RSVP submitted successfully!');
       setRsvpSubmitted(true);
+
       setTimeout(() => {
         setShowRSVPModal(false);
       }, 2500);
@@ -94,7 +105,7 @@ const ExternalActivity = ({ activity }) => {
             <FaMapPin /> {activity.location}
           </Card.Text>
           <Card.Text as="p">
-            <FaRegCalendar /> {activity.date}
+            <FaRegCalendar /> {dayjs(activity.date).format('MMMM D, YYYY')}
           </Card.Text>
           <Card.Text as="p">
             <FaRegClock /> {activity.time}
@@ -106,7 +117,7 @@ const ExternalActivity = ({ activity }) => {
           <Card.Text as="p">
             <FaRegUser /> {activity.capacity}
           </Card.Text>
-          <Button onClick={handleOpenRSVPModal} className="rsvp-button">
+          <Button onClick={() => handleOpenRSVPModal(activity.id)} className="rsvp-button">
             RSVP
           </Button>
         </Card.Body>
