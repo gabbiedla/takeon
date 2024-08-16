@@ -182,7 +182,6 @@ const createActivity = asyncHandler(async (req, res) => {
         event_date: formattedDate,
         event_time: time,
       },
-      `Event Created: ${name}`,
       'event_created'
     );
 
