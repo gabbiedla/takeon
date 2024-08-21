@@ -11,8 +11,8 @@ import ProfileImage from './ProfileImage';
 import { useParams } from 'react-router-dom';
 
 const Header = () => {
-  const { username } = useSelector((state) => state.auth.userInfo);
   const { userInfo } = useSelector((state) => state.auth);
+  const username = userInfo?.username || '';
 
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -206,7 +206,7 @@ const createActivity = asyncHandler(async (req, res) => {
         timeZone: timeZone,
         name: encodeURIComponent(name),
         location: encodeURIComponent(location),
-        details: encodeURIComponent(`\n\n${event_url}\n\n${url}`),
+        details: encodeURIComponent(`\n\n${url || ''}\n\n${url}`),
       }),
     },
     'event_created'
