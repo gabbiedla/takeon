@@ -29,8 +29,8 @@ const Home = () => {
   // }, []);
   const { userId } = useParams(); // Extract userId from route
   console.log('userId from useParams:', userId);
-  const { username } = useSelector((state) => state.auth.userInfo);
-  const { userInfo } = useSelector((state) => state.auth);
+  const { username } = useSelector((state) => state.auth.userInfo) || {};
+  const { userInfo } = useSelector((state) => state.auth) || {};
   const [activities, setActivities] = useState([]);
   const [sortedActivities, setSortedActivities] = useState([]);
   const [sortBy, setSortBy] = useState('name');
