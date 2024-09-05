@@ -12,9 +12,10 @@ import { IconDeviceFloppy } from '@tabler/icons-react';
 dayjs.extend(timezone);
 
 /**
- * Form to create a new activity
+ * Page with the form to create a new activity
+ * @TODO: extract to reuse when editing an activity
  *
- * @returns {JSX.Element}
+ * @returns {JSX.Element} Page to create a new activity
  */
 const CreateActivity = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const CreateActivity = () => {
     url: '',
     time: '18:00',
     capacity: '', // Default value
-    category: '',
+    category: 'summit',
     timeZone: dayjs.tz.guess(),
   });
 
@@ -34,6 +35,7 @@ const CreateActivity = () => {
   useEffect(() => {
     // Check if the user is logged in (you can customize this based on your authentication logic)
     const isLoggedIn = !!localStorage.getItem('userInfo');
+
     if (!isLoggedIn) {
       // If user is not logged in, you may redirect them to the login page or show an error message
       console.error(
@@ -41,6 +43,7 @@ const CreateActivity = () => {
       );
       return navigate('/');
     }
+
   }, [navigate]);
 
   // Handle change in input fields
@@ -55,35 +58,33 @@ const CreateActivity = () => {
     console.log('Submitting activity data:', activityData);
 
     try {
-      // const [formattedDate = ''] = activityData.date.toISOString().split('T');
+      const [formattedDate = ''] = activityData.date.toISOString().split('T');
 
+      console.log({ formattedDate })
       // Create a new object with the formatted date
       const requestData = {
         ...activityData,
-        // date: formattedDate,
+        date: formattedDate,
       };
 
-      console.log('Submitting activity data:', requestData);
+      console.log('POST activity data:', { activity: requestData });
 
-      // Make a POST request to create the activity
-      // const response = await axios.post('/api/activities', requestData);
-      const response = await axios.post('/api/activities', activityData);
+      const response = await axios.post('/api/activities', requestData);
 
-      console.log('Activity created:', response.data);
-      // After successfully creating the activity, navigate back to "/"
-      console.log('Navigating to home page');
+      console.log('Activity created:', { response: response.data });
+      console.log('Navigating to view activity:', response.data?._id);
       navigate(`/activity/${response.data._id}/view`);
+
     } catch (error) {
-      console.error('Error creating activity:', error);
+      console.error('Error creating activity:', { error });
     }
   };
 
-  // Render the component content only if the user is logged in
+  // If the user is not logged it, it would have been redirected. This would never be reached.
   if (!userInfo) {
-    // You may choose to display a message or handle the situation here
     return (
       <div>
-        User is not logged in. Display a message or handle the situation.
+        User is not logged in.
       </div>
     );
   }
@@ -129,11 +130,8 @@ const CreateActivity = () => {
         </Input.Wrapper>
         <Space h="md" />
 
-        <Button
-          type="submit"
-        >
-          <IconDeviceFloppy />
-          &nbsp;Add
+        <Button type="submit">
+          <IconDeviceFloppy /> &nbsp;Add
         </Button>
       </Container>
     </form>

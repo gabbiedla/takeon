@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Container } from 'react-bootstrap';
 // import { EventShareButton } from './EventShareButton';
 // import { LinkContainer } from 'react-router-bootstrap';
+
 import {
   // FaPencilAlt,
   FaMapPin,
@@ -12,8 +13,6 @@ import {
   FaTag,
   // FaShare,
 } from 'react-icons/fa';
-
-//
 
 const Activity = ({ activity }) => {
   const iconData = [
@@ -38,13 +37,9 @@ const Activity = ({ activity }) => {
           <div className="icon-data-item">
             <div className="icon-container">
               {item.icon}
-              <span>{item.data}</span>
+              <span>&nbsp;{item.data}</span>
             </div>
-            {/* <div className="data-container"> */}
-            {/* <span className="label">{item.l}</span> */}
-            {/* <span className="data">{item.data}</span> */}
           </div>
-          // </div>
         )}
       </React.Fragment>
     ));
@@ -74,4 +69,5 @@ const Activity = ({ activity }) => {
     </Card>
   );
 };
+
 export default Activity;
