@@ -1,16 +1,16 @@
 import React from 'react';
-import { Button, Card, Container } from 'react-bootstrap';
-import { EventShareButton } from './EventShareButton';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Card, Container } from 'react-bootstrap';
+// import { EventShareButton } from './EventShareButton';
+// import { LinkContainer } from 'react-router-bootstrap';
 import {
-  FaPencilAlt,
+  // FaPencilAlt,
   FaMapPin,
   FaRegCalendar,
   FaRegClock,
   FaLink,
   FaRegUser,
   FaTag,
-  FaShare,
+  // FaShare,
 } from 'react-icons/fa';
 
 //
@@ -20,16 +20,16 @@ const Activity = ({ activity }) => {
     { icon: <FaMapPin />, data: activity.location },
     { icon: <FaRegCalendar />, data: activity.date },
     { icon: <FaRegClock />, data: activity.time },
-    { icon: <FaLink />, data: activity.url },
+    { icon: <FaLink />, data: <a href={activity.url}>{activity.url}</a> },
     { icon: <FaRegUser />, data: activity.capacity },
     { icon: <FaTag />, data: activity.category },
   ];
 
   // Function to generate unique link
-  const handleShare = (activityId) => {
-    // Generate unique link logic here using the activityId
-    console.log('Share button clicked for activity with ID:', activityId);
-  };
+  // const handleShare = (activityId) => {
+  //   // Generate unique link logic here using the activityId
+  //   console.log('Share button clicked for activity with ID:', activityId);
+  // };
 
   const renderIconData = () => {
     return iconData.map((item, index) => (

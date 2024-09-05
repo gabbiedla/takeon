@@ -3,9 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'; // Import useHistory 
 import { Row, Col, Container, Button, Dropdown } from 'react-bootstrap';
 //import events from '../events'; //data
 import Activity from '../components/InternalActivities'; //event compoonent
-import { FaShare } from 'react-icons/fa'; // Import share icon from react-icons/fa
 import CreateActivityButton from '../components/CreateActivityButton';
-import ShareButton from '../components/ShareButton';
 import axios from 'axios';
 // import Loader from '../components/Loader';
 // import Message from '../components/Message';
@@ -82,6 +80,8 @@ const Home = () => {
       } else if (sortBy === 'category') {
         return a.category.localeCompare(b.category);
       }
+
+      return 0;
     });
     setActivities(sorted); // Update activities array with sorted order
   };
@@ -264,14 +264,10 @@ export default Home;
 
 //   // Handle the case where userInfo or userInfo.userId is undefined
 // };
+// /* <Button variant="primary" onClick={handleShare}>
+//         <FaShare /> Share
+//       </Button> */
+// /* <Button variant="primary" onClick={() => handleShare(userId)}>
+//         <FaShare /> Share
+//       </Button> */
 
-{
-  /* <Button variant="primary" onClick={handleShare}>
-            <FaShare /> Share
-          </Button> */
-}
-{
-  /* <Button variant="primary" onClick={() => handleShare(userId)}>
-            <FaShare /> Share
-          </Button> */
-}

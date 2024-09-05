@@ -55,12 +55,12 @@ const CreateActivity = () => {
     console.log('Submitting activity data:', activityData);
 
     try {
-      const [formattedDate = ''] = activityData.date.toISOString().split('T');
+      // const [formattedDate = ''] = activityData.date.toISOString().split('T');
 
       // Create a new object with the formatted date
       const requestData = {
         ...activityData,
-        date: formattedDate,
+        // date: formattedDate,
       };
 
       console.log('Submitting activity data:', requestData);
