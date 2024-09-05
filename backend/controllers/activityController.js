@@ -163,7 +163,16 @@ const createActivity = asyncHandler(async (req, res) => {
   const formattedDate = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone).format('YYYY-MM-DD');
   const formattedTime = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone).format('hh:mm A');
 
-  console.log('Formatted date:', { date, formattedDate, time, timeZone, formattedTime });
+  const google_calendar_url = createGoogleUrl({
+    startDate: formattedDate,
+    startTime: formattedTime,
+    timeZone: timeZone,
+    name: encodeURIComponent(name),
+    location: encodeURIComponent(location),
+    details: encodeURIComponent(`\n\n${url || ''}\n\n${url}`),
+  });
+
+  console.log('Formatted date:', { date, formattedDate, time, timeZone, formattedTime, google_calendar_url });
 
   // Create a new activity
   const newActivity = new Activity({
@@ -207,13 +216,7 @@ const createActivity = asyncHandler(async (req, res) => {
       event_location: location,
       event_date: formattedDate,
       event_time: time,
-      google_calendar_url: createGoogleUrl({
-        startDate: formattedDate,
-        timeZone: timeZone,
-        name: encodeURIComponent(name),
-        location: encodeURIComponent(location),
-        details: encodeURIComponent(`\n\n${url || ''}\n\n${url}`),
-      }),
+      google_calendar_url,
     },
     'event_created'
   );
