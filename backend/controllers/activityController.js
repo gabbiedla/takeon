@@ -5,6 +5,7 @@ import { sendEmail } from './emailController.js';
 import dayjs from 'dayjs';
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import timezone from 'dayjs/plugin/timezone.js';
+import utc from 'dayjs/plugin/utc.js';
 import { createGoogleUrl } from '../utils.js';
 
 // const getActivitiesByUsername = asyncHandler(async (req, res) => {
@@ -146,6 +147,7 @@ const createActivity = asyncHandler(async (req, res) => {
 
   dayjs.extend(customParseFormat);
   dayjs.extend(timezone);
+  dayjs.extend(utc);
 
   // Validate required fields
   // || !date || !location || !url || !time || !capacity
@@ -157,16 +159,29 @@ const createActivity = asyncHandler(async (req, res) => {
 
   // Perform validation and data sanitization here if needed
   // Format the date before saving to the database
-  const formattedDate = dayjs(`${date} ${time}`, 'YYYY-MM-DD HH:MM', timeZone);
+  const dateTimeString = `${date} ${time}`;
+  const formattedDate = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone).format('YYYY-MM-DD');
+  const formattedTime = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone).format('hh:mm A');
+
+  const google_calendar_url = createGoogleUrl({
+    startDate: formattedDate,
+    startTime: formattedTime,
+    timeZone: timeZone,
+    name: encodeURIComponent(name),
+    location: encodeURIComponent(location),
+    details: encodeURIComponent(`\n\n${url || ''}\n\n${url}`),
+  });
+
+  console.log('Formatted date:', { date, formattedDate, time, timeZone, formattedTime, google_calendar_url });
 
   // Create a new activity
   const newActivity = new Activity({
     user: user._id,
     name,
-    date: formattedDate.toISOString(),
+    date: formattedDate,
     location,
     url,
-    time: formattedDate.format('hh:mm A'),
+    time: formattedTime,
     capacity,
     timezone: timeZone,
     category,
@@ -199,15 +214,9 @@ const createActivity = asyncHandler(async (req, res) => {
       event_name: name,
       event_url: url,
       event_location: location,
-      event_date: formattedDate.format('YYYY-MM-DD'),
-      event_time: formattedDate.format('hh:mm A'),
-      google_calendar_url: createGoogleUrl({
-        startDate: formattedDate.toISOString(),
-        timeZone: timeZone,
-        name: encodeURIComponent(name),
-        location: encodeURIComponent(location),
-        details: encodeURIComponent(`\n\n${url || ''}\n\n${url}`),
-      }),
+      event_date: formattedDate,
+      event_time: time,
+      google_calendar_url,
     },
     'event_created'
   );
@@ -233,10 +242,11 @@ const updateActivity = asyncHandler(async (req, res) => {
     activity.category = category;
 
     const updatedActivity = await activity.save();
-    res.json(updatedActivity);
+
+    res.json({ ...(updatedActivity._doc), message: 'Activity Updated' });
   } else {
-    res.status(404);
-    throw new Error('Resource not found');
+    console.log('Activity not found', req.params.id);
+    res.status(404).json({ message: 'Activity not found' });
   }
 });
 

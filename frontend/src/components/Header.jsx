@@ -1,14 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
-import { FaShoppingCart, FaUser } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileImage from './ProfileImage';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);

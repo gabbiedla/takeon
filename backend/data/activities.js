@@ -6,6 +6,7 @@ const activities = [
     time: 'July 7, 2023',
     url: 'https://www.udemy.com/course/mern-ecommerce/learn/lecture/38106000#questions',
     capacity: 1,
+    timezone: 'America/Los_Angeles',
   },
   {
     name: 'Event 2',
@@ -14,6 +15,7 @@ const activities = [
     time: 'July 7, 2023',
     url: 'https://www.udemy.com/course/mern-ecommerce/learn/lecture/38106000#questions',
     capacity: 2,
+    timezone: 'America/Los_Angeles',
   },
   {
     name: 'Event 3',
@@ -22,6 +24,7 @@ const activities = [
     time: 'July 7, 2023',
     url: 'https://www.udemy.com/course/mern-ecommerce/learn/lecture/38106000#questions',
     capacity: 2,
+    timezone: 'America/Los_Angeles',
   },
   {
     name: 'Event 4',
@@ -30,6 +33,8 @@ const activities = [
     time: 'July 7, 2023',
     url: 'https://www.udemy.com/course/mern-ecommerce/learn/lecture/38106000#questions',
     capacity: 2,
+    timezone: 'America/Toronto',
   },
 ];
+
 export default activities;
