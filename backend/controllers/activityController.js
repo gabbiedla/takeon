@@ -8,6 +8,10 @@ import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 import { createGoogleUrl } from '../utils.js';
 
+dayjs.extend(customParseFormat);
+dayjs.extend(timezone);
+dayjs.extend(utc);
+
 // const getActivitiesByUsername = asyncHandler(async (req, res) => {
 //   // const userId = req.params.userId;
 //   // const { username } = req.params;
@@ -145,10 +149,6 @@ const createActivity = asyncHandler(async (req, res) => {
   // Access user information from the request (assuming it's populated by authentication middleware)
   const { user } = req;
 
-  dayjs.extend(customParseFormat);
-  dayjs.extend(timezone);
-  dayjs.extend(utc);
-
   // Validate required fields
   // || !date || !location || !url || !time || !capacity
   if (!name || !date || !time) {
@@ -229,17 +229,26 @@ const createActivity = asyncHandler(async (req, res) => {
 //@access Private/Admin
 const updateActivity = asyncHandler(async (req, res) => {
   //pull data or descturure the date u need from the body
-  const { name, location, date, url, capacity, category } = req.body;
+  const { name, location, date, url, capacity, category, timeZone, time } = req.body;
   //updating by finding by ID
   const activity = await Activity.findById(req.params.id);
   // check for the activity÷
+
+  const dateTimeString = `${date} ${time}`;
+  const formattedDate = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm A', timeZone).format('YYYY-MM-DD');
+  const formattedTime = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm A', timeZone).format('hh:mm A');
+
+  console.log('Formatted date:', { date, formattedDate, time, timeZone, formattedTime });
+
   if (activity) {
     activity.name = name;
     activity.location = location;
-    activity.date = date;
+    activity.date = formattedDate;
     activity.url = url;
     activity.capacity = capacity;
     activity.category = category;
+    activity.timezone = timeZone;
+    activity.time = formattedTime;
 
     const updatedActivity = await activity.save();
 
