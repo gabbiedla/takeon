@@ -26,7 +26,7 @@ const CreateActivity = () => {
     url: '',
     time: '18:00',
     capacity: '', // Default value
-    category: 'summit',
+    category: '',
     timeZone: dayjs.tz.guess(),
   });
 
