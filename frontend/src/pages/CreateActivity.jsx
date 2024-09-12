@@ -103,7 +103,8 @@ const CreateActivity = () => {
 
         <DatePickerInput
           label="Date"
-          valueFormat="YYYY-MM-DD"
+          firstDayOfWeek={0}
+          valueFormat="MM/DD/YYYY"
           value={activityData.date}
           onChange={(value) => setActivityData({ ...activityData, date: value })}
         />
@@ -120,7 +121,7 @@ const CreateActivity = () => {
             onChange={handleChange}
             data={[
               'group',
-              ...(Array(20).keys().map((number) => (number + 1).toString()))
+              ...Array.from(Array(20).keys()).map((number) => (number + 1).toString())
             ]}
           />
         </Input.Wrapper>
