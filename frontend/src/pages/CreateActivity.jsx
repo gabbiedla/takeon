@@ -103,7 +103,8 @@ const CreateActivity = () => {
 
         <DatePickerInput
           label="Date"
-          valueFormat="YYYY-MM-DD"
+          firstDayOfWeek={0}
+          valueFormat="MM/DD/YYYY"
           value={activityData.date}
           onChange={(value) => setActivityData({ ...activityData, date: value })}
         />
