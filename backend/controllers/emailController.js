@@ -1,6 +1,6 @@
 import postmark from "postmark";
 
-const POSTMARK_API_TOKEN = process.env.POSTMARK_API_TOKEN;
+const POSTMARK_API_TOKEN = process.env.POSTMARK_API_TOKEN || '';
 const EMAIL_FROM = process.env.EMAIL_FROM || 'gabbie@myeventlink.co';
 
 // Send an email:

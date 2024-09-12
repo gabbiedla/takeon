@@ -25,6 +25,8 @@ const createRsvp = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 
+  console.log('Creating RSVP for activity', { activityId, name, email, comments, date: activity.date, });
+
   if (newRsvp) {
     const event_url = `https://myeventlink.co/activity/${activity.id}/view`;
     const data = {
@@ -33,10 +35,11 @@ const createRsvp = asyncHandler(async (req, res) => {
       activity_time: activity.time,
       activity_date: dayjs(activity.date).format('MMMM D, YYYY'),
       activity_location: activity.location,
-      rspvDetails_comments: comments,
+      rsvpDetails_comments: comments,
       activity_url: activity.url,
       google_calendar_url: createGoogleUrl({
         startDate: activity.date,
+        startTime: activity.time,
         timeZone: activity.timezone,
         name: encodeURIComponent(activity.name),
         location: encodeURIComponent(activity.location),
