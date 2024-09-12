@@ -120,7 +120,7 @@ const CreateActivity = () => {
             onChange={handleChange}
             data={[
               'group',
-              ...(Array(20).keys().map((number) => (number + 1).toString()))
+              ...Array.from(Array(20).keys()).map((number) => (number + 1).toString())
             ]}
           />
         </Input.Wrapper>
