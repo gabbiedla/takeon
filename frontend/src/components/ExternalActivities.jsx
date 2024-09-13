@@ -12,7 +12,7 @@ import {
 import { useRegisterRsvpMutation } from '../slices/rsvpsApiSlice';
 import dayjs from 'dayjs';
 
-const ExternalActivity = ({ activity, userId }) => {
+const ExternalActivity = ({ activity }) => {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [showRSVPModal, setShowRSVPModal] = useState(false);
 
@@ -22,7 +22,6 @@ const ExternalActivity = ({ activity, userId }) => {
     email: '',
     // guests: 0,
     comments: '',
-    userId
   });
 
   const [rsvpSubmitted, setRsvpSubmitted] = useState(false);
@@ -44,7 +43,6 @@ const ExternalActivity = ({ activity, userId }) => {
     console.log('Opening RSVP modal for activity', { id });
     setRsvpSubmitted(false);
     setRsvp({
-      userId,
       activityId: id,
       name: '',
       email: '',
