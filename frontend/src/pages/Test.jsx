@@ -137,7 +137,7 @@ const Test = () => {
             <h2>{period.title}</h2>
             {period.events.map((activity) => (
               <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
-                <ExternalActivities activity={activity} />
+                <ExternalActivities activity={activity} userId={username} />
               </Col>
             ))}
           </React.Fragment>

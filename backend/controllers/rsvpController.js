@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 import { createGoogleUrl } from '../utils.js';
 
 const createRsvp = asyncHandler(async (req, res) => {
-  const { activityId, name, email, comments } = req.body;
+  const { activityId, name, email, comments, userId = '' } = req.body;
 
   const activity = await Activity.findById(activityId);
   const user = await User.findById(activity.user);
@@ -29,6 +29,7 @@ const createRsvp = asyncHandler(async (req, res) => {
 
   if (newRsvp) {
     const event_url = `https://myeventlink.co/activity/${activity.id}/view`;
+
     const data = {
       activity_name: activity.name,
       rsvpDetails_name: name,
@@ -37,6 +38,8 @@ const createRsvp = asyncHandler(async (req, res) => {
       activity_location: activity.location,
       rsvpDetails_comments: comments,
       activity_url: activity.url,
+      internalCalendarURL: `https://myeventlink.co/home/${userId}`,
+      externalCalendarURL: `https://myeventlink.co/${userId}`,
       google_calendar_url: createGoogleUrl({
         startDate: activity.date,
         startTime: activity.time,
