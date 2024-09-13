@@ -39,7 +39,7 @@ const ExternalView = () => {
       <Row className="activity-container">
         {activities.map((activity) => (
           <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
-            <ExternalActivities activity={activity} />
+            <ExternalActivities activity={activity} userId={''} />
           </Col>
         ))}
       </Row>
