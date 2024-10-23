@@ -10,18 +10,25 @@ import {
   useGetActivityDetailsQuery,
   useDeleteActivityMutation,
 } from '../slices/activitiesApiSlice';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const ActivityEdit = () => {
   const { id: activityId } = useParams();
 
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
+  const [, setDate] = useState('');
   const [formattedDate, setFormattedDate] = useState('');
   const [time, setTime] = useState('');
   const [url, setUrl] = useState('');
   const [capacity, setCapacity] = useState('');
   const [category, setCategory] = useState('');
+  const [timeZone,] = useState(dayjs.tz.guess());
 
   const {
     data: activity,
@@ -40,16 +47,18 @@ const ActivityEdit = () => {
   //reutrn all product details
   useEffect(() => {
     if (activity) {
+      console.log('Received Activity from API', { activity });
+
       setName(activity.name || '');
       setLocation(activity.location || '');
       setDate(activity.date || '');
-      setFormattedDate(formatDate(activity.date || ''));
+      setFormattedDate(activity.date || '');
       setTime(activity.time || '');
       setUrl(activity.url || '');
       setCapacity(activity.capacity || '');
       setCategory(activity.category || '');
     }
-  }, [activity]);
+  }, [activity, timeZone]);
 
   const formatDate = (inputDate) => {
     // Implement your date formatting logic here
@@ -70,16 +79,18 @@ const ActivityEdit = () => {
       url,
       capacity,
       category,
+      timeZone,
     };
 
     const result = await updateActivity(updatedActivity);
+    refetch();
+
     if (result.error) {
       toast.error(result.error);
     } else {
       toast.success('Activity updated');
-      console.log('Before navigate');
-      navigate('/');
-      console.log('After navigate');
+      console.log('Navigating to view activity');
+      navigate(`/activity/${activityId}/view`);
     }
   };
 
@@ -106,6 +117,8 @@ const ActivityEdit = () => {
       <Link to="/" className="btn btn-light my-3">
         Go Back
       </Link>
+      {isLoading && <div><h2>Loading...</h2></div>}
+      {error && <div><h2>Error: {error}</h2></div>}
       <FormContainer>
         <h1>Edit Activity</h1>
         {LoadingUpdate && <Loader />}

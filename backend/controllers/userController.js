@@ -49,6 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // res.send('Register user');
   const { name, username, email, password } = req.body;
 
+  // @TODO: check that user exists by username as well
   const userExists = await User.findOne({ email });
 
   if (userExists) {
@@ -59,7 +60,11 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({ name, username, email, password });
 
   if (user) {
-    generateToken(res, user._id);
+    try {
+      generateToken(res, user._id);
+    } catch (error) {
+      res.status(500).send({ message: error });
+    }
 
     res.status(201).json({
       _id: user._id,

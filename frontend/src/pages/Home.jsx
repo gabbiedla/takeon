@@ -3,9 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'; // Import useHistory 
 import { Row, Col, Container, Button, Dropdown } from 'react-bootstrap';
 //import events from '../events'; //data
 import Activity from '../components/InternalActivities'; //event compoonent
-import { FaShare } from 'react-icons/fa'; // Import share icon from react-icons/fa
 import CreateActivityButton from '../components/CreateActivityButton';
-import ShareButton from '../components/ShareButton';
 import axios from 'axios';
 // import Loader from '../components/Loader';
 // import Message from '../components/Message';
@@ -29,8 +27,8 @@ const Home = () => {
   // }, []);
   const { userId } = useParams(); // Extract userId from route
   console.log('userId from useParams:', userId);
-  const { username } = useSelector((state) => state.auth.userInfo);
-  const { userInfo } = useSelector((state) => state.auth);
+  const { username } = useSelector((state) => state.auth.userInfo) || {};
+  const { userInfo } = useSelector((state) => state.auth) || {};
   const [activities, setActivities] = useState([]);
   const [sortedActivities, setSortedActivities] = useState([]);
   const [sortBy, setSortBy] = useState('name');
@@ -82,6 +80,8 @@ const Home = () => {
       } else if (sortBy === 'category') {
         return a.category.localeCompare(b.category);
       }
+
+      return 0;
     });
     setActivities(sorted); // Update activities array with sorted order
   };
@@ -264,14 +264,10 @@ export default Home;
 
 //   // Handle the case where userInfo or userInfo.userId is undefined
 // };
+// /* <Button variant="primary" onClick={handleShare}>
+//         <FaShare /> Share
+//       </Button> */
+// /* <Button variant="primary" onClick={() => handleShare(userId)}>
+//         <FaShare /> Share
+//       </Button> */
 
-{
-  /* <Button variant="primary" onClick={handleShare}>
-            <FaShare /> Share
-          </Button> */
-}
-{
-  /* <Button variant="primary" onClick={() => handleShare(userId)}>
-            <FaShare /> Share
-          </Button> */
-}

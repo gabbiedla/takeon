@@ -82,15 +82,16 @@
 
 // export default RsvpPage;
 
-// MODAL FORMAY
+// MODAL FORMAT
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { Container, Form, Button, Modal } from 'react-bootstrap';
 
 const RsvpPage = ({ activity }) => {
   // Extract activity details
-  const { activityId } = useParams();
+  // const { activityId } = useParams();
   const [showModal, setShowModal] = useState(false);
+
   const [rsvpDetails, setRSVPDetails] = useState({
     name: '',
     email: '',

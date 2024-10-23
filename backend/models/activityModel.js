@@ -74,6 +74,9 @@ const activitySchema = new mongoose.Schema(
       // required: true,
       // default: 0,
     },
+    timezone: {
+      type: String,
+    },
     category: {
       type: String,
       // required: true,
