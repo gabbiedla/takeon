@@ -38,11 +38,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.4.0",
     "multer": "^1.4.5-lts.1",
-<<<<<<< HEAD
     "nodemailer": "^6.9.13",
-=======
     "postmark": "^4.0.4",
->>>>>>> refs/remotes/origin/main
     "validator": "^13.11.0"
   },
   "devDependencies": {
