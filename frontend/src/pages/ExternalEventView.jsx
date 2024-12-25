@@ -115,7 +115,7 @@ const ExternalEventView = () => {
 
   return (
     <Container className="ext-single-activity">
-      <h1>Activity Details</h1>
+      <h1>Event Details</h1>
       <div className="buttons">
         <CopyURLButton />
       </div>
@@ -134,10 +134,15 @@ const ExternalEventView = () => {
 
           {/* {!isCollapsed && ( */}
           <Card.Body>
-            <Card.Text as="p">
-              {/* <strong>Location:</strong> {activity.location} */}
-              <FaMapPin /> {activity.location}
-            </Card.Text>
+            {activity.location && (
+              <Card.Text as="p">
+                <FaMapPin /> {activity.location}
+              </Card.Text>
+            )}
+            {/* <Card.Text as="p"> */}
+            {/* <strong>Location:</strong> {activity.location} */}
+            {/* <FaMapPin /> {activity.location}
+            </Card.Text> */}
             <Card.Text as="p">
               {/* <strong>Date:</strong>{' '}
               {dayjs(activity.date).format('MMMM D, YYYY')} */}
@@ -147,16 +152,33 @@ const ExternalEventView = () => {
               {/* <strong>Time:</strong> {activity.time} */}
               <FaRegClock /> {activity.time}
             </Card.Text>
-            <Card.Text as="p">
-              {/* <strong>Capacity:</strong> {activity.capacity} */}
-              <FaRegUser /> {activity.capacity}
-            </Card.Text>
-            <Card.Text as="p">
+            {activity.capacity && (
+              <Card.Text as="p">
+                <FaRegUser /> {activity.capacity}
+              </Card.Text>
+            )}
+            {/* <Card.Text as="p"> */}
+            {/* <strong>Capacity:</strong> {activity.capacity} */}
+            {/* <FaRegUser /> {activity.capacity}
+            </Card.Text> */}
+            {/* <Card.Text as="p">
               <FaLink />{' '}
               <a href={activity.url} target="_blank" rel="noopener noreferrer">
                 View more details
               </a>
-            </Card.Text>
+            </Card.Text> */}
+            {activity.url && (
+              <Card.Text as="p" className="activity-url">
+                <FaLink />
+                <a
+                  href={activity.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View more details
+                </a>
+              </Card.Text>
+            )}
             <Button onClick={handleOpenRSVPModal} className="rsvp-button">
               RSVP
             </Button>

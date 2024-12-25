@@ -123,6 +123,11 @@ const Test = () => {
     ]
   );
 
+  // Sort events within each period by date
+  sortedActivities.forEach((period) => {
+    period.events.sort((a, b) => new Date(a.date) - new Date(b.date));
+  });
+
   return (
     <>
       <Container className="ext-home-heading">

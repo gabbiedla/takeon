@@ -102,9 +102,11 @@ const ExternalActivity = ({ activity }) => {
       </Container>
       {!isCollapsed && (
         <Card.Body>
-          <Card.Text as="p">
-            <FaMapPin /> {activity.location}
-          </Card.Text>
+          {activity.location && (
+            <Card.Text as="p">
+              <FaMapPin /> {activity.location}
+            </Card.Text>
+          )}
           <Card.Text as="p">
             <FaRegCalendar /> {dayjs(activity.date).format('MMMM D, YYYY')}
           </Card.Text>
@@ -115,22 +117,32 @@ const ExternalActivity = ({ activity }) => {
             <FaLink />
             <a href={`/activity/${activity._id}`}> {activity.url}</a>
           </Card.Text> */}
-          <Card.Text as="p" className="activity-url">
+          {activity.url && (
+            <Card.Text as="p" className="activity-url">
+              <FaLink />
+              <a href={activity.url} target="_blank" rel="noopener noreferrer">
+                View more details
+              </a>
+            </Card.Text>
+          )}
+          {/* <Card.Text as="p" className="activity-url">
             <FaLink />
             <a href={activity.url} target="_blank" rel="noopener noreferrer">
-              {' '}
-              {/* {activity.url} */}
-              View more details
+              {' '} */}
+          {/* {activity.url} */}
+          {/* View more details
             </a>
-          </Card.Text>
-          <Card.Text as="p">
-            <FaRegUser /> {activity.capacity}
-          </Card.Text>
+          </Card.Text> */}
+          {activity.capacity && (
+            <Card.Text as="p">
+              <FaRegUser /> {activity.capacity}
+            </Card.Text>
+          )}
           <Button
             onClick={() => handleOpenRSVPModal(activity.id)}
             className="rsvp-button"
           >
-            RSVP
+            JOIN
           </Button>
         </Card.Body>
       )}
@@ -139,7 +151,7 @@ const ExternalActivity = ({ activity }) => {
       <Modal show={showRSVPModal} onHide={handleCloseRSVPModal}>
         <Modal.Header closeButton>
           {/* <Modal.Title>RSVP</Modal.Title> */}
-          <Modal.Title>RSVP for {activity.name}</Modal.Title>
+          <Modal.Title>{activity.name}</Modal.Title>
           {/* <p>RSVP for {activity.time}</p> */}
         </Modal.Header>
         <Modal.Body>
@@ -193,7 +205,7 @@ const ExternalActivity = ({ activity }) => {
             </Form.Group>
             {/* Add other form fields as needed */}
             <Button variant="primary" type="submit">
-              Submit RSVP
+              Count me in!
             </Button>
           </Form>
           {rsvpSubmitted && (
