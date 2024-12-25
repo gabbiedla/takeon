@@ -5,6 +5,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 // import events from '../events';
 import axios from 'axios';
 import ExternalActivities from '../components/ExternalActivities';
+
 //userID as prop allows internal users to view activites on this page only
 const ExternalViewTwo = ({ userId }) => {
   // Assuming you pass the user ID as a prop

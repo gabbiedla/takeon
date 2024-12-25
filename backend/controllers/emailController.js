@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // controller.js
 
 // import nodemailer from 'nodemailer';
@@ -47,8 +46,7 @@
 // };
 
 // export { sendEmailConfirmation };
-=======
-import postmark from "postmark";
+import postmark from 'postmark';
 
 const POSTMARK_API_TOKEN = process.env.POSTMARK_API_TOKEN || '';
 const EMAIL_FROM = process.env.EMAIL_FROM || 'gabbie@myeventlink.co';
@@ -69,8 +67,7 @@ const init = () => {
   client = new postmark.ServerClient(POSTMARK_API_TOKEN);
 
   return client;
-}
-
+};
 
 /**
  * Send an email, using the postmark API
@@ -94,13 +91,16 @@ export const sendEmail = (destiny, data, template_alias) => {
   let result;
 
   try {
-    result = client.sendEmailWithTemplate({
-      From: EMAIL_FROM,
-      // To: 'test@blackhole.postmarkapp.com',
-      To: destiny,
-      TemplateAlias: template_alias,
-      TemplateModel: { ...data },
-    }).then().catch();
+    result = client
+      .sendEmailWithTemplate({
+        From: EMAIL_FROM,
+        // To: 'test@blackhole.postmarkapp.com',
+        To: destiny,
+        TemplateAlias: template_alias,
+        TemplateModel: { ...data },
+      })
+      .then()
+      .catch();
     console.log('Sent email', { result });
   } catch (error) {
     console.error('Failed to send email', { error });
@@ -108,5 +108,3 @@ export const sendEmail = (destiny, data, template_alias) => {
 
   return result;
 };
-
->>>>>>> refs/remotes/origin/main

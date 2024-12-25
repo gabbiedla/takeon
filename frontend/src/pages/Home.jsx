@@ -4,10 +4,13 @@ import { Row, Col, Container, Button, Dropdown } from 'react-bootstrap';
 //import events from '../events'; //data
 import Activity from '../components/InternalActivities'; //event compoonent
 import CreateActivityButton from '../components/CreateActivityButton';
+import CreateActivityModal from '../components/CreateActivityModal';
 import axios from 'axios';
 // import Loader from '../components/Loader';
 // import Message from '../components/Message';
 import { useSelector } from 'react-redux';
+import { FaEye, FaRegular, FaFilter } from 'react-icons/fa';
+import { BsLayoutSidebarInset } from 'react-icons/bs';
 
 // function Home() {
 
@@ -34,6 +37,10 @@ const Home = () => {
   const [sortBy, setSortBy] = useState('name');
   const [viewFormat, setViewFormat] = useState('normal'); // State to toggle view format
   const [loading, setLoading] = useState(true); // Add loading state
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
 
   const navigate = useNavigate(); // Initialize useNavigate hook
   // const { userId } = useParams();
@@ -130,23 +137,118 @@ const Home = () => {
 
   return (
     <>
-      <Container className="home-heading">
-        <h1 className="calendar-title">My Calendar</h1>
-        <div className="buttons">
+      <Container className="home-container">
+        <h1
+          className="calendar-title"
+          style={{
+            fontSize: '1.5em',
+          }}
+        >
+          My Events
+        </h1>
+        <h4
+          className="prompt"
+          style={{
+            fontSize: '1em',
+          }}
+        >
+          What is on your bucket list for 2025?
+        </h4>
+        <div className="home-heading, buttons">
           {userInfo ? <CreateActivityButton /> : null}
+        </div>
+        <div className="home-heading, buttons ">
+          {/* {userInfo ? <CreateActivityButton /> : null} */}
+          {/* {userInfo ? <CreateActivityModal /> : null} */}
+          {/* {userInfo ? (
+            <>
+              <Button onClick={handleShowModal}>Create Activity</Button>
+              <CreateActivityModal
+                show={showModal}
+                handleClose={handleCloseModal}
+              />
+            </>
+          ) : null} */}
+          {/* {userInfo ? (
+            <>
+              <div
+                className="create-modal"
+                onClick={handleShowModal}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '10px',
+                  borderRadius: '25px',
+                  border: '1px solid #ccc',
+                  backgroundColor: '#f7f7f7',
+                  cursor: 'pointer',
+                  width: '100%',
+                  maxWidth: '500px',
+                  marginBottom: '15px',
+                  boxSizing: 'border-box',
+                }}
+              >
+                <FaPlus style={{ marginRight: '10px', fontSize: '20px' }} />
+                <span style={{ fontSize: '16px', color: '#555' }}>
+                  What activity is on your bucket list?
+                </span>
+              </div>
+              <CreateActivityModal
+                show={showModal}
+                handleClose={handleCloseModal}
+              />
+            </>
+          ) : null} */}
+
           {/* <ShareButton /> old code */}
 
           {/* <ShareButton userId={userId} /> */}
           {/* <Button onClick={handleSortByName}>Sort by Name</Button> */}
-          <Button onClick={toggleViewFormat}>
-            {viewFormat === 'normal'
+          <Button
+            className="switch-view-button"
+            onClick={toggleViewFormat}
+            style={{
+              background: 'white',
+              // border: '2px solid #00b8a9',
+              border: '2px solid lightgrey',
+
+              // color: '#00b8a9',
+              color: 'black',
+              // fontWeight: 'bold',
+              fontSize: '.9em',
+            }}
+          >
+            <BsLayoutSidebarInset size={22} />
+            Layout
+            {/* {viewFormat === 'normal'
               ? 'Switch to Grouped View'
-              : 'Switch to Normal View'}
+              : 'Switch to Normal View'} */}
           </Button>
           <Dropdown>
-            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            <Dropdown.Toggle
+              className="sort-button"
+              variant="primary"
+              id="dropdown-basic"
+              style={{
+                background: 'white',
+                // border: 'none',
+                // color: 'black',
+                border: '2px solid lightgrey',
+                // border: '2px solid #00b8a9',
+
+                // border: 'none',
+                // color: '#00b8a9',
+                color: 'black',
+                // fontWeight: 'bold',
+                fontSize: '.9em',
+              }}
+            >
               {/* Sort by: {sortBy === 'name' ? 'Name' : 'Date'} */}
-              Sort by:{' '}
+              <div>
+                {' '}
+                <FaFilter size={17} /> {/* Sort by:{' '} */}
+              </div>
+
               {sortBy === 'name'
                 ? 'Name'
                 : sortBy === 'date'
@@ -156,7 +258,7 @@ const Home = () => {
 
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => handleSort('name')}>
-                Name
+                Name A-Z
               </Dropdown.Item>
               <Dropdown.Item onClick={() => handleSort('date')}>
                 Date
@@ -166,7 +268,25 @@ const Home = () => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <Button onClick={handleActivitiesClick}>View Public Calendar</Button>
+          <Button
+            className="public-view-button"
+            onClick={handleActivitiesClick}
+            style={{
+              background: 'white',
+              // border: 'none',
+              // color: 'black',
+              // border: '2px solid #00b8a9',
+              border: '2px solid lightgrey',
+              // border: 'none',
+              // color: '#00b8a9',
+              color: 'black',
+              // fontWeight: 'bold',
+              fontSize: '.9em',
+            }}
+          >
+            <FaEye size={23} />
+            Public
+          </Button>
         </div>
       </Container>
 
@@ -183,7 +303,7 @@ const Home = () => {
       ) : (
         sortedActivities.map((group, index) => (
           <div key={index}>
-            <h2>{group.title}</h2>
+            <h2 className="period-header">{group.title}</h2>
             <Row className="activity-container">
               {group.events.map((activity) => (
                 <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
@@ -270,4 +390,3 @@ export default Home;
 // /* <Button variant="primary" onClick={() => handleShare(userId)}>
 //         <FaShare /> Share
 //       </Button> */
-

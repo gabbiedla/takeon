@@ -111,14 +111,25 @@ const ExternalActivity = ({ activity }) => {
           <Card.Text as="p">
             <FaRegClock /> {activity.time}
           </Card.Text>
-          <Card.Text as="p" className="activity-url">
+          {/* <Card.Text as="p" className="activity-url">
             <FaLink />
             <a href={`/activity/${activity._id}`}> {activity.url}</a>
+          </Card.Text> */}
+          <Card.Text as="p" className="activity-url">
+            <FaLink />
+            <a href={activity.url} target="_blank" rel="noopener noreferrer">
+              {' '}
+              {/* {activity.url} */}
+              View more details
+            </a>
           </Card.Text>
           <Card.Text as="p">
             <FaRegUser /> {activity.capacity}
           </Card.Text>
-          <Button onClick={() => handleOpenRSVPModal(activity.id)} className="rsvp-button">
+          <Button
+            onClick={() => handleOpenRSVPModal(activity.id)}
+            className="rsvp-button"
+          >
             RSVP
           </Button>
         </Card.Body>

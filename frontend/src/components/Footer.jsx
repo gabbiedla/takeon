@@ -1,14 +1,21 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const Footer = () => {
+const Footer = ({ backgroundColor }) => {
   const currentYear = new Date().getFullYear();
   return (
-    <footer>
+    <footer
+      className="footer"
+      style={{
+        backgroundColor: backgroundColor || '#c8c8c8', // Default fallback
+        padding: '1rem 0',
+        textAlign: 'center',
+      }}
+    >
       <Container>
         <Row>
-          <Col className="text-center py-3">
-            <p>TakeOn &copy; {currentYear}</p>
+          <Col>
+            <p>Circyl &copy; {currentYear}</p>
           </Col>
         </Row>
       </Container>
@@ -17,3 +24,4 @@ const Footer = () => {
 };
 
 export default Footer;
+// className="text-center py-3" goes inside <Col>

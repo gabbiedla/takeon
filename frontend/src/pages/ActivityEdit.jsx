@@ -28,7 +28,7 @@ const ActivityEdit = () => {
   const [url, setUrl] = useState('');
   const [capacity, setCapacity] = useState('');
   const [category, setCategory] = useState('');
-  const [timeZone,] = useState(dayjs.tz.guess());
+  const [timeZone] = useState(dayjs.tz.guess());
 
   const {
     data: activity,
@@ -104,7 +104,8 @@ const ActivityEdit = () => {
         await deleteActivity(id);
         console.log('After deleteActivity');
         refetch();
-        navigate('/');
+        // navigate('/');
+        navigate('/home/:userId');
       } catch (err) {
         console.error('Error deleting activity:', err);
         toast.error(err?.data?.message || err.error);
@@ -114,11 +115,19 @@ const ActivityEdit = () => {
 
   return (
     <>
-      <Link to="/" className="btn btn-light my-3">
+      <Link to="/home/:userId" className="btn btn-light my-3">
         Go Back
       </Link>
-      {isLoading && <div><h2>Loading...</h2></div>}
-      {error && <div><h2>Error: {error}</h2></div>}
+      {isLoading && (
+        <div>
+          <h2>Loading...</h2>
+        </div>
+      )}
+      {error && (
+        <div>
+          <h2>Error: {error}</h2>
+        </div>
+      )}
       <FormContainer>
         <h1>Edit Activity</h1>
         {LoadingUpdate && <Loader />}

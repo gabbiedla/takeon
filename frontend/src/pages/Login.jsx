@@ -24,7 +24,8 @@ const Login = () => {
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   // need to fix this redirect
-  const redirect = sp.get('redirect') || '/';
+  // const redirect = sp.get('redirect') || '/';
+  const redirect = sp.get('redirect') || '/home/:userId';
 
   useEffect(() => {
     if (userInfo) {
@@ -45,7 +46,7 @@ const Login = () => {
 
   return (
     <FormContainer>
-      <h1>Sign-In</h1>
+      <h1 className="sign-in-container">Sign-In</h1>
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">

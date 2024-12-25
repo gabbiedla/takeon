@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@media screen and (max-width: 555px) {
+  /* body {
+    font-family: 'Nunito', serif;
+  } */
+  .ext-home-heading {
+    /* all: unset; */
+    padding-top: 6vh;
+    display: unset;
+  }
+
+  .circle {
+    background: linear-gradient(45deg, #f48a00, #fbcd45);
+    /* background: skyblue; */
+    /* background: linear-gradient(
+      45deg,
+      #f43100,
+      #feb47b
+    );  */
+
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin: auto;
+    /* margin-top: 20px; */
+
+    margin-bottom: 20px;
+  }
+
+  .url-btn {
+    margin-bottom: 10px;
+  }
+
+  .url-btn:hover {
+    color: #4178ff !important;
+  }
+}
+
+/* user name in external view */
+.ext-calendar-title {
+  display: flex;
+  justify-content: center;
+  /* background-color: #00b8a9; */
+  padding-bottom: 5px;
+  font-family: 'Nunito', serif;
+
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  font-weight: 800;
+  font-size: 1.3em;
+  /* margin-left: 15px; */
+}

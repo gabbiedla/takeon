@@ -55,7 +55,7 @@ const Register = () => {
 
   return (
     <FormContainer>
-      <h1>Sign Up</h1>
+      <h1 className="register-container">Sign Up</h1>
 
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="name" className="my-3">

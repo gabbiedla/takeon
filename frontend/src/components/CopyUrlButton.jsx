@@ -24,7 +24,19 @@ class CopyURLButton extends React.Component {
 
   render() {
     return (
-      <Button className="buttons" onClick={this.copyURL}>
+      <Button
+        className="url-btn"
+        onClick={this.copyURL}
+        style={{
+          background: 'white',
+          // border: 'none',
+          color: 'black',
+          border: 'none',
+          // color: '#00b8a9',
+          // fontWeight: 'bold',
+          fontSize: '1em',
+        }}
+      >
         <FaLink />
       </Button>
     );

@@ -66,6 +66,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { FaShare, FaLink } from 'react-icons/fa';
 import CopyURLButton from '../components/CopyUrlButton';
+import '../externalactivitiespage.css';
 
 const Test = () => {
   const { username } = useParams();
@@ -124,24 +125,34 @@ const Test = () => {
 
   return (
     <>
-      <Container className="home-heading">
-        <h1 className="calendar-title">{`${username}'s Calendar`}</h1>
-        <div className="buttons">
+      <Container className="ext-home-heading">
+        <div className="circle"></div>
+        <h1 className="ext-calendar-title">{`${username}'s Calendar`}</h1>
+        <div className="buttons links">
           <CopyURLButton />
         </div>
+        {/* <div className="profile-img">img</div>
+        <h1 className="ext-calendar-title">{`${username}'s Calendar`}</h1>
+        <div className="buttons links">
+          <CopyURLButton />
+        </div> */}
       </Container>
 
-      <Row className="activity-container">
-        {sortedActivities.map((period) => (
-          <React.Fragment key={period.title}>
-            <h2>{period.title}</h2>
-            {period.events.map((activity) => (
-              <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
-                <ExternalActivities activity={activity} />
-              </Col>
-            ))}
-          </React.Fragment>
-        ))}
+      <Row className="activity-container-external">
+        {sortedActivities.map(
+          (period) =>
+            //ADDED on dec 22 to hide title if no activites
+            period.events.length > 0 && (
+              <React.Fragment key={period.title}>
+                <h2 className="period-header">{period.title}</h2>
+                {period.events.map((activity) => (
+                  <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>
+                    <ExternalActivities activity={activity} />
+                  </Col>
+                ))}
+              </React.Fragment>
+            )
+        )}
       </Row>
     </>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
@@ -14,8 +15,10 @@ import { IconHome } from '@tabler/icons-react';
 
 import App from './App';
 import PrivateRoute from './components/PrivateRoute';
+import LandingPage from './pages/LandingPage';
 import Home from './pages/Home';
 import CreateActivity from './pages/CreateActivity';
+import OnboardCreateActivity from './pages/OnboardingForm';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ActivityEdit from './pages/ActivityEdit';
@@ -28,7 +31,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       {/** Index page */}
-      <Route index={true} element={<IconHome size={48} />} />
+      {/* <Route index={true} element={<IconHome size={48} />} /> */}
+      <Route index={true} element={<LandingPage />} />
+
       {/* <Route index={true} path="/" element={<Home />} /> */}
 
       {/* //allows non users to view activities by user */}
@@ -51,6 +56,7 @@ const router = createBrowserRouter(
       <Route path="" element={<PrivateRoute />}>
         <Route index={true} path="/home/:userId" element={<Home />} />
         <Route path="/add-activity" element={<CreateActivity />} />
+        <Route path="/create-activity" element={<OnboardCreateActivity />} />
         <Route path="/activity/:id/edit" element={<ActivityEdit />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
@@ -70,4 +76,3 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-

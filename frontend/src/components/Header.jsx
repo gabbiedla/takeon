@@ -8,6 +8,8 @@ import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import ProfileImage from './ProfileImage';
+import { FaHome } from 'react-icons/fa';
+
 // import { useParams } from 'react-router-dom';
 
 const Header = () => {
@@ -30,12 +32,44 @@ const Header = () => {
   };
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+      <Navbar bg="black" variant="dark" expand="md" collapseOnSelect>
         <Container>
-          <LinkContainer to={`/home/${username}`}>
+          {/* <LinkContainer to={`/home/${username}`}> */}
+          <LinkContainer to={`/`}>
             {/* <LinkContainer to="/"> old code*/}
-            <Navbar.Brand>TakeOn</Navbar.Brand>
+            <Navbar.Brand>Circyl</Navbar.Brand>
+            {/* <FaHome /> */}
           </LinkContainer>
+          {userInfo && (
+            <LinkContainer
+              to={`/home/${username}`}
+              style={{ display: 'inline-block', cursor: 'pointer' }}
+            >
+              <div
+                style={{
+                  backgroundColor: '#000000',
+                  padding: '10px',
+                  borderRadius: '50%',
+                }}
+              >
+                <FaHome style={{ color: 'white', fontSize: '20px' }} />
+              </div>
+            </LinkContainer>
+          )}
+          {/* <LinkContainer
+            to={`/home/${username}`}
+            style={{ display: 'inline-block', cursor: 'pointer' }}
+          >
+            <div
+              style={{
+                backgroundColor: '#000000',
+                padding: '10px',
+                borderRadius: '50%',
+              }}
+            >
+              <FaHome style={{ color: 'white', fontSize: '20px' }} />
+            </div>
+          </LinkContainer> */}
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">

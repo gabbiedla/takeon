@@ -459,7 +459,7 @@ const ProfilePage = () => {
     <>
       <FormContainer>
         {loadingDelete && <Loader />}
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} className="profile-container">
           <FormGroup controlId="name">
             <Form.Label>Name</Form.Label>
             <Form.Control
