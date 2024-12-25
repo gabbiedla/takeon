@@ -303,7 +303,7 @@ const Home = () => {
       ) : (
         sortedActivities.map((group, index) => (
           <div key={index}>
-            <h2 className="period-header">{group.title}</h2>
+            <h2 className="int-period-header">{group.title}</h2>
             <Row className="activity-container">
               {group.events.map((activity) => (
                 <Col key={activity._id} sm={12} md={6} lg={4} xl={3}>

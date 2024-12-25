@@ -509,6 +509,17 @@ table th {
 
   /* color: #c8ba00; */
 }
+
+.int-period-header {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: rgb(108, 108, 108);
+  /* text-decoration: underline 3px lightgray; */
+  text-underline-offset: 4px;
+  margin-left: 30px;
+
+  /* color: #c8ba00; */
+}
 .prompt {
   display: flex;
   justify-content: center;
