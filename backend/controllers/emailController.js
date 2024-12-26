@@ -49,7 +49,8 @@
 import postmark from 'postmark';
 
 const POSTMARK_API_TOKEN = process.env.POSTMARK_API_TOKEN || '';
-const EMAIL_FROM = process.env.EMAIL_FROM || 'gabbie@myeventlink.co';
+// const EMAIL_FROM = process.env.EMAIL_FROM || 'gabbie@myeventlink.co';
+const EMAIL_FROM = process.env.EMAIL_FROM || 'gabriela@circyl.co';
 
 // Send an email:
 let client;
