@@ -25,10 +25,17 @@ const createRsvp = asyncHandler(async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 
-  console.log('Creating RSVP for activity', { activityId, name, email, comments, date: activity.date, });
+  console.log('Creating RSVP for activity', {
+    activityId,
+    name,
+    email,
+    comments,
+    date: activity.date,
+  });
 
   if (newRsvp) {
-    const event_url = `https://myeventlink.co/activity/${activity.id}/view`;
+    // const event_url = `https://myeventlink.co/activity/${activity.id}/view`;
+    const event_url = `https://circyl.co/activity/${activity.id}/view`;
 
     const data = {
       activity_name: activity.name,
@@ -38,15 +45,19 @@ const createRsvp = asyncHandler(async (req, res) => {
       activity_location: activity.location,
       rsvpDetails_comments: comments,
       activity_url: activity.url,
-      internalCalendarURL: `https://myeventlink.co/home/${user.username}`,
-      externalCalendarURL: `https://myeventlink.co/${user.username}`,
+      // internalCalendarURL: `https://myeventlink.co/home/${user.username}`,
+      internalCalendarURL: `https://circyl.co/home/${user.username}`,
+      // externalCalendarURL: `https://myeventlink.co/${user.username}`,
+      externalCalendarURL: `https://circyl.co/${user.username}`,
       google_calendar_url: createGoogleUrl({
         startDate: activity.date,
         startTime: activity.time,
         timeZone: activity.timezone,
         name: encodeURIComponent(activity.name),
         location: encodeURIComponent(activity.location),
-        details: encodeURIComponent(`${comments}\n\n${event_url}\n\n${activity.url}`),
+        details: encodeURIComponent(
+          `${comments}\n\n${event_url}\n\n${activity.url}`
+        ),
       }),
       user_name: user.name,
       event_url,

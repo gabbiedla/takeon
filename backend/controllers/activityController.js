@@ -3,7 +3,7 @@ import asyncHandler from '../middleware/asyncHandler.js';
 import Activity from '../models/activityModel.js';
 import { sendEmail } from './emailController.js';
 import dayjs from 'dayjs';
-import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import customParseFormat from 'dayjs/plugin/customParseFormat.js';
 import timezone from 'dayjs/plugin/timezone.js';
 import utc from 'dayjs/plugin/utc.js';
 import { createGoogleUrl } from '../utils.js';
@@ -144,7 +144,16 @@ const getActivityById = asyncHandler(async (req, res) => {
 // @route POST /api/activities
 // @access Public
 const createActivity = asyncHandler(async (req, res) => {
-  const { name, date, location, url, time, capacity, category, timeZone = '' } = req.body;
+  const {
+    name,
+    date,
+    location,
+    url,
+    time,
+    capacity,
+    category,
+    timeZone = '',
+  } = req.body;
 
   // Access user information from the request (assuming it's populated by authentication middleware)
   const { user } = req;
@@ -160,8 +169,12 @@ const createActivity = asyncHandler(async (req, res) => {
   // Perform validation and data sanitization here if needed
   // Format the date before saving to the database
   const dateTimeString = `${date} ${time}`;
-  const formattedDate = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone).format('YYYY-MM-DD');
-  const formattedTime = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone).format('hh:mm A');
+  const formattedDate = dayjs
+    .tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone)
+    .format('YYYY-MM-DD');
+  const formattedTime = dayjs
+    .tz(dateTimeString, 'YYYY-MM-DD HH:mm', timeZone)
+    .format('hh:mm A');
 
   const google_calendar_url = createGoogleUrl({
     startDate: formattedDate,
@@ -172,7 +185,14 @@ const createActivity = asyncHandler(async (req, res) => {
     details: encodeURIComponent(`\n\n${url || ''}\n\n${url}`),
   });
 
-  console.log('Formatted date:', { date, formattedDate, time, timeZone, formattedTime, google_calendar_url });
+  console.log('Formatted date:', {
+    date,
+    formattedDate,
+    time,
+    timeZone,
+    formattedTime,
+    google_calendar_url,
+  });
 
   // Create a new activity
   const newActivity = new Activity({
@@ -193,7 +213,8 @@ const createActivity = asyncHandler(async (req, res) => {
     createdActivity = await newActivity.save();
 
     // send a success email to the person who created the event
-    const event_url = `https://myeventlink.co/activity/${createdActivity.id}/view`;
+    // const event_url = `https://myeventlink.co/activity/${createdActivity.id}/view`;
+    const event_url = `https://circyl.co/activity/${createdActivity.id}/view`;
     // Send a success response with the created activity
   } catch (error) {
     // Log detailed error information
@@ -229,16 +250,27 @@ const createActivity = asyncHandler(async (req, res) => {
 //@access Private/Admin
 const updateActivity = asyncHandler(async (req, res) => {
   //pull data or descturure the date u need from the body
-  const { name, location, date, url, capacity, category, timeZone, time } = req.body;
+  const { name, location, date, url, capacity, category, timeZone, time } =
+    req.body;
   //updating by finding by ID
   const activity = await Activity.findById(req.params.id);
   // check for the activity÷
 
   const dateTimeString = `${date} ${time}`;
-  const formattedDate = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm A', timeZone).format('YYYY-MM-DD');
-  const formattedTime = dayjs.tz(dateTimeString, 'YYYY-MM-DD HH:mm A', timeZone).format('hh:mm A');
+  const formattedDate = dayjs
+    .tz(dateTimeString, 'YYYY-MM-DD HH:mm A', timeZone)
+    .format('YYYY-MM-DD');
+  const formattedTime = dayjs
+    .tz(dateTimeString, 'YYYY-MM-DD HH:mm A', timeZone)
+    .format('hh:mm A');
 
-  console.log('Formatted date:', { date, formattedDate, time, timeZone, formattedTime });
+  console.log('Formatted date:', {
+    date,
+    formattedDate,
+    time,
+    timeZone,
+    formattedTime,
+  });
 
   if (activity) {
     activity.name = name;
@@ -252,7 +284,7 @@ const updateActivity = asyncHandler(async (req, res) => {
 
     const updatedActivity = await activity.save();
 
-    res.json({ ...(updatedActivity._doc), message: 'Activity Updated' });
+    res.json({ ...updatedActivity._doc, message: 'Activity Updated' });
   } else {
     console.log('Activity not found', req.params.id);
     res.status(404).json({ message: 'Activity not found' });
