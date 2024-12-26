@@ -1,4 +1,6 @@
 import React from 'react';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+
 import { Container } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 
@@ -29,18 +31,44 @@ const App = () => {
     }
   };
   return (
-    <MantineProvider>
-      <Header />
-      {/* <main className="py-3"> */}
-      <main style={{ backgroundColor: '#e7e7e7', minHeight: '100vh' }}>
-        {/* <main backgroundColor={getBackgroundColor()}> */}
-        <Container fluid style={{ padding: 0, margin: 0 }}>
-          <Outlet />
-        </Container>
-      </main>
-      <Footer backgroundColor={getBackgroundColor()} />
-      <ToastContainer />
-    </MantineProvider>
+    <HelmetProvider>
+      <MantineProvider>
+        <Helmet>
+          {/* <!-- Google tag (gtag.js) --> */}
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-MXSGQKEQN7"
+          ></script>
+          {/* <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MXSGQKEQN7');
+</script> */}
+          <script>
+            {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-MXSGQKEQN7');
+          `}
+          </script>
+        </Helmet>
+        <Header />
+        {/* <main className="py-3"> */}
+        <main style={{ backgroundColor: '#e7e7e7', minHeight: '100vh' }}>
+          {/* <main backgroundColor={getBackgroundColor()}> */}
+          <Container fluid style={{ padding: 0, margin: 0 }}>
+            <Outlet />
+          </Container>
+        </main>
+        <Footer backgroundColor={getBackgroundColor()} />
+        <ToastContainer />
+      </MantineProvider>
+    </HelmetProvider>
   );
 };
 
