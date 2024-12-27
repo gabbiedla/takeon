@@ -204,26 +204,28 @@ const Home = () => {
 
           {/* <ShareButton userId={userId} /> */}
           {/* <Button onClick={handleSortByName}>Sort by Name</Button> */}
-          <Button
-            className="switch-view-button ga4-layout-btn"
-            onClick={toggleViewFormat}
-            style={{
-              background: 'white',
-              // border: '2px solid #00b8a9',
-              border: '2px solid lightgrey',
+          <div className="ga4-layout-btn">
+            <Button
+              className="switch-view-button ga4-layout-btn"
+              onClick={toggleViewFormat}
+              style={{
+                background: 'white',
+                // border: '2px solid #00b8a9',
+                border: '2px solid lightgrey',
 
-              // color: '#00b8a9',
-              color: 'black',
-              // fontWeight: 'bold',
-              fontSize: '.9em',
-            }}
-          >
-            <BsLayoutSidebarInset className="ga4-layout-btn" size={22} />
-            Layout
-            {/* {viewFormat === 'normal'
+                // color: '#00b8a9',
+                color: 'black',
+                // fontWeight: 'bold',
+                fontSize: '.9em',
+              }}
+            >
+              <BsLayoutSidebarInset size={22} />
+              Layout
+              {/* {viewFormat === 'normal'
               ? 'Switch to Grouped View'
               : 'Switch to Normal View'} */}
-          </Button>
+            </Button>
+          </div>
           <Dropdown>
             <Dropdown.Toggle
               className="sort-button ga4-sort-btn"
