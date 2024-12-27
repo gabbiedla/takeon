@@ -24,23 +24,23 @@ class CopyURLButton extends React.Component {
 
   render() {
     return (
-      <div className="ga4-url-icon-btn">
-        <Button
-          className="url-btn"
-          onClick={this.copyURL}
-          style={{
-            background: 'white',
-            // border: 'none',
-            color: 'black',
-            border: 'none',
-            // color: '#00b8a9',
-            // fontWeight: 'bold',
-            fontSize: '1em',
-          }}
-        >
-          <FaLink />
-        </Button>
-      </div>
+      // <div className="ga4-url-icon-btn">
+      <Button
+        className="url-btn"
+        onClick={this.copyURL}
+        style={{
+          background: 'white',
+          // border: 'none',
+          color: 'black',
+          border: 'none',
+          // color: '#00b8a9',
+          // fontWeight: 'bold',
+          fontSize: '1em',
+        }}
+      >
+        <FaLink className="ga4-url-icon-btn" />
+      </Button>
+      // </div>
     );
   }
 }
