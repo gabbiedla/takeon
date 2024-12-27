@@ -133,7 +133,7 @@ const Test = () => {
       <Container className="ext-home-heading">
         <div className="circle"></div>
         <h1 className="ext-calendar-title">{`${username}'s Calendar`}</h1>
-        <div className="buttons links ga4-url-icon-btn">
+        <div className="buttons links">
           <CopyURLButton />
         </div>
         {/* <div className="profile-img">img</div>

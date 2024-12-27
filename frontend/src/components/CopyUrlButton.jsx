@@ -25,7 +25,7 @@ class CopyURLButton extends React.Component {
   render() {
     return (
       <Button
-        className="url-btn"
+        className="url-btn ga4-url-icon-btn"
         onClick={this.copyURL}
         style={{
           background: 'white',
