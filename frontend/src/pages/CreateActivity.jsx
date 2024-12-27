@@ -216,7 +216,11 @@ const CreateActivity = () => {
           />
         </Input.Wrapper>
         <Space h="md" />
-        <Button className="ga4-create-submit-btn" type="submit">
+        <Button
+          className="ga4-create-submit-btn"
+          data-ga="create-activity-submit"
+          type="submit"
+        >
           {/* <IconDeviceFloppy /> &nbsp;Add */}
           <strong>Create</strong>
         </Button>
