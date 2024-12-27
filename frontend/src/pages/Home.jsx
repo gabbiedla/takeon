@@ -226,7 +226,7 @@ const Home = () => {
               : 'Switch to Normal View'} */}
             </Button>
           </div>
-          <Dropdown>
+          <Dropdown className="ga4-sort-btn">
             <Dropdown.Toggle
               className="sort-button ga4-sort-btn"
               variant="primary"
@@ -270,26 +270,28 @@ const Home = () => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-          <Button
-            className="public-view-button
+          <div className="ga4-view-public-profile-btn">
+            <Button
+              className="public-view-button
             ga4-view-public-profile-btn"
-            onClick={handleActivitiesClick}
-            style={{
-              background: 'white',
-              // border: 'none',
-              // color: 'black',
-              // border: '2px solid #00b8a9',
-              border: '2px solid lightgrey',
-              // border: 'none',
-              // color: '#00b8a9',
-              color: 'black',
-              // fontWeight: 'bold',
-              fontSize: '.9em',
-            }}
-          >
-            <FaEye size={23} />
-            Public
-          </Button>
+              onClick={handleActivitiesClick}
+              style={{
+                background: 'white',
+                // border: 'none',
+                // color: 'black',
+                // border: '2px solid #00b8a9',
+                border: '2px solid lightgrey',
+                // border: 'none',
+                // color: '#00b8a9',
+                color: 'black',
+                // fontWeight: 'bold',
+                fontSize: '.9em',
+              }}
+            >
+              <FaEye size={23} />
+              Public
+            </Button>
+          </div>
         </div>
       </Container>
 
