@@ -218,7 +218,7 @@ const Home = () => {
               fontSize: '.9em',
             }}
           >
-            <BsLayoutSidebarInset size={22} />
+            <BsLayoutSidebarInset className="ga4-layout-btn" size={22} />
             Layout
             {/* {viewFormat === 'normal'
               ? 'Switch to Grouped View'
