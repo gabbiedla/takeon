@@ -42,18 +42,22 @@ const Header = () => {
           </LinkContainer>
           {userInfo && (
             <LinkContainer
-              className="ga4-home-icon-btn"
+              // className="ga4-home-icon-btn"
               to={`/home/${username}`}
               style={{ display: 'inline-block', cursor: 'pointer' }}
             >
               <div
+                className="ga4-home-icon-btn"
                 style={{
                   backgroundColor: '#000000',
                   padding: '10px',
                   borderRadius: '50%',
                 }}
               >
-                <FaHome style={{ color: 'white', fontSize: '20px' }} />
+                <FaHome
+                  className="ga4-home-icon-btn"
+                  style={{ color: 'white', fontSize: '20px' }}
+                />
               </div>
             </LinkContainer>
           )}
