@@ -6,7 +6,7 @@ const CreateActivityButton = () => {
     // <div>CreateEventButton</div>
     <LinkContainer className="ga4-create-event-btn" to="/add-activity">
       <button className="new-activity-button rounded border-0 fs-8 fw-bold">
-        Add Event
+        Create Event
       </button>
     </LinkContainer>
   );
