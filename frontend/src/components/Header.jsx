@@ -92,7 +92,7 @@ const Header = () => {
               ) : (
                 <>
                   <LinkContainer to="/login">
-                    <Nav.Link>
+                    <Nav.Link className="ga4-header-sign-in-btn">
                       <FaUser />
                       {` `} Sign In
                     </Nav.Link>

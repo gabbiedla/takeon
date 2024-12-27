@@ -165,7 +165,10 @@ const Register = () => {
       <Row className="py-3">
         <Col>
           Already have an account?{' '}
-          <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+          <Link
+            className="ga4-redirect-register-to-login"
+            to={redirect ? `/login?redirect=${redirect}` : '/login'}
+          >
             Login
           </Link>
         </Col>
