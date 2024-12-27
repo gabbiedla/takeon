@@ -35,13 +35,14 @@ const Header = () => {
       <Navbar bg="black" variant="dark" expand="md" collapseOnSelect>
         <Container>
           {/* <LinkContainer to={`/home/${username}`}> */}
-          <LinkContainer to={`/`}>
+          <LinkContainer className="ga4-app-name" to={`/`}>
             {/* <LinkContainer to="/"> old code*/}
             <Navbar.Brand>Circyl</Navbar.Brand>
             {/* <FaHome /> */}
           </LinkContainer>
           {userInfo && (
             <LinkContainer
+              className="ga4-home-icon-btn"
               to={`/home/${username}`}
               style={{ display: 'inline-block', cursor: 'pointer' }}
             >
@@ -82,10 +83,13 @@ const Header = () => {
                   {userInfo.profileImage && (
                     <ProfileImage image={userInfo.profileImage} />
                   )}
-                  <LinkContainer to="/profile">
+                  <LinkContainer className="ga4-account-btn" to="/profile">
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={logoutHandler}>
+                  <NavDropdown.Item
+                    className="ga4-logout-btn"
+                    onClick={logoutHandler}
+                  >
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
