@@ -95,7 +95,7 @@ const LandingPage = () => {
       </section> */}
 
           <div className="hero-cta-container">
-            <Link to="/register">
+            <Link to="/register" className="g4a-hero-cta-link">
               <button className="hero-cta-button">Plan Your Way</button>
             </Link>
           </div>
