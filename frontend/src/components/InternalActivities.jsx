@@ -211,7 +211,7 @@ const Activity = ({ activity }) => {
             <div>
               <LinkContainer to={`/activity/${activity._id}/edit`}>
                 <Button
-                  className="bg-transparent border-0"
+                  className="bg-transparent border-0 ga4-edit-single-event-btn"
                   onClick={() => console.log('Edit button clicked')}
                 >
                   <FaPencilAlt className="int-edit-btn mx-2" />
@@ -219,7 +219,7 @@ const Activity = ({ activity }) => {
               </LinkContainer>
               <LinkContainer to={`/activity/${activity._id}/view`}>
                 <Button
-                  className="bg-transparent border-0"
+                  className="bg-transparent border-0 ga4-share-single-event-btn"
                   onClick={() => console.log('Share button clicked')}
                 >
                   <FaShare className="int-share-btn mx-2" />

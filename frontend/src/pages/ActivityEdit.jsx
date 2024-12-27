@@ -115,7 +115,10 @@ const ActivityEdit = () => {
 
   return (
     <>
-      <Link to="/home/:userId" className="btn btn-light my-3">
+      <Link
+        to="/home/:userId"
+        className="btn btn-light my-3 ga4-event-back-btn"
+      >
         Go Back
       </Link>
       {isLoading && (
@@ -204,12 +207,16 @@ const ActivityEdit = () => {
               onChange={(e) => setCategory(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type="submit" variant="primary" className="my-2">
+          <Button
+            type="submit"
+            variant="primary"
+            className="my-2 ga4-event-update-btn"
+          >
             Update
           </Button>
           <Button
             variant="danger"
-            className="my-2"
+            className="my-2 ga4-event-delete-btn"
             onClick={() => deleteHandler(activity._id)}
           >
             Delete

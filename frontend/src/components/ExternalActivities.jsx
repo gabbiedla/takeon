@@ -96,7 +96,10 @@ const ExternalActivity = ({ activity }) => {
         <Card.Title as="div">
           <h3 className="card-title">{activity.name}</h3>
         </Card.Title>
-        <button onClick={toggleCollapse} className="collapse-btn">
+        <button
+          onClick={toggleCollapse}
+          className="collapse-btn ga4-expand-icon-btn"
+        >
           {isCollapsed ? <FaPlus /> : <FaMinus />}
         </button>
       </Container>
@@ -140,7 +143,7 @@ const ExternalActivity = ({ activity }) => {
           )}
           <Button
             onClick={() => handleOpenRSVPModal(activity.id)}
-            className="rsvp-button"
+            className="rsvp-button ga4-join-event-btn"
           >
             JOIN
           </Button>
@@ -204,7 +207,11 @@ const ExternalActivity = ({ activity }) => {
               />
             </Form.Group>
             {/* Add other form fields as needed */}
-            <Button variant="primary" type="submit">
+            <Button
+              className="ga4-submit-rsvp-btn"
+              variant="primary"
+              type="submit"
+            >
               Count me in!
             </Button>
           </Form>
@@ -213,7 +220,11 @@ const ExternalActivity = ({ activity }) => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseRSVPModal}>
+          <Button
+            className="ga4-close-rsvp-modal-btn"
+            variant="secondary"
+            onClick={handleCloseRSVPModal}
+          >
             Close
           </Button>
         </Modal.Footer>
