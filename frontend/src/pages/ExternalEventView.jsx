@@ -116,8 +116,8 @@ const ExternalEventView = () => {
   return (
     <Container className="ext-single-activity">
       <h1>Event Details</h1>
-      <div className="buttons">
-        <CopyURLButton />
+      <div className="buttons ga4-single-event-url-icon">
+        <CopyURLButton className="buttons ga4-single-event-url-icon" />
       </div>
       {error && <p>Error: {error.message}</p>}
       {isLoading && <p>Loading...</p>}
