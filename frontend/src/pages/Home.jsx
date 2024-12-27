@@ -219,7 +219,7 @@ const Home = () => {
                 fontSize: '.9em',
               }}
             >
-              <BsLayoutSidebarInset size={22} />
+              <BsLayoutSidebarInset className="ga4-layout-btn" size={22} />
               Layout
               {/* {viewFormat === 'normal'
               ? 'Switch to Grouped View'
@@ -248,7 +248,8 @@ const Home = () => {
               {/* Sort by: {sortBy === 'name' ? 'Name' : 'Date'} */}
               <div>
                 {' '}
-                <FaFilter size={17} /> {/* Sort by:{' '} */}
+                <FaFilter className="ga4-sort-btn" size={17} />{' '}
+                {/* Sort by:{' '} */}
               </div>
 
               {sortBy === 'name'
@@ -288,7 +289,7 @@ const Home = () => {
                 fontSize: '.9em',
               }}
             >
-              <FaEye size={23} />
+              <FaEye className="ga4-view-public-profile-btn" size={23} />
               Public
             </Button>
           </div>
