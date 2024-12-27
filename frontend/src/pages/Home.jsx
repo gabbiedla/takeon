@@ -205,7 +205,7 @@ const Home = () => {
           {/* <ShareButton userId={userId} /> */}
           {/* <Button onClick={handleSortByName}>Sort by Name</Button> */}
           <Button
-            className="switch-view-button, ga4-layout-btn"
+            className="switch-view-button ga4-layout-btn"
             onClick={toggleViewFormat}
             style={{
               background: 'white',
@@ -226,7 +226,7 @@ const Home = () => {
           </Button>
           <Dropdown>
             <Dropdown.Toggle
-              className="sort-button, ga4-sort-btn"
+              className="sort-button ga4-sort-btn"
               variant="primary"
               id="dropdown-basic"
               style={{
@@ -269,7 +269,8 @@ const Home = () => {
             </Dropdown.Menu>
           </Dropdown>
           <Button
-            className="public-view-button, ga4-view-public-profile-btn"
+            className="public-view-button
+            ga4-view-public-profile-btn"
             onClick={handleActivitiesClick}
             style={{
               background: 'white',

@@ -538,18 +538,23 @@ const ProfilePage = () => {
               onChange={(e) => setImage(e.target.value)}
             ></Form.Control>
             <FormControl
+              className="ga4-choose-file-btn"
               type="file"
               label="Choose File"
               onChange={uploadFileHandler}
             ></FormControl>
           </Form.Group>
-          <Button type="submit" variant="primary" className="my-2">
+          <Button
+            type="submit"
+            variant="primary"
+            className="my-2 ga4-account-update-btn"
+          >
             Update
           </Button>
           <Button
             onClick={() => deleteHandler(userInfo._id)}
             variant="danger"
-            className="my-2"
+            className="my-2 g4a-account-delete-btn"
           >
             Delete
           </Button>
