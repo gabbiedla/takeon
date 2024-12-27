@@ -179,8 +179,11 @@ const ExternalEventView = () => {
                 </a>
               </Card.Text>
             )}
-            <Button onClick={handleOpenRSVPModal} className="rsvp-button">
-              RSVP
+            <Button
+              onClick={handleOpenRSVPModal}
+              className="rsvp-button ga4-single-event-rsvp"
+            >
+              JOIN
             </Button>
           </Card.Body>
           {/* )} */}
@@ -223,8 +226,12 @@ const ExternalEventView = () => {
                     }
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                  Submit RSVP
+                <Button
+                  className="ga4-submit-single-rsvp-btn"
+                  variant="primary"
+                  type="submit"
+                >
+                  Count me in!
                 </Button>
               </Form>
               {rsvpSubmitted && (
@@ -234,7 +241,11 @@ const ExternalEventView = () => {
               )}
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleCloseRSVPModal}>
+              <Button
+                className="ga4-close-rsvp-modal-single-btn"
+                variant="secondary"
+                onClick={handleCloseRSVPModal}
+              >
                 Close
               </Button>
             </Modal.Footer>
