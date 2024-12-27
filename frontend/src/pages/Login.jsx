@@ -73,7 +73,7 @@ const Login = () => {
         <Button
           type="submit"
           variant="primary"
-          className="mt-2"
+          className="mt-2, ga4-sign-in-btn"
           disabled={isLoading}
         >
           Sign In
@@ -84,8 +84,11 @@ const Login = () => {
 
       <Row className="py-3">
         <Col>
-          New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+          New User?{' '}
+          <Link
+            className="ga4-redirect-login-to-register"
+            to={redirect ? `/register?redirect=${redirect}` : '/register'}
+          >
             Register
           </Link>
         </Col>
