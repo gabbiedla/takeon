@@ -153,7 +153,7 @@ const Register = () => {
         <Button
           type="submit"
           variant="primary"
-          className="mt-2"
+          className="mt-2, g4a-register-btn"
           disabled={isLoading}
         >
           Register
