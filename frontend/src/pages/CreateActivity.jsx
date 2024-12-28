@@ -79,16 +79,6 @@ const CreateActivity = () => {
 
       console.log('Activity created:', { response: response.data });
       console.log('Navigating to view activity:', response.data?._id);
-
-      // Google Analytics 4 Event
-      if (window.gtag) {
-        window.gtag('event', 'form_submit', {
-          event_category: 'Activity',
-          event_label: activityData.name,
-          value: 1, // Optional: Add a value if it makes sense
-        });
-      }
-
       navigate(`/activity/${response.data._id}/view`);
     } catch (error) {
       console.error('Error creating activity:', { error });
