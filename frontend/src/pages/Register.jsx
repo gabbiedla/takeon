@@ -65,7 +65,7 @@ const Register = () => {
   };
 
   return (
-    <FormContainer>
+    <FormContainer className="new-user-form">
       <h1 className="register-container">Sign Up</h1>
 
       <Form className="new-user-form" onSubmit={submitHandler}>
