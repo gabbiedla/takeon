@@ -68,7 +68,7 @@ const Register = () => {
     <FormContainer>
       <h1 className="register-container">Sign Up</h1>
 
-      <Form onSubmit={submitHandler}>
+      <Form className="new-user-form" onSubmit={submitHandler}>
         <Form.Group controlId="name" className="my-3">
           <Form.Label>Name</Form.Label>
           <Form.Control
